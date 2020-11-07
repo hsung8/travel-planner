@@ -12,11 +12,26 @@ class Navbar extends Component {
               style={{
                 fontFamily: "monospace"
               }}
-              className="col s5 brand-logo center black-text"
-            >
-              <i className="material-icons">code</i>
-              Travel-app
-            </Link>
+              className="col s4 brand-logo center black-text"
+            ><i className="material-icons">code</i>Travel-app</Link>
+            <Link
+              to="/register"
+              style={{
+                width: "140px",
+                borderRadius: "3px",
+                letterSpacing: "1.5px"
+              }}
+              className="col s4 btn btn-large waves-effect waves-light hoverable blue accent-3"
+            >Register</Link>
+            <Link
+              to="/login"
+              style={{
+                width: "140px",
+                borderRadius: "3px",
+                letterSpacing: "1.5px"
+              }}
+              className="col s4 btn btn-large btn-flat waves-effect white black-text"
+            >Log In</Link>
           </div>
         </nav>
       </div>
