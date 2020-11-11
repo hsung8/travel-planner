@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import Logout from "../layout/Logout"
 import Search from "../Search/Search"
+import Budget from "../layout/Budget"
 
 class Dashboard extends Component {
 
@@ -13,21 +14,22 @@ class Dashboard extends Component {
     return (
       <div>
         <Logout />
-        <div style={{ height: "75vh" }} className="container valign-wrapper">
+        <div style={{ height: "75vh" }} className="container">
           <div className="row">
             <div className="col s12 center-align">
               <h4>
-                <b>Hey there,</b> {user.name.split(" ")[0]}
-                <p className="flow-text grey-text text-darken-1">
-                  You are logged into a full-stack{" "}
-                  <span style={{ fontFamily: "monospace" }}>MERN</span> app 👏
-              </p>
+                Hello, <b>{user.name.split(" ")[0]}</b>👋 Ready to Getaway?
               </h4>
+              <Budget />
             </div>
           </div>
-        </div >
-
-          <Search />
+        </div>
+        <div style={{ height: "75vh" }} className="container">
+          <div className="col s12 center-align">
+            <Search />
+          </div>
+        </div>
+        
 
       </div>
     );
