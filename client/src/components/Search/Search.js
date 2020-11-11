@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 class Search extends Component {
     render() {
         return (
+            <div style={{ background: "#abd1c6" }}>
             <div className="row">
                 <div className="col s12 center-align">
                     <div className="card horizontal">
@@ -23,6 +24,7 @@ class Search extends Component {
                     </div>
                 </div>
             </div>
+        </div>
         );
     }
 }
