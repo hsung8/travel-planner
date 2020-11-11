@@ -20,7 +20,7 @@ class Logout extends Component {
                         fontFamily: "monospace",
                         float: "left"
                     }}
-                    className="col s4 brand-logo black-text"
+                    className="col s2 brand-logo black-text"
                 ><i className="material-icons">code</i>Travel-app</Link>
                 <button
                     style={{
