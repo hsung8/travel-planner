@@ -9,13 +9,13 @@ class Search extends Component {
                     <div className="card horizontal">
                         <div className="card-stacked">
                             <div className="card-content">
-                                <button href="#">HOTELS</button>
-                                <button href="#">FLIGHTS</button>
-                                <button href="#">RENTAL CARS</button>
-                                <button href="#">ACTIVITIES</button>
+                                <button href="/hotel">HOTELS</button>
+                                <button href="/flights">FLIGHTS</button>
+                                <button href="/rental">RENTAL CARS</button>
+                                <button href="/activity">ACTIVITIES</button>
                                 <br />
                                 <input placeholder="Start your Adventure Here"></input>
-                                <button className="Search">
+                                <button className="Search btn-large waves-effect waves-light hoverable blue accent-3">
                                     <a href="#">Search</a>
                                 </button>
                             </div>
