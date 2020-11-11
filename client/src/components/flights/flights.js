@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Search from "../Search/Search.js";
 
-const Activity = () => {
+const Flights = () => {
     return (
         <div style={{ height: "75vh" }} className="container valign-wrapper">
             <div className="row">
@@ -21,4 +21,4 @@ const Activity = () => {
     );
 };
 
-export default Activity;
+export default Flights;
