@@ -21,7 +21,7 @@ class Navbar extends Component {
                 borderRadius: "3px",
                 letterSpacing: "1.5px"
               }}
-              className="col s4 btn btn-large waves-effect waves-light hoverable blue accent-3"
+              className="col s4 right btn btn-large waves-effect waves-light hoverable blue accent-3"
             >Register</Link>
             <Link
               to="/login"
@@ -30,7 +30,7 @@ class Navbar extends Component {
                 borderRadius: "3px",
                 letterSpacing: "1.5px"
               }}
-              className="col s4 btn btn-large btn-flat waves-effect white black-text"
+              className="col s4 right btn btn-large btn-flat waves-effect white black-text"
             >Log In</Link>
           </div>
         </nav>
