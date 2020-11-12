@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Search from "../Search/Search.js";
+import SearchFlight from "../Search/SearchFlight.js";
 
 const Flights = () => {
     return (
@@ -15,7 +15,7 @@ const Flights = () => {
             </p>
                     <br />
                 </div>
-                <Search />
+                <SearchFlight />
             </div>
         </div>
     );
