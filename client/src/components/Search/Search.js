@@ -9,32 +9,60 @@ const Search = () => {
     return (
         <div className="row">
             <div className="col s12 center-align">
-                <div className="card horizontal">
+                <div className="card horizontal searchBox">
                     <div className="card-stacked">
                         <div className="card-content">
                             <Link
                                 to="/hotel"
-                                className="btn btn-large hoverable green accent-3"
+                                className="btn btn-large hoverable accent-3"
                                 style={{
-                                    marginRight: 10
+                                    marginRight: 10,
+                                    width: "150px",
+                                    borderRadius: "3px",
+                                    letterSpacing: "1.5px",
+                                    marginTop: "1rem",
+                                    marginBottom: "1rem",
+                                    background: "#f9bc60",
+                                    color: "#001e1d"
                                 }}
                             >HOTELS</Link>
                             <Link to="/flights"
-                                className="btn btn-large hoverable blue accent-3"
+                                className="btn btn-large hoverable  accent-3"
                                 style={{
-                                    marginRight: 10
+                                    marginRight: 10,
+                                    width: "150px",
+                                    borderRadius: "3px",
+                                    letterSpacing: "1.5px",
+                                    marginTop: "1rem",
+                                    marginBottom: "1rem",
+                                    background: "#f9bc60",
+                                    color: "#001e1d"
                                 }}
                             >FLIGHTS</Link>
                             <Link to="/rental"
-                                className="btn btn-large hoverable black accent-3"
+                                className="btn btn-large hoverable accent-3"
                                 style={{
-                                    marginRight: 10
+                                    marginRight: 10,
+                                    width: "150px",
+                                    borderRadius: "3px",
+                                    letterSpacing: ".5px",
+                                    marginTop: "1rem",
+                                    marginBottom: "1rem",
+                                    background: "#f9bc60",
+                                    color: "#001e1d"
                                 }}
-                            >RENTAL CARS</Link>
+                            >RENTALCARS</Link>
                             <Link to="/activity"
-                                className="btn btn-large hoverable orange accent-3"
+                                className="btn btn-large hoverable accent-3"
                                 style={{
-                                    marginRight: 10
+                                    marginRight: 10,
+                                    width: "150px",
+                                    borderRadius: "3px",
+                                    letterSpacing: "1.5px",
+                                    marginTop: "1rem",
+                                    marginBottom: "1rem",
+                                    background: "#f9bc60",
+                                    color: "#001e1d"
                                 }}
                             >ACTIVITIES</Link>
                             <br />
@@ -42,15 +70,25 @@ const Search = () => {
                             <input className="origin" placeholder="Where are you coming from?"></input>
                             <br />
                             <DatePicker style={{
-                                align: "center"
+                                
+
+
                             }}
-                            className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChnage={date => setStartDate(date)} />
+                                className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChnage={date => setStartDate(date)} />
                             <br />
                             <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChnage={date => setEndDate(date)} />
                             <br />
-                            <Link
+                            <Link style={{
+                                width: "150px",
+                                borderRadius: "3px",
+                                letterSpacing: "1.5px",
+                                marginTop: "1rem",
+                                paddingBottom: "1rem",
+                                background: "#f9bc60",
+                                color: "#001e1d"
+                            }}
                                 to=""
-                                className="Search btn btn-large hoverable blue accent-3">
+                                className="Search btn btn-large hoverable accent-3">
                                 Search</Link>
                         </div>
                     </div>

@@ -10,25 +10,30 @@ class Navbar extends Component {
             <Link
               to="/"
               style={{
-                fontFamily: "monospace"
+                fontFamily: "monospace",
+                display: "flex"
               }}
               className="col s4 brand-logo center black-text"
-            ><i className="material-icons">code</i>Travel-app</Link>
+            ><i className="material-icons">code</i>Travel-Hub</Link>
             <Link
               to="/register"
               style={{
                 width: "140px",
                 borderRadius: "3px",
-                letterSpacing: "1.5px"
+                letterSpacing: "1.5px",
+                background: "#e16162",
+                
               }}
-              className="col s4 right btn btn-large waves-effect waves-light hoverable blue accent-3"
+              className="col s4 right btn btn-large waves-effect waves-light hoverable accent-3"
             >Register</Link>
             <Link
               to="/login"
               style={{
                 width: "140px",
                 borderRadius: "3px",
-                letterSpacing: "1.5px"
+                letterSpacing: "1.5px",
+                background: "#004643",
+               
               }}
               className="col s4 right btn btn-large btn-flat waves-effect white black-text"
             >Log In</Link>
