@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Search = () => {
+const SearchFlight = () => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
     return (
@@ -12,7 +12,7 @@ const Search = () => {
                 <div className="card horizontal">
                     <div className="card-stacked">
                         <div className="card-content">
-                            <Link
+                           <Link
                                 to="/hotel"
                                 className="btn btn-large hoverable green accent-3"
                                 style={{
@@ -60,4 +60,4 @@ const Search = () => {
     );
 };
 
-export default Search;
+export default SearchFlight;
