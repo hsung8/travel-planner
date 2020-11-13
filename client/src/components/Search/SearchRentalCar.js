@@ -38,8 +38,9 @@ const SearchRentalCar = () => {
                                 }}
                             >ACTIVITIES</Link>
                             <br />
-                            <input className="destination" placeholder="Where is your adventure taking you?"></input>
-                            <input className="origin" placeholder="Where are you coming from?"></input>
+                            <input className="destination" placeholder="Where do you want to drop off the vehicle?"></input>
+                            <input className="origin" placeholder="Where do you want ot pick up git?"></input>
+                            <input className="vehicleType" placeholder="What type of vehicle do you want to rent?"></input>
                             <br />
                             <DatePicker style={{
                                 align: "center"
