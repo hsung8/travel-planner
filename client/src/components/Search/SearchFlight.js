@@ -70,9 +70,9 @@ const SearchFlight = () => {
                             <input className="origin" placeholder="Where are you coming from?"></input>
                             <br />
                             <DatePicker
-                                className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChnage={date => setStartDate(date)} />
+                                className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChange={date => setStartDate(date)} />
                             <br />
-                            <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChnage={date => setEndDate(date)} />
+                            <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} />
                             <br />
                             <Link style={{
                                 width: "150px",

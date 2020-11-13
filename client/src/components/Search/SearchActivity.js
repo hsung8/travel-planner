@@ -4,15 +4,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const SearchActivity = () => {
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
     return (
         <div className="row">
             <div className="col s12 center-align">
                 <div className="card horizontal">
                     <div className="card-stacked">
                         <div className="card-content">
-                           <Link
+                            <Link
                                 to="/hotel"
                                 className="btn btn-large hoverable green accent-3"
                                 style={{
