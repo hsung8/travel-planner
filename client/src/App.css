@@ -1,0 +1,28 @@
+body {
+    background-color: #004643;
+}
+
+.container {
+    border-radius: 25px;
+}
+
+.searchBox {
+    border-radius: 25px; 
+    background-color: #abd1c6;
+}
+
+::placeholder {
+    color: black;
+}
+
+.startDate {
+   text-align: center;
+ }
+
+ .endDate {
+    text-align: center;
+  }
+
+.nav-wrapper {
+   color: black;
+}

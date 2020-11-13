@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import Logout from "../layout/Logout"
-import Search from "../Search/Search"
 import Budget from "../layout/Budget"
+import SearchFlight from "../Search/SearchFlight.js"
+
 
 class Dashboard extends Component {
 
@@ -26,11 +27,9 @@ class Dashboard extends Component {
         </div>
         <div style={{ height: "75vh" }} className="container">
           <div className="col s12 center-align">
-            <Search />
+            <SearchFlight />
           </div>
-        </div>
-        
-
+        </div >
       </div>
     );
   }

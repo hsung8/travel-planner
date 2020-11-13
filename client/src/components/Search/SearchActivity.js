@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Search = () => {
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
+const SearchActivity = () => {
     return (
         <div className="row">
             <div className="col s12 center-align">
                 <div className="card horizontal">
                     <div className="card-stacked">
                         <div className="card-content">
-                            <Link
+                           <Link
                                 to="/hotel"
                                 className="btn btn-large hoverable green accent-3"
                                 style={{
@@ -38,15 +36,7 @@ const Search = () => {
                                 }}
                             >ACTIVITIES</Link>
                             <br />
-                            <input className="destination" placeholder="Where is your adventure taking you?"></input>
-                            <input className="origin" placeholder="Where are you coming from?"></input>
-                            <br />
-                            <DatePicker style={{
-                                align: "center"
-                            }}
-                            className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChnage={date => setStartDate(date)} />
-                            <br />
-                            <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChnage={date => setEndDate(date)} />
+                            <input className="address" placeholder="What is the address where you want to do an activity?"></input>
                             <br />
                             <Link
                                 to=""
@@ -60,4 +50,4 @@ const Search = () => {
     );
 };
 
-export default Search;
+export default SearchActivity;
