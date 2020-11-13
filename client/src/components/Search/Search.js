@@ -69,7 +69,7 @@ const Search = () => {
                             <input className="destination" placeholder="Where is your adventure taking you?"></input>
                             <input className="origin" placeholder="Where are you coming from?"></input>
                             <br />
-                            <h1>Outbound</h1>
+                            <h1></h1>
                             <DatePicker style={{
                                 
 
@@ -78,7 +78,7 @@ const Search = () => {
                             
                                 className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChange={date => setStartDate(date)} />
                             <br />
-                            <h1>Return</h1>
+                            
                             <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} />
                             <br />
                             <Link style={{
