@@ -13,6 +13,9 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import Activity from "./components/activity/activity";
+import Hotel from "./components/hotel/hotel";
+import Flights from "./components/flights/flights";
 
 import "./App.css";
 
@@ -44,6 +47,10 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/activity" component={Activity} />
+            <Route exact path="/flights" component={Flights} />
+            <Route exact path="/hotel" component={Hotel} />
+
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
