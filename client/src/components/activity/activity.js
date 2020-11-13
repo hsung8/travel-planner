@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Search from "../Search/Search.js";
 import SearchActivity from "../Search/SearchActivity.js";
 
 const Activity = () => {
