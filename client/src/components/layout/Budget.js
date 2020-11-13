@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Piechart from "../layout/Piechart";
 
 class Budget extends Component {
     render() {
@@ -54,7 +55,18 @@ class Budget extends Component {
                     <div style={{ width: "100%" }} className="card horizontal">
                         <div className="card-stacked">
                             <div style={{ height: "75vh" }} className="card-content">
-                                <b>Budget card</b>
+                                <div className="col s4 center-align">
+                                    <h6>Your goal: </h6>
+                                    <h4>2,000 USD </h4>
+                                    < br />
+
+                                    <h6>Your estimates: </h6>
+                                    <h4>1,800 USD </h4>
+                                </div>
+                                <div className="col s8 center-align">
+                                    <Piechart />
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
