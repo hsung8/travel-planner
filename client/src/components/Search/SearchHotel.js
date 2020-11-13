@@ -39,7 +39,6 @@ const SearchHotel = () => {
                             >ACTIVITIES</Link>
                             <br />
                             <input className="destination" placeholder="Where is your adventure taking you?"></input>
-                            <input className="origin" placeholder="Where are you coming from?"></input>
                             <br />
                             <DatePicker style={{
                                 align: "center"

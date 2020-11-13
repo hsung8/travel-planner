@@ -38,15 +38,7 @@ const SearchActivity = () => {
                                 }}
                             >ACTIVITIES</Link>
                             <br />
-                            <input className="destination" placeholder="Where is your adventure taking you?"></input>
-                            <input className="origin" placeholder="Where are you coming from?"></input>
-                            <br />
-                            <DatePicker style={{
-                                align: "center"
-                            }}
-                            className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChnage={date => setStartDate(date)} />
-                            <br />
-                            <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChnage={date => setEndDate(date)} />
+                            <input className="address" placeholder="What is the address where you want to do an activity?"></input>
                             <br />
                             <Link
                                 to=""
