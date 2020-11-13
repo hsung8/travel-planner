@@ -77,7 +77,7 @@ const SearchFlight = () => {
                             
                                 className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChange={date => setStartDate(date)} />
                             <br />
-                            <h1>Return</h1>
+                            
                             <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} />
                             <br />
                             <Link style={{
