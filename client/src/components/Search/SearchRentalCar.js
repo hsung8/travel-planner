@@ -1,18 +1,48 @@
 import React, { useState } from "react";
+import Select from "react-select";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const SearchRentalCar = () => {
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const options = [
+        { value: "economy", label: "Economy" },
+        { value: "compact", label: "Compact" },
+        { value: "mid-size", label: "Mid-Size" },
+        { value: "full-size", label: "Full-Size" },
+        { value: "premium", label: "Premium" },
+        { value: "luxury", label: "Luxury" },
+        { value: "minivan", label: "Minivan" },
+        { value: "convertible", label: "Convertible" },
+        { value: "mid-size SUV", label: "Mid-Size SUV" },
+        { value: "standard SUV", label: "Standard SUV" },
+        { value: "full-size SUV", label: "Full-Size SUV" }
+    ];
+    const timeOptions = [
+        { value: "06", label: "6:00 AM" },
+        { value: "07", label: "7:00 AM" },
+        { value: "08", label: "8:00 AM" },
+        { value: "09", label: "9:00 AM" },
+        { value: "10", label: "10:00 AM" },
+        { value: "11", label: "11:00 AM" },
+        { value: "12", label: "12:00 PM" },
+        { value: "13", label: "1:00 PM" },
+        { value: "14", label: "2:00 PM" },
+        { value: "15", label: "3:00 PM" },
+        { value: "16", label: "4:00 PM" },
+        { value: "17", label: "5:00 PM" },
+        { value: "18", label: "6:00 PM" }
+
+    ]
     return (
         <div className="row">
             <div className="col s12 center-align">
                 <div className="card horizontal">
                     <div className="card-stacked">
                         <div className="card-content">
-                           <Link
+                            <Link
                                 to="/hotel"
                                 className="btn btn-large hoverable green accent-3"
                                 style={{
@@ -38,16 +68,23 @@ const SearchRentalCar = () => {
                                 }}
                             >ACTIVITIES</Link>
                             <br />
-                            <input className="destination" placeholder="Where do you want to drop off the vehicle?"></input>
-                            <input className="origin" placeholder="Where do you want ot pick up git?"></input>
-                            <input className="vehicleType" placeholder="What type of vehicle do you want to rent?"></input>
+                            <input className="pickUp" placeholder="What is your pick-up location?"></input>
+                            <label> What type of vehicle do you want?</label>
+                            <Select options={options} />
                             <br />
-                            <DatePicker style={{
-                                align: "center"
-                            }}
-                            className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChnage={date => setStartDate(date)} />
+                            <label style={{ alignSelf: "left" }}> What day do you want to start your rental?
+                            <DatePicker
+                                    className="startDate" timeInputLabel="When is your pick-up date?" selected={startDate} onChange={date => setStartDate(date)} />
+                            </label>
                             <br />
-                            <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChnage={date => setEndDate(date)} />
+                            <label> What time do you want to pick up the vehicle?</label>
+                            <Select options={timeOptions} />
+                            <br />
+                            <label> What day do you want to end your rental?</label>
+                            <DatePicker className="endDate" timeInputLabel="When do you want to return the car?" selected={endDate} onChange={date => setEndDate(date)} />
+                            <br />
+                            <label> What time do you want to drop off the vehicle?</label>
+                            <Select options={timeOptions} />
                             <br />
                             <Link
                                 to=""

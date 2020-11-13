@@ -40,12 +40,10 @@ const SearchHotel = () => {
                             <br />
                             <input className="destination" placeholder="Where is your adventure taking you?"></input>
                             <br />
-                            <DatePicker style={{
-                                align: "center"
-                            }}
-                            className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChnage={date => setStartDate(date)} />
+                            <DatePicker
+                            className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChange={date => setStartDate(date)} />
                             <br />
-                            <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChnage={date => setEndDate(date)} />
+                            <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} />
                             <br />
                             <Link
                                 to=""

@@ -16,6 +16,10 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Activity from "./components/activity/activity";
 import Hotel from "./components/hotel/hotel";
 import Flights from "./components/flights/flights";
+<<<<<<< HEAD
+import RentalCar from "./components/rental/rental";
+=======
+>>>>>>> 6c3ec9b9c61e17d5f4251a31692f3e5f99060cb9
 
 import "./App.css";
 
@@ -48,9 +52,9 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/activity" component={Activity} />
-            <Route exact path="/flights" component={Flights} />
             <Route exact path="/hotel" component={Hotel} />
-
+            <Route exact path="/flights" component={Flights} />
+            <Route exact path="/rental" component={RentalCar} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>

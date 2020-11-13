@@ -10,7 +10,7 @@ const SearchActivity = () => {
                 <div className="card horizontal">
                     <div className="card-stacked">
                         <div className="card-content">
-                           <Link
+                            <Link
                                 to="/hotel"
                                 className="btn btn-large hoverable green accent-3"
                                 style={{
