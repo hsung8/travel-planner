@@ -17,6 +17,8 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "chart.js": "^2.9.4",
+    "chartjs": "^0.3.24",
     "concurrently": "^4.0.1",
     "express": "^4.16.4",
     "is-empty": "^1.2.0",
@@ -24,6 +26,9 @@
     "mongoose": "^5.3.11",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "react": "^0.14.0",
+    "react-chartjs-2": "^2.11.1",
+    "react-dom": "^0.14.0",
     "validator": "^10.9.0"
   }
 }
