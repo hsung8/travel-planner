@@ -9,7 +9,7 @@ import store from "./store";
 
 //flights API 
 //NOTE: Consider merging "AmadeusProvider" and "Provider", but there is no reason we cannot have two different providers.
-import { AmadeusProvider } from "./utils/AmadeusProvider";
+// import { AmadeusProvider } from "./utils/AmadeusProvider";
 
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
@@ -46,7 +46,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <AmadeusProvider>
+        {/* <AmadeusProvider> */}
         <Router>
           <div className="App">
             <Route exact path="/" component={Landing} />
@@ -61,7 +61,7 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
-        </AmadeusProvider>
+        {/* </AmadeusProvider> */}
       </Provider>
     );
   }

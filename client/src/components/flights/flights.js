@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SearchFlight from "../Search/SearchFlight.js";
 
+
 const Flights = () => {
     return (
         <div  className="container valign-wrapper">

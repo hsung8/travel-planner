@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import Select from "react-select";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+// import { AmadeusProvider, AmadeusContext } from "../../utils/AmadeusProvider";
+import amadeus from '../../utils/AmadeusProvider'
+
 
 const SearchFlight = () => {
     const [startDate, setStartDate] = useState(new Date())
@@ -13,6 +16,27 @@ const SearchFlight = () => {
         { value: "BUSINESS", label: "Business" },
         { value: "FIRST", label: "First" }
     ]
+    const [destination, setDestination] = useState({ destination: "" });
+    const [origin, setOrigin] = useState({ origin: "" });
+    // const { refreshToken, getIATACode, getFlights } = useContext(AmadeusProvider)
+
+    useEffect(() => {
+        amadeus.shopping.flightOffersSearch.get({
+            originLocationCode: 'SYD',
+            destinationLocationCode: 'BKK',
+            departureDate: '2020-12-01',
+            adults: '2',
+            currencyCode: "USD",
+            max: 10,
+            travelClass: "ECONOMY"
+        }).then(function(response){
+          console.log(response.data);
+        }).catch(function(responseError){
+          console.log(responseError.code);
+        });
+    
+    }, [])
+
     return (
         
         <div className="row">
@@ -74,21 +98,27 @@ const SearchFlight = () => {
                                 }}
                             >ACTIVITIES</Link>
                             <br />
-                            <input className="destination" placeholder="Where is your adventure taking you?"></input>
-                            <input className="origin" placeholder="Where are you coming from?"></input>
+                            <form >
+
+                                <input name="destination" className="destination" placeholder="Where is your adventure taking you?"></input>
+                                <input name="origin" className="origin" placeholder="Where are you coming from?"></input>
+                            </form>
                             <br />
-                            <input className="adults" placeholder="How many adults will be traveling?"></input>
-                            <input className="adults" placeholder="How many children will be traveling?"></input>
-                            <br />
-                            <label>
-                                Which class would you like to fly in?
+                            <form style = {{display: "none"}}>
+
+                                <input className="adults" placeholder="How many adults will be traveling?"></input>
+                                <input className="adults" placeholder="How many children will be traveling?"></input>
+                                <br />
+                                <label>
+                                    Which class would you like to fly in?
                                 <Select options={options} />
-                            </label>
-                            <DatePicker
-                                className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChange={date => setStartDate(date)} />
-                            <br />
-                            <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} />
-                            <br />
+                                </label>
+                                <DatePicker
+                                    className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChange={date => setStartDate(date)} />
+                                <br />
+                                <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} />
+                                <br />
+                            </form>
                             <Link style={{
                               
                                 letterSpacing: "1.5px",
