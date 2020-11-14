@@ -53,7 +53,7 @@ class Register extends Component {
     const { errors } = this.state;
 
     return (
-      <div style={{ background: "#abd1c6" , paddingBottom: "1rem", marginTop: "2rem"}} className="container">
+      <div style={{ background: "#fffffe" , paddingBottom: "1rem", marginTop: "2rem"}} className="container">
         <div className="row">
           <div className="col s8 offset-s2">
             <Link to="/" className="btn-flat waves-effect">
@@ -133,7 +133,7 @@ class Register extends Component {
                     letterSpacing: "1.5px",
                     marginTop: "1rem",
                     background: "#f9bc60",
-                    color: "#001e1d"
+                    color: "#001e1d",
                   }}
                   type="submit"
                   className="btn btn-large waves-effect waves-light hoverable accent-3"
