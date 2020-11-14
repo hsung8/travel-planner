@@ -25,6 +25,7 @@ const SearchFlight = () => {
             originLocationCode: 'SYD',
             destinationLocationCode: 'BKK',
             departureDate: '2020-12-01',
+            returnDate: '2020-12-10',
             adults: '2',
             currencyCode: "USD",
             max: 10,
