@@ -16,6 +16,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Activity from "./components/activity/activity";
 import Hotel from "./components/hotel/hotel";
 import Flights from "./components/flights/flights";
+import RentalCar from "./components/rental/rental";
 import "./App.css";
 
 // Check for token to keep user logged in

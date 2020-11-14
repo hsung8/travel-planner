@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useRef} from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import {getActivitiesByAddress} from "../../actions/activitiesActions"
 const SearchActivity = () => {
+    const searchInput = useRef();
     return (
         <div className="row">
             <div className="col s12 center-align">
@@ -36,12 +37,15 @@ const SearchActivity = () => {
                                 }}
                             >ACTIVITIES</Link>
                             <br />
-                            <input className="address" placeholder="What is the address where you want to do an activity?"></input>
-                            <br />
-                            <Link
-                                to=""
-                                className="Search btn btn-large hoverable blue accent-3">
-                                Search</Link>
+                            <form onSubmit={() => {getActivitiesByAddress(searchInput.current.value)}}>
+                                <input type="text" ref={searchInput} className="address" placeholder="What is the address where you want to do an activity?"></input>
+
+                                <br />
+                                <button
+                                    to=""
+                                    className="Search btn btn-large hoverable blue accent-3">
+                                    Search </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -51,3 +55,5 @@ const SearchActivity = () => {
 };
 
 export default SearchActivity;
+
+
