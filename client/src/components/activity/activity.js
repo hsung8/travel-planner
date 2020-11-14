@@ -4,7 +4,7 @@ import SearchActivity from "../Search/SearchActivity.js";
 
 const Activity = () => {
     return (
-        <div style={{ height: "75vh" }} className="container valign-wrapper">
+        <div  className="container valign-wrapper">
             <div className="row">
                 <div className="row">
                     <div className="col s12 center-align">
