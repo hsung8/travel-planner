@@ -7,7 +7,8 @@ class Budget extends Component {
     state = {
         savingsGoal: "",
         savingsLength: "",
-        savingsPerWeek: ""
+        savingsPerWeek: "",
+        style: "none"
     };
 
     handleSearchEvent = (e) => {
@@ -15,14 +16,16 @@ class Budget extends Component {
             this.setState({ savingsGoal: e.target.value });
         };
         if (e.target.name === "savingsLength") {
-            this.setState({ savingsGoal: e.target.value });
+            this.setState({ savingsLength: e.target.value });
         };
     };
-    
-    handleSubmit = (e) => {
+
+    handleSubmit = () => {
         console.log(this.state.savingsPerWeek);
-        this.setState({savingsPerWeek: parseFloat(this.state.savingsGoal) })
-    }
+        const savings = parseFloat(this.state.savingsGoal) / parseFloat(this.state.savingsLength);
+        this.setState({ savingsPerWeek: savings });
+        this.setState({ style: "" });
+    };
 
     render() {
         return (
@@ -82,8 +85,8 @@ class Budget extends Component {
                                         res.preventDefault();
                                     }}>
                                         <input onChange={this.handleSearchEvent} name="savingsGoal" className="savingsGoal" placeholder="What is your savings goal?" style={{ textAlign: "center" }}></input>
-                                        <input onChange={this.handleSearchEvent} name="savingsLength"className="savingsLength" placeholder="How many weeks to save?" style={{ textAlign: "center" }}></input>
-                                        <button onSubmit={this.handleSubmit} type="submit" className="btn btn-large waves-effect hoverable">Submit</button>
+                                        <input onChange={this.handleSearchEvent} name="savingsLength" className="savingsLength" placeholder="How many weeks to save?" style={{ textAlign: "center" }}></input>
+                                        <button onClick={this.handleSubmit} type="submit" className="btn btn-large waves-effect hoverable">Submit</button>
                                     </form>
                                     <h4 className="totalSavings"></h4>
                                     < br />
@@ -94,7 +97,7 @@ class Budget extends Component {
                                     <Piechart />
                                 </div>
                             </div>
-                            <h5 className="" style={{ display: "" }}>You need to save {this.state.savingsPerWeek} each week to save {}! Get Saving!</h5>
+                            <h5 className="savingsPerWeek" style={{ display: this.state.style }}>You need to save {this.state.savingsPerWeek} each week to save {this.state.savingsGoal}! Get Saving!</h5>
                         </div>
                     </div>
                     <div style={{ width: "100%" }} className="card horizontal">
@@ -111,7 +114,7 @@ class Budget extends Component {
 
             </div>
         );
-    }
-}
+    };
+};
 
 export default Budget;
