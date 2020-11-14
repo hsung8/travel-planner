@@ -13,25 +13,31 @@ class Dashboard extends Component {
     const { user } = this.props.auth;
 
     return (
+   
       <div>
         <Logout />
-        <div style={{ height: "75vh" }} className="container">
+        
+        <div className="container">
+
           <div className="row">
             <div className="col s12 center-align">
+            
               <h4>
                 Hello, <b>{user.name.split(" ")[0]}</b>👋 Ready to Getaway?
               </h4>
+              <br></br>
               <Budget />
             </div>
           </div>
         </div>
-        <div style={{ height: "75vh" }} className="container">
+        <div className="container">
           <div className="col s12 center-align">
             <SearchFlight />
           </div>
         </div >
       </div>
     );
+  
   }
 }
 

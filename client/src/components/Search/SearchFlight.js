@@ -7,6 +7,7 @@ const SearchFlight = () => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
     return (
+        
         <div className="row">
             <div className="col s12 center-align">
                 <div className="card horizontal searchBox">
@@ -75,16 +76,12 @@ const SearchFlight = () => {
                             <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} />
                             <br />
                             <Link style={{
-                                width: "150px",
-                                borderRadius: "3px",
+                              
                                 letterSpacing: "1.5px",
                                 marginTop: "1rem",
-                                paddingBottom: "1rem",
-                                background: "#f9bc60",
-                                color: "#001e1d"
                             }}
                                 to=""
-                                className="Search btn btn-large hoverable accent-3">
+                                className="Search btn btn-large hoverable blue accent-3">
                                 Search</Link>
                         </div>
                     </div>
