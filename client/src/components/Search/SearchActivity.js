@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
 import PropTypes from "prop-types";
-import { getActivitiesByAddress } from "../../actions/activitiesActions"
+import { getActivitiesByAddress, addActivitiesToMongo } from "../../actions/activitiesActions"
+import { v4 as uuidv4 } from 'uuid';
 
 
 class SearchActivity extends Component {
@@ -67,14 +68,19 @@ class SearchActivity extends Component {
                             <div className="card-content">
                                 {this.props.activities.activities.map(item => {
                                     return (
-                                        <div className="container">
-                                            {/* name of the event */}
+                                        <div className="container" key={uuidv4()}>
                                             <div>{item.name}</div>
                                             <div>{`Description: ${item.description}`}</div>
                                             <div>{`Location: ${item.location.address1} ${item.location.city} ${item.location.state} ${item.location.zipcode}}`}</div>
                                             <a target="_blank" href={`${item.event_site_url}`}>{`Event Link: ${item.event_site_url}`}</a>
-                                            <button class="btn waves-effect waves-light" type="submit" name="action">Add to Planner
-                                                <i class="material-icons right">send</i>
+                                            <button className="btn waves-effect waves-light" type="submit" name="action"
+                                            onClick={(event) => {
+                                                event.preventDefault();
+                                                //ADD THE USER to the activities data so mongoose can locate the user based on _userID
+                                                item.user = this.props.auth.user.id;
+                                                console.log("this come from line 80 of SearchActivity.js to console.log data to be send to mongo from the front end react",item)
+                                                this.props.addActivitiesToMongo(item)}}>Add to Planner
+                                                <i className="material-icons right">send</i>
                                             </button>
                                         </div>
                                     )
@@ -89,6 +95,7 @@ class SearchActivity extends Component {
 }
 SearchActivity.propTypes = {
     getActivitiesByAddress: PropTypes.func.isRequired,
+    addActivitiesToMongo:PropTypes.func.isRequired,
     activities: PropTypes.object
 };
 
@@ -99,6 +106,6 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getActivitiesByAddress }
+    { getActivitiesByAddress , addActivitiesToMongo}
 )(SearchActivity);
 

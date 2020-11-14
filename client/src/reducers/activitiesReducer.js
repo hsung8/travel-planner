@@ -10,7 +10,6 @@ const initialState = {
     switch (action.type) {
       case SET_ACTIVITIES:
         //if successful got data from YELP, export that data to the activities state
-        console.log(action.payload)
         return {activities: action.payload}
         ;
       default:
