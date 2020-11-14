@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Select from "react-select";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -6,6 +7,12 @@ import "react-datepicker/dist/react-datepicker.css";
 const SearchFlight = () => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
+    const options = [
+        { value: "ECONOMY", label: "Economy" },
+        { value: "PREMIUM_ECONOMY", label: "Premium Economy" },
+        { value: "BUSINESS", label: "Business" },
+        { value: "FIRST", label: "First" }
+    ]
     return (
         
         <div className="row">
@@ -70,6 +77,13 @@ const SearchFlight = () => {
                             <input className="destination" placeholder="Where is your adventure taking you?"></input>
                             <input className="origin" placeholder="Where are you coming from?"></input>
                             <br />
+                            <input className="adults" placeholder="How many adults will be traveling?"></input>
+                            <input className="adults" placeholder="How many children will be traveling?"></input>
+                            <br />
+                            <label>
+                                Which class would you like to fly in?
+                                <Select options={options} />
+                            </label>
                             <DatePicker
                                 className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChange={date => setStartDate(date)} />
                             <br />
