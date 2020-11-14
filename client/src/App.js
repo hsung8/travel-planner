@@ -7,6 +7,10 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
 
+//flights API 
+//NOTE: Consider merging "AmadeusProvider" and "Provider", but there is no reason we cannot have two different providers.
+import { AmadeusProvider } from "./utils/AmadeusProvider";
+
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
@@ -42,6 +46,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
+        <AmadeusProvider>
         <Router>
           <div className="App">
             <Route exact path="/" component={Landing} />
@@ -56,6 +61,7 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
+        </AmadeusProvider>
       </Provider>
     );
   }
