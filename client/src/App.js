@@ -16,7 +16,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Activity from "./components/activity/activity";
 import Hotel from "./components/hotel/hotel";
 import Flights from "./components/flights/flights";
-
+import RentalCar from "./components/rental/rental";
 import "./App.css";
 
 // Check for token to keep user logged in
@@ -48,9 +48,9 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/activity" component={Activity} />
-            <Route exact path="/flights" component={Flights} />
             <Route exact path="/hotel" component={Hotel} />
-
+            <Route exact path="/flights" component={Flights} />
+            <Route exact path="/rental" component={RentalCar} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
