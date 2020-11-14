@@ -23,7 +23,7 @@ class SearchActivity extends Component {
                 <div className="col s12 center-align">
                     <div className="card horizontal">
                         <div className="card-stacked">
-                            <div className="card-content">
+                            <div className="card-header">
                                 <Link
                                     to="/hotel"
                                     className="btn btn-large hoverable green accent-3"
@@ -63,20 +63,22 @@ class SearchActivity extends Component {
                                         className="Search btn btn-large hoverable blue accent-3">
                                         Search </button>
                                 </form>
-                                {this.props.activities.activities.map( item => {
-                                    return(
-                                        <>
-                                    {/* name of the event */}
-                                    <div>{item.name}</div>
-                                    <div>{`Description: ${item.description}`}</div>
-                                    <div>{`Location: ${item.location.address1} ${item.location.city} ${item.location.state} ${item.location.zipcode}}`}</div>
-                                    <a target="_blank" href={`${item.event_site_url}`}>{`Event Link: ${item.event_site_url}`}</a>
-                                    <div></div>
-                                    <br></br>
-                                    </>
+                            </div>
+                            <div className="card-content">
+                                {this.props.activities.activities.map(item => {
+                                    return (
+                                        <div className="container">
+                                            {/* name of the event */}
+                                            <div>{item.name}</div>
+                                            <div>{`Description: ${item.description}`}</div>
+                                            <div>{`Location: ${item.location.address1} ${item.location.city} ${item.location.state} ${item.location.zipcode}}`}</div>
+                                            <a target="_blank" href={`${item.event_site_url}`}>{`Event Link: ${item.event_site_url}`}</a>
+                                            <button class="btn waves-effect waves-light" type="submit" name="action">Add to Planner
+                                                <i class="material-icons right">send</i>
+                                            </button>
+                                        </div>
                                     )
                                 })}
-
                             </div>
                         </div>
                     </div>
@@ -84,19 +86,19 @@ class SearchActivity extends Component {
             </div>
         );
     }
-}   
+}
 SearchActivity.propTypes = {
-   getActivitiesByAddress: PropTypes.func.isRequired,
-   activities:  PropTypes.object
-  };
+    getActivitiesByAddress: PropTypes.func.isRequired,
+    activities: PropTypes.object
+};
 
-  const mapStateToProps = state => ({
+const mapStateToProps = state => ({
     auth: state.auth,
     activities: state.activities
-  });
-  
-  export default connect(
+});
+
+export default connect(
     mapStateToProps,
     { getActivitiesByAddress }
-  )(SearchActivity);
+)(SearchActivity);
 
