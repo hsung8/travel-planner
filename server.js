@@ -15,6 +15,13 @@ app.use(
 );
 app.use(bodyParser.json());
 
+// //app.get("/yelp/", (req, res)=>{
+//   const location = req.query.location
+
+//   // request to yelp server
+
+//   // request.send(data)
+// }")
 // Serve up static assets
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

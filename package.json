@@ -20,6 +20,7 @@
     "chart.js": "^2.9.4",
     "chartjs": "^0.3.24",
     "concurrently": "^4.0.1",
+    "cors-anywhere": "^0.4.3",
     "express": "^4.16.4",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.3.0",
@@ -29,6 +30,7 @@
     "react": "^0.14.0",
     "react-chartjs-2": "^2.11.1",
     "react-dom": "^0.14.0",
-    "validator": "^10.9.0"
+    "validator": "^10.9.0",
+    "yelp-fusion": "^3.0.0"
   }
 }
