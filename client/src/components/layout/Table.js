@@ -11,8 +11,8 @@ class Table extends Component {
              { id: 4, category: 'Activities', price: 40, savedDate: 'Nov 4, 2020' },
              { id: 5, category: 'Miscellaneous', price: 20, savedDate: 'Oct 8, 2020' }
           ]
-       }
-    }
+       };
+    };
  
     renderTableData() {
         return this.state.travel.map((travel, index) => {
@@ -23,19 +23,18 @@ class Table extends Component {
                  <td>{category}</td>
                  <td>{price}</td>
                  <td>{savedDate}</td>
-                 <td><button type="button">Edit</button></td>
                  <td><button type="button">Delete</button></td>
               </tr>
            )
-        })
-    }
+        });
+    };
 
     renderTableHeader() {
         let header = Object.keys(this.state.travel[0])
         return header.map((key, index) => {
            return <th key={index}>{key.toUpperCase()}</th>
-        })
-    }
+        });
+    };
   
     render() {
         return (
@@ -47,8 +46,8 @@ class Table extends Component {
                  </tbody>
               </table>
            </div>
-        )
-    }
- }
+        );
+    };
+ };
  
  export default Table 
