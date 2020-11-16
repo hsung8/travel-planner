@@ -10,7 +10,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 class SearchActivity extends Component {
     state = {
-        searchTerm: ""
+        searchTerm: "",
+        saved: "none"
     }
 
     handleSearchEvent = (event) => {
@@ -24,65 +25,30 @@ class SearchActivity extends Component {
                 <div className="col s12 center-align">
                     <div className="card horizontal">
                         <div className="card-stacked">
-                            <div className="card-content">
+                            <div className="card-header">
                                 <Link
                                     to="/hotel"
-                                    className="btn btn-large hoverable accent-3"
+                                    className="btn btn-large hoverable green accent-3"
                                     style={{
-                                        marginRight: 10,
-                                        background: "#f9bc60",
-                                        color: "#001e1d",
-                                        width: "150px",
-                                        borderRadius: "3px",
-                                        letterSpacing: "1.5px",
-                                        marginTop: "1rem",
-                                        marginBottom: "1rem",
-                                        background: "#f9bc60",
-                                        color: "#001e1d"
+                                        marginRight: 10
                                     }}
                                 >HOTELS</Link>
                                 <Link to="/flights"
-                                    className="btn btn-large hoverable accent-3"
+                                    className="btn btn-large hoverable blue accent-3"
                                     style={{
-                                        marginRight: 10,
-                                        background: "#f9bc60",
-                                        color: "#001e1d",
-                                        width: "150px",
-                                        borderRadius: "3px",
-                                        letterSpacing: "1.5px",
-                                        marginTop: "1rem",
-                                        marginBottom: "1rem",
-                                        background: "#f9bc60",
-                                        color: "#001e1d"
-
+                                        marginRight: 10
                                     }}
                                 >FLIGHTS</Link>
                                 <Link to="/rental"
-                                    className="btn btn-large hoverable accent-3"
+                                    className="btn btn-large hoverable black accent-3"
                                     style={{
-                                        marginRight: 10,
-                                        width: "150px",
-                                        borderRadius: "3px",
-                                        letterSpacing: ".5px",
-                                        marginTop: "1rem",
-                                        marginBottom: "1rem",
-                                        background: "#f9bc60",
-                                        color: "#001e1d"
+                                        marginRight: 10
                                     }}
-                                >RENTALCARS</Link>
+                                >RENTAL CARS</Link>
                                 <Link to="/activity"
-                                    className="btn btn-large hoverable accent-3"
+                                    className="btn btn-large hoverable orange accent-3"
                                     style={{
-                                        marginRight: 10,
-                                        background: "#f9bc60",
-                                        color: "#001e1d",
-                                        width: "150px",
-                                        borderRadius: "3px",
-                                        letterSpacing: "1.5px",
-                                        marginTop: "1rem",
-                                        marginBottom: "1rem",
-                                        background: "#f9bc60",
-                                        color: "#001e1d"
+                                        marginRight: 10
                                     }}
                                 >ACTIVITIES</Link>
                                 <br />
@@ -91,31 +57,23 @@ class SearchActivity extends Component {
                                     console.log("form successuflly submitted");
                                     this.props.getActivitiesByAddress(this.state.searchTerm)
                                 }}>
-                                    <input onChange={this.handleSearchEvent} value={this.state.searchTerm} name="activitiesSearch" type="text" className="address" placeholder="What is the address where you want to do an activity?"></input>
+                                    <input onChange={this.handleSearchEvent} value={this.state.searchTerm} name="activitiesSearch" type="text" className="address" placeholder="Search an address or city for fun events to do!!!"></input>
 
                                     <br />
-                                    <Link style={{
-                                 
-                              
-                                    letterSpacing: "1.5px",
-                                    marginTop: "1rem",
-                                }}
-                         
-                                to=""
-                                className="Search btn btn-large hoverable blue accent-3">
-                                Search</Link>
-
-                                   
+                                    <button
+                                        type="submit"
+                                        className="Search btn btn-large hoverable blue accent-3">
+                                        Search </button>
                                 </form>
                             </div>
                             <div className="card-content">
                                 {this.props.activities.activities.map(item => {
-                                    return (
-                                        <div className="container" key={uuidv4()}>
-                                            <div>{item.name}</div>
-                                            <div>{`Description: ${item.description}`}</div>
-                                            <div>{`Location: ${item.location.address1} ${item.location.city} ${item.location.state} ${item.location.zipcode}}`}</div>
-                                            <a target="_blank" href={`${item.event_site_url}`}>{`Event Link: ${item.event_site_url}`}</a>
+                                    return (<>
+                                        <div className="container" >
+                                            <div><a target="_blank" href={`${item.event_site_url}`}>{item.name}</a></div>
+                                            <div>{item.description}</div>
+                                            <div>{`Location: ${item.location.address1} ${item.location.city} ${item.location.state} ${item.location.zip_code}`}</div>
+                                            <div>cost: {item.is_free ? "free event" : `$ ${item.cost === null ? `to be announced`: item.cost}`}</div>
                                             <button className="btn waves-effect waves-light" type="submit" name="action"
                                             onClick={(event) => {
                                                 event.preventDefault();
@@ -126,6 +84,9 @@ class SearchActivity extends Component {
                                                 <i className="material-icons right">send</i>
                                             </button>
                                         </div>
+                                        <br></br>
+                                        <br></br>
+                                        </>
                                     )
                                 })}
                             </div>
