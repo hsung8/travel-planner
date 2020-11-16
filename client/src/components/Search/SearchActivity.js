@@ -6,19 +6,20 @@ import "react-datepicker/dist/react-datepicker.css"
 import PropTypes from "prop-types";
 import { getActivitiesByAddress, addActivitiesToMongo } from "../../actions/activitiesActions"
 import { v4 as uuidv4 } from 'uuid';
+import M from 'materialize-css';
 
 
 class SearchActivity extends Component {
     state = {
         searchTerm: "",
     }
-
+    ;
     handleSearchEvent = (event) => {
         this.setState({
             searchTerm: event.target.value
         })
     }
-
+    ;
     renderResult = (state) => {
         if (state.default) {
             return <div>{state.default}</div>
@@ -51,6 +52,7 @@ class SearchActivity extends Component {
                             item.key = key
                             console.log("this come from line 80 of SearchActivity.js to console.log data to be send to mongo from the front end react", item);
                             this.props.addActivitiesToMongo(item);
+                            M.toast({ html: "Successfully added to planner", class: "toast" });
                             
                         }}>Add to Planner
                         <i className="material-icons right">send</i>

@@ -23,7 +23,7 @@ router.put("/activities", (req, res) => {
 })
 
 
-// @route GET api/users/activities
+// @route GET api/users/getActivities
 // @desc GET actitivies  from yelp API
 // @access Public
 router.post("/getActivities", (req, res) => {
@@ -32,8 +32,8 @@ router.post("/getActivities", (req, res) => {
     //    {
     //        address: ""
     //    }
-    const searchTerm = req.body.address
-    console.log("this is the search term", searchTerm)
+    const searchTerm = req.body.address;
+    console.log("this is the search term", searchTerm);
     client.eventSearch({
         location: searchTerm,
         sort_by: "asc",
