@@ -11,13 +11,63 @@ import { v4 as uuidv4 } from 'uuid';
 class SearchActivity extends Component {
     state = {
         searchTerm: "",
-        saved: "none"
     }
 
     handleSearchEvent = (event) => {
         this.setState({
             searchTerm: event.target.value
         })
+    }
+
+    renderResult = (state) => {
+        if (state.default) {
+            return <div>{state.default}</div>
+        }
+        else if (state.length === 0) {
+            return <div>No information found</div>
+        }
+        else {
+            //map thru every event in the array
+            return this.props.activities.activities.map(item => {
+                //create a unique key for each event
+                const key = uuidv4()
+                return (<div key={key}>
+                    <ul className="container" >
+                        {/* event name */}
+                        <li><a target="_blank" href={`${item.event_site_url}`}>{item.name}</a></li>
+                        {/* event description */}
+                        <li>{item.description}</li>
+                        {/* event location */}
+                        <li>{`Location: ${item.location.address1} ${item.location.city} ${item.location.state} ${item.location.zip_code}`}</li>
+                        {/* event cost */}
+                        <li>cost: {item.is_free ? "free event" : `$ ${item.cost === null ? `to be announced` : item.cost}`}</li>
+                        {/* button to save */}
+                        {this.props.activities.selected.indexOf(key) === parseInt(-1) ? 
+                        <button id={key} className="btn waves-effect waves-light" type="submit" name="action"
+                        onClick={(event) => {
+                            event.preventDefault();
+                            //ADD THE USER to the activities data so mongoose can locate the user based on _userID
+                            item.user = this.props.auth.user.id;
+                            item.key = key
+                            console.log("this come from line 80 of SearchActivity.js to console.log data to be send to mongo from the front end react", item);
+                            this.props.addActivitiesToMongo(item);
+                            
+                        }}>Add to Planner
+                        <i className="material-icons right">send</i>
+                    </button>
+                    :
+                    <div></div>
+                    }
+                        
+                    </ul>
+                    <br></br>
+                    <br></br>
+                </div>
+                );
+                
+                
+            })
+        }
     }
     render() {
         return (
@@ -67,28 +117,7 @@ class SearchActivity extends Component {
                                 </form>
                             </div>
                             <div className="card-content">
-                                {this.props.activities.activities.map(item => {
-                                    return (<>
-                                        <div className="container" >
-                                            <div><a target="_blank" href={`${item.event_site_url}`}>{item.name}</a></div>
-                                            <div>{item.description}</div>
-                                            <div>{`Location: ${item.location.address1} ${item.location.city} ${item.location.state} ${item.location.zip_code}`}</div>
-                                            <div>cost: {item.is_free ? "free event" : `$ ${item.cost === null ? `to be announced`: item.cost}`}</div>
-                                            <button className="btn waves-effect waves-light" type="submit" name="action"
-                                            onClick={(event) => {
-                                                event.preventDefault();
-                                                //ADD THE USER to the activities data so mongoose can locate the user based on _userID
-                                                item.user = this.props.auth.user.id;
-                                                console.log("this come from line 80 of SearchActivity.js to console.log data to be send to mongo from the front end react",item)
-                                                this.props.addActivitiesToMongo(item)}}>Add to Planner
-                                                <i className="material-icons right">send</i>
-                                            </button>
-                                        </div>
-                                        <br></br>
-                                        <br></br>
-                                        </>
-                                    )
-                                })}
+                                {this.renderResult(this.props.activities.activities)}
                             </div>
                         </div>
                     </div>
@@ -99,17 +128,20 @@ class SearchActivity extends Component {
 }
 SearchActivity.propTypes = {
     getActivitiesByAddress: PropTypes.func.isRequired,
-    addActivitiesToMongo:PropTypes.func.isRequired,
-    activities: PropTypes.object
+    addActivitiesToMongo: PropTypes.func.isRequired,
+    activities: PropTypes.object,
+    selected : PropTypes.array
+
 };
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    activities: state.activities
+    activities: state.activities,
+    selected: state.selected
 });
 
 export default connect(
     mapStateToProps,
-    { getActivitiesByAddress , addActivitiesToMongo}
+    { getActivitiesByAddress, addActivitiesToMongo }
 )(SearchActivity);
 

@@ -12,7 +12,13 @@ router.put("/activities", (req, res) => {
     const activity = req.body
     User.findByIdAndUpdate(user, {
         $push: { activities: activity }
-    }).then(res => console.log("This comes from line 17 of activities.js console.log the response from Mongo after you add the activity", res))
+    })
+        .then(response => {
+            console.log(response)
+            // console.log("This comes from line 17 of activities.js console.log the response from Mongo after you add the activity", res)
+            res.status(200).json({ key: req.body.key }) 
+        }
+        )
         .catch(err => console.log(err))
 })
 
@@ -33,8 +39,8 @@ router.post("/getActivities", (req, res) => {
         sort_by: "asc",
         limit: 10
     })
-        .then (response => {
-            console.log("this console.log the array of events received from Yelp API",response.jsonBody.events)
+        .then(response => {
+            // console.log("this console.log the array of events received from Yelp API", response.jsonBody.events)
             res.status(200).json(response.jsonBody.events)
         })
         .catch(e => {

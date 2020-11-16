@@ -12,7 +12,7 @@ const SearchHotel = () => {
                 <div className="card horizontal">
                     <div className="card-stacked">
                         <div className="card-content">
-                           <Link
+                            <Link
                                 to="/hotel"
                                 className="btn btn-large hoverable accent-3"
                                 style={{
@@ -70,21 +70,23 @@ const SearchHotel = () => {
                                 }}
                             >ACTIVITIES</Link>
                             <br />
-                            <input className="destination" placeholder="Where is your adventure taking you?"></input>
-                            <br />
-                            <DatePicker
-                            className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChange={date => setStartDate(date)} />
-                            <br />
-                            <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} />
-                            <br />
-                            <Link style={{
-                              
-                              letterSpacing: "1.5px",
-                              marginTop: "1rem",
-                          }}
-                                to=""
-                                className="Search btn btn-large hoverable blue accent-3">
-                                Search</Link>
+                            <form>
+                                <input className="destination" placeholder="Where is your adventure taking you?"></input>
+                                <br />
+                                <DatePicker
+                                    className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChange={date => setStartDate(date)} />
+                                <br />
+                                <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} />
+                                <br />
+                                <Link style={{
+
+                                    letterSpacing: "1.5px",
+                                    marginTop: "1rem",
+                                }}
+                                    to=""
+                                    className="Search btn btn-large hoverable blue accent-3">
+                                    Search</Link>
+                            </form>
                         </div>
                     </div>
                 </div>
