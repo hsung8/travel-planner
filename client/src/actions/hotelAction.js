@@ -13,6 +13,12 @@ export const getHotels = (searchObj) => (dispatch) => {
     },
   })
     .then((res) => res.json())
-    .then((hotels) => console.log(hotels))
-    .catch( err => console.log(err));
+    .then((hotels) => {
+      console.log("this is the array of hotels extracted from our backend server",hotels);
+      dispatch({
+        type: GET_HOTELS,
+        payload: hotels
+    })
+    })
+    .catch((err) => console.log(err));
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import SearchActivity from "../Search/SearchActivity.js";
 import Logout2 from "../layout/Logout2"
 

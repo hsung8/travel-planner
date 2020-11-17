@@ -5,8 +5,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getHotels } from "../../actions/hotelAction";
-import { v4 as uuidv4 } from "uuid";
-import M from 'materialize-css';
 
 const SearchHotel = (props) => {
   const [startDate, setStartDate] = useState(new Date());
@@ -39,8 +37,6 @@ const SearchHotel = (props) => {
                   letterSpacing: "1.5px",
                   marginTop: "1rem",
                   marginBottom: "1rem",
-                  background: "#f9bc60",
-                  color: "#001e1d",
                 }}
               >
                 HOTELS
@@ -56,9 +52,7 @@ const SearchHotel = (props) => {
                   borderRadius: "3px",
                   letterSpacing: "1.5px",
                   marginTop: "1rem",
-                  marginBottom: "1rem",
-                  background: "#f9bc60",
-                  color: "#001e1d",
+                  marginBottom: "1rem"
                 }}
               >
                 FLIGHTS
@@ -146,6 +140,14 @@ const SearchHotel = (props) => {
                 </button>
               </form>
             </div>
+            <div className="card-content">
+                {props.hotel.length === 0 ? 
+                <div>No hotel can be found</div>
+            :
+            props.hotel.map(item => {
+                return <div>{item.hotel.cityCode}</div>
+            })}
+            </div>
           </div>
         </div>
       </div>
@@ -155,10 +157,11 @@ const SearchHotel = (props) => {
 
 SearchHotel.propTypes = {
   getHotels: PropTypes.func,
+  hotel: PropTypes.array,
 };
 
-// const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
+  hotel: state.hotel.hotels,
+});
 
-// });
-
-export default connect(null, { getHotels })(SearchHotel);
+export default connect(mapStateToProps, { getHotels })(SearchHotel);

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { SET_ACTIVITIES, SELECTED } from "./types";
 
  

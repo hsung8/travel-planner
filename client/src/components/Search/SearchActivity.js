@@ -1,8 +1,6 @@
 import React, { Component, useRef } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css"
 import PropTypes from "prop-types";
 import { getActivitiesByAddress, addActivitiesToMongo } from "../../actions/activitiesActions"
 import { v4 as uuidv4 } from 'uuid';
@@ -139,7 +137,6 @@ SearchActivity.propTypes = {
 const mapStateToProps = state => ({
     auth: state.auth,
     activities: state.activities,
-    selected: state.selected
 });
 
 export default connect(
