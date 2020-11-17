@@ -10,7 +10,7 @@ import amadeus from '../../utils/AmadeusProvider'
 const SearchFlight = () => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
-    const options = [
+    const travelClass = [
         { value: "ECONOMY", label: "Economy" },
         { value: "PREMIUM_ECONOMY", label: "Premium Economy" },
         { value: "BUSINESS", label: "Business" },
@@ -18,24 +18,35 @@ const SearchFlight = () => {
     ]
     const [destination, setDestination] = useState({ destination: "" });
     const [origin, setOrigin] = useState({ origin: "" });
-    // const { refreshToken, getIATACode, getFlights } = useContext(AmadeusProvider)
+    const [adults, setAdults] = useState({ adults: 1 })
+    const [children, setChildren] = useState({ children: 0 })
 
-    useEffect(() => {
-        amadeus.shopping.flightOffersSearch.get({
-            originLocationCode: 'SYD',
-            destinationLocationCode: 'BKK',
-            departureDate: '2020-12-01',
-            adults: '2',
-            currencyCode: "USD",
-            max: 10,
-            travelClass: "ECONOMY"
-        }).then(function(response){
-          console.log(response.data);
-        }).catch(function(responseError){
-          console.log(responseError.code);
-        });
-    
-    }, [])
+
+    const handleFlightSubmit = event => {
+        event.preventDefault();  
+    }
+        
+        useEffect(() => {
+            amadeus.shopping.flightOffersSearch.get({
+                originLocationCode: {origin},
+                destinationLocationCode: {destination},
+                departureDate: {startDate},
+                returnDate: {endDate},
+                adults: {adults},
+                children: {children},
+                currencyCode: "USD",
+                max: 5,
+                travelClass: {travelClass}
+            }).then(function(response){
+                console.log(response.data);
+            }).catch(function(responseError){
+                console.log(responseError.code);
+            });
+            
+            
+        }, [])
+        
+   
 
     return (
         
@@ -100,26 +111,26 @@ const SearchFlight = () => {
                             <br />
                             <form >
 
-                                <input name="destination" className="destination" placeholder="Where is your adventure taking you?"></input>
-                                <input name="origin" className="origin" placeholder="Where are you coming from?"></input>
+                                <input name="origin" className="origin" placeholder="Where from?" onChange={origin => setOrigin(origin)}></input>
+                                <input name="destination" className="destination" placeholder="Where to?" onChange={destination => setDestination(destination)}></input>
                             </form>
                             <br />
                             <form style = {{display: "none"}}>
 
-                                <input className="adults" placeholder="How many adults will be traveling?"></input>
-                                <input className="adults" placeholder="How many children will be traveling?"></input>
+                                <input value= {adults} className="adults" placeholder="How many adults will be traveling?" onChange={adults => setAdults(adults)}></input>
+                                <input value= {children} className="children" placeholder="How many children will be traveling?" onChange={children => setChildren(children)}></input>
                                 <br />
                                 <label>
                                     Which class would you like to fly in?
-                                <Select options={options} />
+                                <Select value= {travelClass} options={travelClass} />
                                 </label>
-                                <DatePicker
+                                <DatePicker value= {startDate}
                                     className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChange={date => setStartDate(date)} />
                                 <br />
-                                <DatePicker className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} />
+                                <DatePicker value= {endDate} className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} />
                                 <br />
                             </form>
-                            <Link style={{
+                            <Link onClick= {handleFlightSubmit} style={{
                               
                                 letterSpacing: "1.5px",
                                 marginTop: "1rem",
