@@ -48,7 +48,6 @@ class Logout2 extends Component {
                         letterSpacing: "1.5px",
                         marginTop: "1rem",
                         float: "right",
-                        marginRight: "10px"
                     }}
                 >Dashboard</Link>
             </div>

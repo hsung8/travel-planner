@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import SearchRentalCar from "../Search/SearchRentalCar.js";
 import Logout2 from "../layout/Logout2"
 
