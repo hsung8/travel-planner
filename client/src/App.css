@@ -1,14 +1,24 @@
-body {
-    background-color: #004643;
+body{
+    background-image: url(https://bpmforreal.files.wordpress.com/2013/08/new-york-city-skyline.jpg);
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    width: 100%;
+    height: auto;
 }
 
 .container {
+    border-radius: 25px;
+    opacity: .9;
+}
+
+.card {
     border-radius: 25px;
 }
 
 .searchBox {
     border-radius: 25px; 
-    background-color: #abd1c6;
+    background-color: #fffffe;
 }
 
 ::placeholder {
@@ -25,4 +35,5 @@ body {
 
 .nav-wrapper {
    color: black;
+   background-color: white;
 }

@@ -44,27 +44,59 @@ const SearchRentalCar = () => {
                         <div className="card-content">
                             <Link
                                 to="/hotel"
-                                className="btn btn-large hoverable green accent-3"
+                                className="btn btn-large hoverable accent-3"
                                 style={{
-                                    marginRight: 10
+                                    marginRight: 10,
+                                    background: "#f9bc60",
+                                    color: "#001e1d",
+                                    width: "150px",
+                                    borderRadius: "3px",
+                                    letterSpacing: "1.5px",
+                                    marginTop: "1rem",
+                                    marginBottom: "1rem",
+                                    background: "#f9bc60",
+                                    color: "#001e1d"
                                 }}
                             >HOTELS</Link>
                             <Link to="/flights"
-                                className="btn btn-large hoverable blue accent-3"
+                                className="btn btn-large hoverable accent-3"
                                 style={{
-                                    marginRight: 10
+                                    marginRight: 10,
+                                    marginRight: 10,
+                                    width: "150px",
+                                    borderRadius: "3px",
+                                    letterSpacing: "1.5px",
+                                    marginTop: "1rem",
+                                    marginBottom: "1rem",
+                                    background: "#f9bc60",
+                                    color: "#001e1d"
                                 }}
                             >FLIGHTS</Link>
                             <Link to="/rental"
-                                className="btn btn-large hoverable black accent-3"
+                                className="btn btn-large hoverable accent-3"
                                 style={{
-                                    marginRight: 10
+                                    marginRight: 10,
+                                    marginRight: 10,
+                                    width: "150px",
+                                    borderRadius: "3px",
+                                    letterSpacing: ".5px",
+                                    marginTop: "1rem",
+                                    marginBottom: "1rem",
+                                    background: "#f9bc60",
+                                    color: "#001e1d"
                                 }}
-                            >RENTAL CARS</Link>
+                            >RENTALCARS</Link>
                             <Link to="/activity"
-                                className="btn btn-large hoverable orange accent-3"
+                                className="btn btn-large hoverable accent-3"
                                 style={{
-                                    marginRight: 10
+                                    marginRight: 10,
+                                    width: "150px",
+                                    borderRadius: "3px",
+                                    letterSpacing: "1.5px",
+                                    marginTop: "1rem",
+                                    marginBottom: "1rem",
+                                    background: "#f9bc60",
+                                    color: "#001e1d"
                                 }}
                             >ACTIVITIES</Link>
                             <br />
