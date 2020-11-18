@@ -19,7 +19,7 @@ const SearchFlight = () => {
 
     const travelClass = [
         { value: "ECONOMY", label: "Economy" },
-        { value: "PREMIUM ECONOMY", label: "Premium Economy" },
+        { value: "PREMIUM_ECONOMY", label: "Premium Economy" },
         { value: "BUSINESS", label: "Business" },
         { value: "FIRST", label: "First" }
     ]
@@ -175,14 +175,14 @@ const SearchFlight = () => {
                             <br />
                             <form onSubmit={flightSearchSubmit} style={{ display: showAdditionalFlightInformation ? "block" : "none" }}>
 
-                                <input name="adults" className="adults" placeholder="How many adults will be traveling?" onChange={handleInputs}></input>
-                                <input name="children" className="children" placeholder="How many children will be traveling?" onChange={handleInputs}></input>
+                                <input type="number" name="adults" className="adults" placeholder="How many adults will be traveling?" onChange={handleInputs}></input>
+                                <input type="number" name="children" className="children" placeholder="How many children will be traveling?" onChange={handleInputs}></input>
                                 <br />
                                 <label>
                                     Which class would you like to fly in?
                                 <Select name="travelClass" options={travelClass} onChange={handleClassChange} />
                                 </label>
-                                <DatePicker name="startDate"
+                                <DatePicker name="startDate" required
                                     className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChange={date => setStartDate(date)} />
                                 <br />
                                 <DatePicker name="endDate"
