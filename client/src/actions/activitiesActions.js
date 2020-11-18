@@ -50,6 +50,7 @@ export const getActivitiesByAddress  = (fullAddress)  => dispatch => {
         })
     })
     .catch((error) => {
+        console.log(" i encounter an erorr")
         console.error('Error:', error);
       });
 }

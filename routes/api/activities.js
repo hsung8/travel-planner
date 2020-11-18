@@ -39,7 +39,7 @@ router.post("/getActivities", (req, res) => {
         limit: 10
     })
         .then(response => {
-            // console.log("this console.log the array of events received from Yelp API", response.jsonBody.events)
+            console.log("this console.log the array of events received from Yelp API", response.jsonBody)
             res.status(200).json(response.jsonBody.events)
         })
         .catch(e => {

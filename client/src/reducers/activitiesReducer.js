@@ -6,12 +6,13 @@ const initialState = {
   },
   selected: [],
   savedActivities: []
-};
+};  
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case SET_ACTIVITIES:
       //if successful got data from YELP, export that data to the activities state
+      console.log(action.payload)
       return {
         activities: action.payload,
         selected: [],
