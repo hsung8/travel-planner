@@ -2,8 +2,7 @@ import React, { Component, useRef } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getActivitiesByAddress, addActivitiesToMongo } from "../../actions/activitiesActions"
-import { v4 as uuidv4 } from 'uuid';
+import { getActivitiesByAddress, addActivitiesToMongo, getSavedActivities } from "../../actions/activitiesActions"
 import M from 'materialize-css';
 
 
@@ -12,6 +11,9 @@ class SearchActivity extends Component {
         searchTerm: "",
     }
     ;
+    componentDidMount() {
+        this.props.getSavedActivities(this.props.auth.user.id)
+    }
     handleSearchEvent = (event) => {
         this.setState({
             searchTerm: event.target.value
@@ -41,7 +43,6 @@ class SearchActivity extends Component {
                         {/* event cost */}
                         <li>cost: {item.is_free ? "free event" : `$ ${item.cost === null ? `to be announced` : item.cost}`}</li>
                         {/* button to save */}
-                        {console.log(this.props.activities.selected)}
                         {!this.props.activities.selected.includes(key) ? 
                         <button id={key} className="btn waves-effect waves-light" type="submit" name="action"
                         onClick={(event) => {
@@ -132,8 +133,8 @@ SearchActivity.propTypes = {
     getActivitiesByAddress: PropTypes.func.isRequired,
     addActivitiesToMongo: PropTypes.func.isRequired,
     activities: PropTypes.object,
-    selected : PropTypes.array
-
+    selected : PropTypes.array,
+    getSavedActivities: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -143,6 +144,6 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getActivitiesByAddress, addActivitiesToMongo }
+    { getActivitiesByAddress, addActivitiesToMongo , getSavedActivities}
 )(SearchActivity);
 

@@ -14,9 +14,8 @@ router.put("/activities", (req, res) => {
         $push: { activities: activity }
     })
         .then(response => {
-            console.log(response)
-            // console.log("This comes from line 17 of activities.js console.log the response from Mongo after you add the activity", res)
-            res.status(200).json({ key: req.body.key }) 
+            console.log("This comes from line 17 of activities.js console.log the response from Mongo after you add the activity", response)
+            res.status(200).json(response.activities) 
         }
         )
         .catch(err => console.log(err))
@@ -47,5 +46,26 @@ router.post("/getActivities", (req, res) => {
             console.log(e);
         });
 })
+
+
+// @route GET api/users/activities
+// @desc add activities to the user database based on log in ID
+// @access Public
+router.get("/getSavedActivities/:id", (req, res) => {
+    const user = req.params.id
+    User.findById(user)
+        .then(response => {
+            console.log("This comes from line 17 of activities.js console.log the response from Mongo after you add the activity", response)
+            res.status(200).json(response.activities) 
+        }
+        )
+        .catch(err => console.log(err))
+})
+
+
+
+
+
+
 // export the router 
 module.exports = router;
