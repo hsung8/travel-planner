@@ -58,7 +58,7 @@ const SearchHotel = (props) => {
               >
                 FLIGHTS
               </Link>
-              <Link
+              {/* <Link
                 to="/rental"
                 className="btn btn-large hoverable  accent-3"
                 style={{
@@ -73,7 +73,7 @@ const SearchHotel = (props) => {
                 }}
               >
                 RENTALCARS
-              </Link>
+              </Link> */}
               <Link
                 to="/activity"
                 className="btn btn-large hoverable accent-3"

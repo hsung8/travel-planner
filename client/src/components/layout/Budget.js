@@ -57,13 +57,13 @@ class Budget extends Component {
                                         width: "100%"
                                     }}
                                 >FLIGHTS</Link><br />
-                                <Link to="/rental"
+                                {/* <Link to="/rental"
                                     className="btn btn-large hoverable green accent-3"
                                     style={{
                                         marginBottom: 10,
                                         width: "100%"
                                     }}
-                                >RENTAL CARS</Link><br />
+                                >RENTAL CARS</Link><br /> */}
                                 <Link to="/activity"
                                     className="btn btn-large hoverable blue accent-3"
                                     style={{

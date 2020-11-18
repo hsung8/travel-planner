@@ -7,7 +7,7 @@ class Table extends Component {
           travel: [
              { id: 1, category: 'Flights', price: 75, savedDate: 'Nov 14, 2020' },
              { id: 2, category: 'Hotels', price: 59, savedDate: 'Nov 12, 2020' },
-             { id: 3, category: 'Rental Cars', price: 30, savedDate: 'Nov 10, 2020' },
+            //  { id: 3, category: 'Rental Cars', price: 30, savedDate: 'Nov 10, 2020' },
              { id: 4, category: 'Activities', price: 40, savedDate: 'Nov 4, 2020' },
              { id: 5, category: 'Miscellaneous', price: 20, savedDate: 'Oct 8, 2020' }
           ]
