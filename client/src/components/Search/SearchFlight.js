@@ -1,55 +1,105 @@
-import React, { useState, useContext,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Select from "react-select";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // import { AmadeusProvider, AmadeusContext } from "../../utils/AmadeusProvider";
-import amadeus from '../../utils/AmadeusProvider'
+// import amadeus from '../../utils/AmadeusProvider'
+const Amadeus = require("amadeus");
+const amadeus = new Amadeus({
+    clientId: "HikDALzxHh0L6AaJXVTRTdxknMs0ItsR",
+    clientSecret: "mhpcNiCqSY1olTPP",
+});
 
 
 const SearchFlight = () => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
+
+
     const travelClass = [
         { value: "ECONOMY", label: "Economy" },
-        { value: "PREMIUM_ECONOMY", label: "Premium Economy" },
+        { value: "PREMIUM ECONOMY", label: "Premium Economy" },
         { value: "BUSINESS", label: "Business" },
         { value: "FIRST", label: "First" }
     ]
-    const [destination, setDestination] = useState({ destination: "" });
-    const [origin, setOrigin] = useState({ origin: "" });
-    const [adults, setAdults] = useState({ adults: 1 })
-    const [children, setChildren] = useState({ children: 0 })
+    console.log(travelClass);
+
+    const [inputs, setInputs] = useState({})
+    const [showAdditionalFlightInformation, setShowAdditionalFlightInformation] = useState(false)
 
 
-    const handleFlightSubmit = event => {
-        event.preventDefault();  
+    const handleOriginDestinationSubmit = async event => {
+        event.preventDefault();
+        console.log(inputs);
+        //get iata code for origin
+        const originIataCode = await amadeus.referenceData.locations
+            .get({
+                keyword: inputs.origin,
+                subType: "CITY",
+
+            })
+        console.log(originIataCode.data[0].iataCode);
+
+        let clone = inputs
+        clone.originIataCode = originIataCode.data[0].iataCode
+        setInputs(clone)
+
+
+
+        //get iata code for destination
+        const destinationIataCode = await amadeus.referenceData.locations
+            .get({
+                keyword: inputs.destination,
+                subType: "CITY",
+
+            })
+        console.log(destinationIataCode.data[0].iataCode);
+
+        let clone2 = inputs
+        clone2.destinationIataCode = destinationIataCode.data[0].iataCode
+        setInputs(clone2)
+        setShowAdditionalFlightInformation(true)
+
     }
-        
-        useEffect(() => {
-            amadeus.shopping.flightOffersSearch.get({
-                originLocationCode: {origin},
-                destinationLocationCode: {destination},
-                departureDate: {startDate},
-                returnDate: {endDate},
-                adults: {adults},
-                children: {children},
+
+    const handleInputs = (e) => {
+        const { name, value } = e.target
+        const clone = inputs
+        clone[name] = value
+        setInputs(clone)
+    }
+    const handleClassChange = selectedOption => {
+        // this.setState({ selectedOption });
+        console.log(`Option selected:`, selectedOption);
+        const clone = inputs;
+        clone.travelClass = selectedOption.value;
+        setInputs(clone)
+    };
+
+    const flightSearchSubmit = async event => {
+        event.preventDefault();
+
+        // get flights data
+        const flights = await amadeus.shopping.flightOffersSearch
+            .get({
+                originLocationCode: inputs.originIataCode,
+                destinationLocationCode: inputs.destinationIataCode,
+                departureDate: startDate.toISOString().split('T')[0],
+                returnDate: endDate.toISOString().split('T')[0],
+                adults: inputs.adults,
+                children: inputs.children,
                 currencyCode: "USD",
                 max: 5,
-                travelClass: {travelClass}
-            }).then(function(response){
-                console.log(response.data);
-            }).catch(function(responseError){
-                console.log(responseError.code);
-            });
-            
-            
-        }, [])
-        
-   
+                travelClass: inputs.travelClass
+            })
+        console.log(flights)
+        console.log(inputs.travelClass)
 
+
+    }
     return (
-        
+
         <div className="row">
             <div className="col s12 center-align">
                 <div className="card horizontal searchBox">
@@ -109,35 +159,46 @@ const SearchFlight = () => {
                                 }}
                             >ACTIVITIES</Link>
                             <br />
-                            <form >
+                            <form onSubmit={handleOriginDestinationSubmit}>
 
-                                <input name="origin" className="origin" placeholder="Where from?" onChange={origin => setOrigin(origin)}></input>
-                                <input name="destination" className="destination" placeholder="Where to?" onChange={destination => setDestination(destination)}></input>
+                                <input required name="origin" className="origin" placeholder="Where from?" onChange={handleInputs}></input>
+                                <input required name="destination" className="destination" placeholder="Where to?" onChange={handleInputs}></input>
+                                <button style={{
+
+                                    letterSpacing: "1.5px",
+                                    marginTop: "1rem",
+                                }}
+
+                                    className="Search btn btn-large hoverable blue accent-3">
+                                    Search</button>
                             </form>
                             <br />
-                            <form style = {{display: "none"}}>
+                            <form onSubmit={flightSearchSubmit} style={{ display: showAdditionalFlightInformation ? "block" : "none" }}>
 
-                                <input value= {adults} className="adults" placeholder="How many adults will be traveling?" onChange={adults => setAdults(adults)}></input>
-                                <input value= {children} className="children" placeholder="How many children will be traveling?" onChange={children => setChildren(children)}></input>
+                                <input name="adults" className="adults" placeholder="How many adults will be traveling?" onChange={handleInputs}></input>
+                                <input name="children" className="children" placeholder="How many children will be traveling?" onChange={handleInputs}></input>
                                 <br />
                                 <label>
                                     Which class would you like to fly in?
-                                <Select value= {travelClass} options={travelClass} />
+                                <Select name="travelClass" options={travelClass} onChange={handleClassChange} />
                                 </label>
-                                <DatePicker value= {startDate}
+                                <DatePicker name="startDate"
                                     className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChange={date => setStartDate(date)} />
                                 <br />
-                                <DatePicker value= {endDate} className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} />
+                                <DatePicker name="endDate"
+                                    className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} />
                                 <br />
+
+                                <button style={{
+
+                                    letterSpacing: "1.5px",
+                                    marginTop: "1rem",
+                                }}
+
+                                    className="Search btn btn-large hoverable blue accent-3">
+                                    Search</button>
                             </form>
-                            <Link onClick= {handleFlightSubmit} style={{
-                              
-                                letterSpacing: "1.5px",
-                                marginTop: "1rem",
-                            }}
-                                to=""
-                                className="Search btn btn-large hoverable blue accent-3">
-                                Search</Link>
+
                         </div>
                     </div>
                 </div>
