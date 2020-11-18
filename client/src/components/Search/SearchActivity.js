@@ -78,45 +78,86 @@ class SearchActivity extends Component {
                 <div className="col s12 center-align">
                     <div className="card horizontal">
                         <div className="card-stacked">
-                            <div className="card-header">
+                            <div className="card-content">
                                 <Link
                                     to="/hotel"
-                                    className="btn btn-large hoverable green accent-3"
+                                    className="btn btn-large hoverable accent-3"
                                     style={{
-                                        marginRight: 10
+                                        marginRight: 10,
+                                        background: "#f9bc60",
+                                        color: "#001e1d",
+                                        width: "150px",
+                                        borderRadius: "3px",
+                                        letterSpacing: "1.5px",
+                                        marginTop: "1rem",
+                                        marginBottom: "1rem",
+                                        background: "#f9bc60",
+                                        color: "#001e1d"
                                     }}
                                 >HOTELS</Link>
                                 <Link to="/flights"
-                                    className="btn btn-large hoverable blue accent-3"
+                                    className="btn btn-large hoverable accent-3"
                                     style={{
-                                        marginRight: 10
+                                        marginRight: 10,
+                                        background: "#f9bc60",
+                                        color: "#001e1d",
+                                        width: "150px",
+                                        borderRadius: "3px",
+                                        letterSpacing: "1.5px",
+                                        marginTop: "1rem",
+                                        marginBottom: "1rem",
+                                        background: "#f9bc60",
+                                        color: "#001e1d"
                                     }}
                                 >FLIGHTS</Link>
-                                <Link to="/rental"
-                                    className="btn btn-large hoverable black accent-3"
+                                {/* <Link to="/rental"
+                                    className="btn btn-large hoverable accent-3"
                                     style={{
-                                        marginRight: 10
+                                        marginRight: 10,
+                                        width: "150px",
+                                         borderRadius: "3px",
+                                         letterSpacing: ".5px",
+                                         marginTop: "1rem",
+                                         marginBottom: "1rem",
+                                         background: "#f9bc60",
+                                         color: "#001e1d"
                                     }}
-                                >RENTAL CARS</Link>
+                                >RENTALCARS</Link> */}
                                 <Link to="/activity"
-                                    className="btn btn-large hoverable orange accent-3"
+                                    className="btn btn-large hoverable accent-3"
                                     style={{
-                                        marginRight: 10
+                                        marginRight: 10,
+                                        background: "#f9bc60",
+                                         color: "#001e1d",
+                                         width: "150px",
+                                         borderRadius: "3px",
+                                         letterSpacing: "1.5px",
+                                         marginTop: "1rem",
+                                         marginBottom: "1rem",
+                                         background: "#f9bc60",
+                                         color: "#001e1d"
+
                                     }}
                                 >ACTIVITIES</Link>
                                 <br />
                                 <form onSubmit={(event) => {
                                     event.preventDefault();
-                                    console.log("form successuflly submitted");
+                                    console.log("form successfully submitted");
                                     this.props.getActivitiesByAddress(this.state.searchTerm)
                                 }}>
                                     <input onChange={this.handleSearchEvent} value={this.state.searchTerm} name="activitiesSearch" type="text" className="address" placeholder="Search an address or city for fun events to do!!!"></input>
 
                                     <br />
-                                    <button
-                                        type="submit"
-                                        className="Search btn btn-large hoverable blue accent-3">
-                                        Search </button>
+                                    
+                                    <button style={{
+
+                                        letterSpacing: "1.5px",
+                                        marginTop: "1rem",
+                                        background: "#090088"
+                                    }}
+
+                                        className="Search btn btn-large hoverable accent-3">
+                                        Search</button>
                                 </form>
                             </div>
                             <div className="card-content">
