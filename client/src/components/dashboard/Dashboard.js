@@ -7,37 +7,43 @@ import Budget from "../layout/Budget"
 import SearchFlight from "../Search/SearchFlight.js"
 
 
+
 class Dashboard extends Component {
 
+  
   render() {
+
+    
     const { user } = this.props.auth;
 
     return (
-   
-      <div>
-        <Logout />
-        
-        <div className="container">
+      
 
-          <div className="row">
-            <div className="col s12 center-align">
-            
-              <h4>
-                Hello, <b>{user.name.split(" ")[0]}</b>👋 Ready to Getaway?
+        <div>
+          <Logout />
+
+          <div className="container">
+
+            <div className="row">
+              <div className="col s12 center-align">
+
+                <h4>
+                  Hello, <b>{user.name.split(" ")[0]}</b>👋 Ready to Getaway?
               </h4>
-              <br></br>
-              <Budget />
+                <br></br>
+                <Budget />
+              </div>
             </div>
           </div>
+          <div className="container">
+            <div className="col s12 center-align">
+              <SearchFlight />
+            </div>
+          </div >
         </div>
-        <div className="container">
-          <div className="col s12 center-align">
-            <SearchFlight />
-          </div>
-        </div >
-      </div>
+      
     );
-  
+
   }
 }
 

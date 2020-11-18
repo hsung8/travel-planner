@@ -1,3 +1,8 @@
+* {
+    margin:0;
+    padding:0;
+}
+
 body{
     background-image: url(https://bpmforreal.files.wordpress.com/2013/08/new-york-city-skyline.jpg);
     background-position: center; 
@@ -5,6 +10,11 @@ body{
     background-size: cover; 
     width: 100%;
     height: auto;
+    align-items: center;
+    justify-content: center;
+    background-color: #1d1f20;
+    font-family: "Josefin Sans", sans-serif;
+    
 }
 
 .container {
@@ -36,4 +46,52 @@ body{
 .nav-wrapper {
    color: black;
    background-color: white;
+}
+
+  
+
+    /* ==========================================================================
+     Loader
+     ========================================================================== */
+
+
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700");
+@import url("https://fonts.googleapis.com/css?family=Indie+Flower");
+
+
+.svg-calLoader {
+  width: 230px;
+  height: 230px;
+  transform-origin: 115px 115px;
+  animation: 1.4s linear infinite loader-spin;
+}
+
+.cal-loader__plane {
+  fill: #ffa500;
+}
+
+.cal-loader__path {
+  stroke: #ffffff;
+  animation: 1.4s ease-in-out infinite loader-path;
+}
+
+  /*
+     Loader animations
+     ========================================================================== */
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader-path {
+  0% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+  }
+  50% {
+    stroke-dasharray: 0, 450, 10, 30, 10, 30, 10, 30, 10;
+  }
+  100% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+  }
 }
