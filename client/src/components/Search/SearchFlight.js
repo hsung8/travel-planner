@@ -175,8 +175,8 @@ const SearchFlight = () => {
                             <br />
                             <form onSubmit={flightSearchSubmit} style={{ display: showAdditionalFlightInformation ? "block" : "none" }}>
 
-                                <input type="number" name="adults" className="adults" placeholder="How many adults will be traveling?" onChange={handleInputs}></input>
-                                <input type="number" name="children" className="children" placeholder="How many children will be traveling?" onChange={handleInputs}></input>
+                                <input required type="number" name="adults" className="adults" placeholder="How many adults will be traveling?" onChange={handleInputs}></input>
+                                <input required type="number" name="children" className="children" placeholder="How many children will be traveling?" onChange={handleInputs}></input>
                                 <br />
                                 <label>
                                     Which class would you like to fly in?
@@ -198,6 +198,12 @@ const SearchFlight = () => {
                                     className="Search btn btn-large hoverable blue accent-3">
                                     Search</button>
                             </form>
+
+                            <div className="card-content">
+                                
+
+
+                            </div>
 
                         </div>
                     </div>
