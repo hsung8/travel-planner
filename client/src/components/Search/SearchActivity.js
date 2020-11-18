@@ -30,7 +30,7 @@ class SearchActivity extends Component {
   isPast = (date) => {
     const day = new Date();
     return day < date;
-  }
+  };
   renderResult = (state) => {
     if (state.default) {
       return <div>{state.default}</div>;
@@ -62,10 +62,18 @@ class SearchActivity extends Component {
                   : `$ ${item.cost === null ? `to be announced` : item.cost}`}
               </li>
               {/* start date */}
-              <li>Start Date: {moment(item.time_start).format("MM-DD-YYYY")}</li>
-               {/* end date */}
-               
-               <li> End Date: {item.time_end === null ? "not available" : moment(item.time_end).format("MM-DD-YYYY") }</li>
+              <li>
+                Start Date: {moment(item.time_start).format("MM-DD-YYYY")}
+              </li>
+              {/* end date */}
+
+              <li>
+                {" "}
+                End Date:{" "}
+                {item.time_end === null
+                  ? "not available"
+                  : moment(item.time_end).format("MM-DD-YYYY")}
+              </li>
               {/* button to save */}
               {!this.props.activities.selected.includes(key) ? (
                 <button
@@ -116,6 +124,15 @@ class SearchActivity extends Component {
                   className="btn btn-large hoverable green accent-3"
                   style={{
                     marginRight: 10,
+                    background: "#f9bc60",
+                    color: "#001e1d",
+                    width: "150px",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px",
+                    marginTop: "1rem",
+                    marginBottom: "1rem",
+                    background: "#f9bc60",
+                    color: "#001e1d",
                   }}
                 >
                   HOTELS
@@ -125,11 +142,20 @@ class SearchActivity extends Component {
                   className="btn btn-large hoverable blue accent-3"
                   style={{
                     marginRight: 10,
+                    background: "#f9bc60",
+                    color: "#001e1d",
+                    width: "150px",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px",
+                    marginTop: "1rem",
+                    marginBottom: "1rem",
+                    background: "#f9bc60",
+                    color: "#001e1d",
                   }}
                 >
                   FLIGHTS
                 </Link>
-                <Link
+                {/* <Link
                   to="/rental"
                   className="btn btn-large hoverable black accent-3"
                   style={{
@@ -137,12 +163,20 @@ class SearchActivity extends Component {
                   }}
                 >
                   RENTAL CARS
-                </Link>
+                </Link> */}
                 <Link
                   to="/activity"
                   className="btn btn-large hoverable orange accent-3"
                   style={{
-                    marginRight: 10,
+                    background: "#f9bc60",
+                    color: "#001e1d",
+                    width: "150px",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px",
+                    marginTop: "1rem",
+                    marginBottom: "1rem",
+                    background: "#f9bc60",
+                    color: "#001e1d",
                   }}
                 >
                   ACTIVITIES
@@ -171,7 +205,9 @@ class SearchActivity extends Component {
                     selectsStart
                     startDate={this.state.startDate}
                     filterDate={this.isPast}
-                    onChange={(date) => this.setState({ ...this.state, startDate: date })}
+                    onChange={(date) =>
+                      this.setState({ ...this.state, startDate: date })
+                    }
                   />
                   <br />
                   <DatePicker
@@ -182,7 +218,9 @@ class SearchActivity extends Component {
                     startDate={this.state.startDate}
                     endDate={this.state.endDate}
                     filterDate={this.isPast}
-                    onChange={(date) => this.setState({ ...this.state, endDate: date })}
+                    onChange={(date) =>
+                      this.setState({ ...this.state, endDate: date })
+                    }
                   />
                   <br />
                   <button

@@ -50,7 +50,7 @@ class Budget extends Component {
                                 >BUDGET</Link><br />
                                 <Link
                                     to="/hotel"
-                                    className="btn btn-large hoverable yellow accent-3"
+                                    className="btn btn-large hoverable green accent-3"
                                     style={{
                                         marginBottom: 10,
                                         width: "100%"
@@ -63,13 +63,13 @@ class Budget extends Component {
                                         width: "100%"
                                     }}
                                 >FLIGHTS</Link><br />
-                                <Link to="/rental"
+                                {/* <Link to="/rental"
                                     className="btn btn-large hoverable green accent-3"
                                     style={{
                                         marginBottom: 10,
                                         width: "100%"
                                     }}
-                                >RENTAL CARS</Link><br />
+                                >RENTAL CARS</Link><br /> */}
                                 <Link to="/activity"
                                     className="btn btn-large hoverable blue accent-3"
                                     style={{
@@ -90,9 +90,13 @@ class Budget extends Component {
                                     <form onSubmit={(res) => {
                                         res.preventDefault();
                                     }}>
-                                        <input onChange={this.handleSearchEvent} name="savingsGoal" className="savingsGoal" placeholder="What is your savings goal?" style={{ textAlign: "center" }}></input>
-                                        <input onChange={this.handleSearchEvent} name="savingsLength" className="savingsLength" placeholder="How many weeks to save?" style={{ textAlign: "center" }}></input>
-                                        <button onClick={this.handleSubmit} type="submit" className="btn btn-large waves-effect hoverable">Submit</button>
+                                        <input onChange={this.handleSearchEvent} name="savingsGoal" className="savingsGoal" placeholder="What is your savings goal?" style={{ textAlign: "center",fontSize: "12.5px"}}></input>
+                                        <input onChange={this.handleSearchEvent} name="savingsLength" className="savingsLength" placeholder="How many weeks to save?" style={{ textAlign: "center",fontSize: "12.5px"}}></input>
+                                        
+                                        
+                                        <button onClick={this.handleSubmit} type="submit" className="btn btn-large waves-effect hoverable" style={{background: "#090088"}}>Submit</button>
+                                    
+                                    
                                     </form>
                                     <h4 className="totalSavings"></h4>
                                     < br />
