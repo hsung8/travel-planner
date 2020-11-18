@@ -11,3 +11,5 @@ export const SELECTED = "SELECTED"
 
 //HOTEL ACTION
 export const GET_HOTELS = "GET_HOTELS"
+export const SAVE_HOTEL = "GET_HOTEL"
+

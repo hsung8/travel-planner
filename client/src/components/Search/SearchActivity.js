@@ -27,9 +27,9 @@ class SearchActivity extends Component {
         }
         else {
             //map thru every event in the array
-            return this.props.activities.activities.map(item => {
+            return this.props.activities.activities.map((item, id) => {
                 //create a unique key for each event
-                const key = uuidv4()
+                const key = id
                 return (<div key={key}>
                     <ul className="container" >
                         {/* event name */}
@@ -41,10 +41,12 @@ class SearchActivity extends Component {
                         {/* event cost */}
                         <li>cost: {item.is_free ? "free event" : `$ ${item.cost === null ? `to be announced` : item.cost}`}</li>
                         {/* button to save */}
-                        {this.props.activities.selected.indexOf(key) === parseInt(-1) ? 
+                        {console.log(this.props.activities.selected)}
+                        {!this.props.activities.selected.includes(key) ? 
                         <button id={key} className="btn waves-effect waves-light" type="submit" name="action"
                         onClick={(event) => {
                             event.preventDefault();
+                            
                             //ADD THE USER to the activities data so mongoose can locate the user based on _userID
                             item.user = this.props.auth.user.id;
                             item.key = key

@@ -3,7 +3,6 @@ import { SET_ACTIVITIES, SELECTED } from "./types";
  
 // const yelp = `Bearer 1PLVyi4fmTRLknS5zUS29KZGV5BDDh3e6WCWv5ds7SnaHvk1rFDKHmW90CFeTMogcDGUhK_qEXWtsuSGZ9k6HaXk7aeWEPIfx-yCCg2Z_ftSvShgumpl9MIf3UarX3Yx`
 
-// get activities from YELP API, the city name comes from user input
 export const addActivitiesToMongo  = (activity) => dispatch => {
     fetch(`/api/users/activities`,
     {

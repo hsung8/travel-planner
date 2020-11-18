@@ -1,5 +1,7 @@
-import { GET_HOTELS } from "./types";
+import { GET_HOTELS, SAVE_HOTEL } from "./types";
 
+
+//get hotel infor from Amadeus API
 export const getHotels = (searchObj) => (dispatch) => {
   console.log(
     "this logs the search object to be used to send the back end for API querying",
@@ -22,3 +24,26 @@ export const getHotels = (searchObj) => (dispatch) => {
     })
     .catch((err) => console.log(err));
 };
+
+
+// Post hotels to Mongo
+export const addHotelToMongo  = (hotel) => dispatch => {    
+    console.log("line 31 of hotelActions, log the hotels to be send to Mongo",hotel)
+    fetch(`/api/users/postHotel`,
+    {
+    method: "PUT",
+    body: JSON.stringify(hotel),
+    headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then( res => res.json())
+    .then( (response) => {
+        console.log("this log the response after you added the hotel to mongo",response);
+        dispatch({
+            type: SAVE_HOTEL,
+            payload: response
+        })
+    })
+    .catch (err => console.log(err))
+}
