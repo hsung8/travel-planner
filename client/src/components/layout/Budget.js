@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Piechart from "../layout/Piechart";
 import Table from "../layout/Table"
-
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getActivitiesByAddress, addActivitiesToMongo, getSavedActivities } from "../../actions/activitiesActions"
 class Budget extends Component {
     state = {
         savingsGoal: "",
@@ -11,6 +13,10 @@ class Budget extends Component {
         style: "none"
     };
 
+    componentDidMount() {
+        this.props.getSavedActivities(this.props.auth.user.id)
+    }
+    
     handleSearchEvent = (e) => {
         if (e.target.name === "savingsGoal") {
             this.setState({ savingsGoal: e.target.value });
@@ -117,4 +123,18 @@ class Budget extends Component {
     };
 };
 
-export default Budget;
+Budget.propTypes = {
+    activities: PropTypes.object,
+    getSavedActivities: PropTypes.func
+};
+
+const mapStateToProps = state => ({
+    auth: state.auth,
+    activities: state.activities,
+});
+
+
+export default connect(
+    mapStateToProps,
+    { getActivitiesByAddress, addActivitiesToMongo , getSavedActivities}
+)(Budget);

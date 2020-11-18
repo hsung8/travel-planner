@@ -44,6 +44,7 @@ router.post("/getActivities", (req, res) => {
         })
         .catch(e => {
             console.log(e);
+            res.status(e.statusCode).send(e.response.body)
         });
 })
 
