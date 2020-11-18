@@ -27,16 +27,23 @@ router.put("/activities", (req, res) => {
 // @access Public
 router.post("/getActivities", (req, res) => {
     // store the search term object into a variable called searchTerm to be used for fetch
-    //This object look like this
+    // This object look like this
     //    {
-    //        address: ""
+    //        address: "",
+    //        startDate: "",
+    //        endDate: ""
+                
     //    }
     const searchTerm = req.body.address;
+    const startDate = Date.parse(req.body.startDate)
+    const endDate = Date.parse(req.body.endDate)
     console.log("this is the search term", searchTerm);
     client.eventSearch({
         location: searchTerm,
         sort_by: "asc",
-        limit: 10
+        limit: 10,
+        start_date: (startDate/1000),
+        end_date: (endDate/1000)
     })
         .then(response => {
             console.log("this console.log the array of events received from Yelp API", response.jsonBody)

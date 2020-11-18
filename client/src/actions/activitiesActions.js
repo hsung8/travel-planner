@@ -30,13 +30,15 @@ export const addActivitiesToMongo = (activity) => (dispatch) => {
 };
 
 // get activities from YELP API, the fulladdress comes from user input
-export const getActivitiesByAddress = (fullAddress) => (dispatch) => {
-  const searchTerm = {
-    address: fullAddress,
+export const getActivitiesByAddress = (searchParams) => (dispatch) => {
+  const searchCondition = {
+    address: searchParams.searchTerm,
+    startDate: searchParams.startDate,
+    endDate: searchParams.endDate
   };
   fetch(`/api/users/getActivities`, {
     method: "POST",
-    body: JSON.stringify(searchTerm),
+    body: JSON.stringify(searchCondition),
     headers: {
       "Content-Type": "application/json",
       // 'Content-Type': 'application/x-www-form-urlencoded',
