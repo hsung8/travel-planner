@@ -11,10 +11,10 @@ const Hotel = () => {
                     <div className="row">
                         <div className="col s12 center-align">
                             <h4>
-                                BOOK IT AND GO, CATCH YOU OUTSIDE HOWBOUT THAT!
+                                Ready for your next adventure?
               </h4>
                             <p className="flow-text white-text text-lighten-1">
-                                A freaking cool tool to book your travel for your next trip !!!
+                                Book your next hotel around the area of your next travel spot!
               </p>
                             <br />
                         </div>

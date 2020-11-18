@@ -23,7 +23,7 @@ const SearchHotel = (props) => {
   return (
     <div className="row">
       <div className="col s12 center-align">
-        <div className="card horizontal">
+        <div className="card horizontal searchBox">
           <div className="card-stacked">
             <div className="card-content">
               <Link
@@ -146,9 +146,10 @@ const SearchHotel = (props) => {
                   style={{
                     letterSpacing: "1.5px",
                     marginTop: "1rem",
+                    background: "#090088"
                   }}
                   type="submit"
-                  className="Search btn btn-large hoverable blue accent-3"
+                  className="Search btn btn-large hoverable accent-3"
                 >
                   Search
                 </button>

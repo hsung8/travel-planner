@@ -6,7 +6,7 @@ class Navbar extends Component {
     return (
       <div className="navbar-fixed">
         <nav className="z-depth-5">
-          <div className="nav-wrapper white">
+          <div className="nav-wrapper">
             <Link
               to="/"
               style={{
@@ -19,29 +19,29 @@ class Navbar extends Component {
               to="/register"
               style={{
                 width: "120px",
-                marginRight: "5px",
-                marginTop: "1px",
-                paddingRight: "5px",
-                paddingLeft: "5px",
+                marginTop: "3px",
                 letterSpacing: "1.5px",
                 background: "#e16162",
+                marginRight: "1rem",
+                paddingLeft: "21px",
+                background: "#090088"
+               
+                
+             
                 
               }}
-              className="col s4 right btn btn-large waves-effect waves-light hoverable blue accent-3"
+              className="col s4 right btn btn-large waves-effect waves-light hoverable accent-3"
             >Register</Link>
             <Link
               to="/login"
               style={{
                 width: "120px",
                 letterSpacing: "1.5px",
-                marginRight: "5px",
-                paddingRight: "5px",
-                paddingLeft: "5px",
-                marginTop: "1px",
-               
+                marginTop: "3px",
+                
               }}
               className="col s4 right btn btn-large btn-flat waves-effect white black-text"
-            >Log In</Link>
+            >LogIn</Link>
           </div>
         </nav>
       </div>

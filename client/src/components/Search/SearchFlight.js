@@ -167,9 +167,10 @@ const SearchFlight = () => {
 
                                     letterSpacing: "1.5px",
                                     marginTop: "1rem",
+                                    background: "#090088"
                                 }}
 
-                                    className="Search btn btn-large hoverable blue accent-3">
+                                    className="Search btn btn-large hoverable accent-3">
                                     Search</button>
                             </form>
                             <br />
@@ -193,17 +194,17 @@ const SearchFlight = () => {
 
                                     letterSpacing: "1.5px",
                                     marginTop: "1rem",
+                                    marginBottom: "2px",
+                                    background: "#090088"
+                                
                                 }}
 
-                                    className="Search btn btn-large hoverable blue accent-3">
+                                    className="Search btn btn-large hoverable accent-3">
                                     Search</button>
                             </form>
-
+{/* 
                             <div className="card-content">
-                                
-
-
-                            </div>
+                                 </div> */}
 
                         </div>
                     </div>

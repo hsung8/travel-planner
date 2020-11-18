@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Piechart from "../layout/Piechart";
 import Table from "../layout/Table"
-
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getActivitiesByAddress, addActivitiesToMongo, getSavedActivities } from "../../actions/activitiesActions"
 class Budget extends Component {
     state = {
         savingsGoal: "",
@@ -11,6 +13,10 @@ class Budget extends Component {
         style: "none"
     };
 
+    componentDidMount() {
+        this.props.getSavedActivities(this.props.auth.user.id)
+    }
+    
     handleSearchEvent = (e) => {
         if (e.target.name === "savingsGoal") {
             this.setState({ savingsGoal: e.target.value });
@@ -44,7 +50,7 @@ class Budget extends Component {
                                 >BUDGET</Link><br />
                                 <Link
                                     to="/hotel"
-                                    className="btn btn-large hoverable yellow accent-3"
+                                    className="btn btn-large hoverable green accent-3"
                                     style={{
                                         marginBottom: 10,
                                         width: "100%"
@@ -84,9 +90,13 @@ class Budget extends Component {
                                     <form onSubmit={(res) => {
                                         res.preventDefault();
                                     }}>
-                                        <input onChange={this.handleSearchEvent} name="savingsGoal" className="savingsGoal" placeholder="What is your savings goal?" style={{ textAlign: "center" }}></input>
-                                        <input onChange={this.handleSearchEvent} name="savingsLength" className="savingsLength" placeholder="How many weeks to save?" style={{ textAlign: "center" }}></input>
-                                        <button onClick={this.handleSubmit} type="submit" className="btn btn-large waves-effect hoverable">Submit</button>
+                                        <input onChange={this.handleSearchEvent} name="savingsGoal" className="savingsGoal" placeholder="What is your savings goal?" style={{ textAlign: "center",fontSize: "12.5px"}}></input>
+                                        <input onChange={this.handleSearchEvent} name="savingsLength" className="savingsLength" placeholder="How many weeks to save?" style={{ textAlign: "center",fontSize: "12.5px"}}></input>
+                                        
+                                        
+                                        <button onClick={this.handleSubmit} type="submit" className="btn btn-large waves-effect hoverable" style={{background: "#090088"}}>Submit</button>
+                                    
+                                    
                                     </form>
                                     <h4 className="totalSavings"></h4>
                                     < br />
@@ -117,4 +127,18 @@ class Budget extends Component {
     };
 };
 
-export default Budget;
+Budget.propTypes = {
+    activities: PropTypes.object,
+    getSavedActivities: PropTypes.func
+};
+
+const mapStateToProps = state => ({
+    auth: state.auth,
+    activities: state.activities,
+});
+
+
+export default connect(
+    mapStateToProps,
+    { getActivitiesByAddress, addActivitiesToMongo , getSavedActivities}
+)(Budget);

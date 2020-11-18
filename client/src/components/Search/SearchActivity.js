@@ -1,4 +1,4 @@
-import React, { Component, useRef } from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -153,9 +153,10 @@ class SearchActivity extends Component {
 
                                         letterSpacing: "1.5px",
                                         marginTop: "1rem",
+                                        background: "#090088"
                                     }}
 
-                                        className="Search btn btn-large hoverable blue accent-3">
+                                        className="Search btn btn-large hoverable accent-3">
                                         Search</button>
                                 </form>
                             </div>

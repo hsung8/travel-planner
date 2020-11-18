@@ -30,10 +30,11 @@ class Logout2 extends Component {
                         letterSpacing: "1.5px",
                         marginTop: "1rem",
                         float: "right",
-                        marginRight: "10px"
+                        marginRight: "10px",
+                        background: "#090088",
                     }}
                     onClick={this.onLogoutClick}
-                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                    className="btn btn-large waves-effect waves-light hoverable accent-3"
                 >
                     Logout
                 </button>
@@ -48,6 +49,10 @@ class Logout2 extends Component {
                         letterSpacing: "1.5px",
                         marginTop: "1rem",
                         float: "right",
+                        paddingLeft: "23px",
+                        paddingTop: "3px",
+                        background: "#87dfd6",
+                        color: "black"
                     }}
                 >Dashboard</Link>
             </div>
