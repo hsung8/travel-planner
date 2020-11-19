@@ -27,6 +27,10 @@ const UserSchema = new Schema({
     type: Array,
     required: false,
   },
+  flights: {
+    type: Array,
+    required: false,
+  },
 });
 
 module.exports = User = mongoose.model("users", UserSchema);

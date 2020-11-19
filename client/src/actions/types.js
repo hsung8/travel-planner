@@ -17,3 +17,6 @@ export const GET_HOTELS = "GET_HOTELS"
 export const SAVE_HOTEL = "SAVE_HOTEL"
 export const SELECTED_HOTEL = "SELECTED_HOTEL"
 
+//FLIGHT ACTION
+export const POST_FLIGHT = "POST_FLIGHT"
+

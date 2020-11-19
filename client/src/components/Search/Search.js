@@ -39,7 +39,7 @@ const Search = () => {
                                     color: "#001e1d"
                                 }}
                             >FLIGHTS</Link>
-                            <Link to="/rental"
+                            {/* <Link to="/rental"
                                 className="btn btn-large hoverable accent-3"
                                 style={{
                                     marginRight: 10,
@@ -51,7 +51,7 @@ const Search = () => {
                                     background: "#f9bc60",
                                     color: "#001e1d"
                                 }}
-                            >RENTALCARS</Link>
+                            >RENTALCARS</Link> */}
                             <Link to="/activity"
                                 className="btn btn-large hoverable accent-3"
                                 style={{
