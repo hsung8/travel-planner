@@ -218,7 +218,7 @@ const SearchFlight = () => {
                 {flightsState.map((flight, i) => {                 
                     let airlineName = flight.itineraries[0].segments[0].carrierCode
                     if (airlineName === "B6") {
-                        airlineName = "test"
+                        airlineName = "JetBlue"
                     } else if (airlineName === "DL") {
                         airlineName = "Delta Airlines"
                     } else if (airlineName === "AA") {
@@ -241,8 +241,6 @@ const SearchFlight = () => {
                         airlineName = "Spirit Airlines"
                     } else if (airlineName === "F9") {
                         airlineName = "Frontier Airlines"
-                    } else if (airlineName === "B6") {
-                        airlineName = "JetBlue Airways"
                     } else if (airlineName === "HA") {
                         airlineName = "Hawaiian Airlines"
                     } else if (airlineName === "G4") {
