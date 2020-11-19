@@ -138,7 +138,7 @@ const SearchFlight = () => {
                                     color: "#001e1d"
                                 }}
                             >FLIGHTS</Link>
-                            <Link to="/rental"
+                            {/* <Link to="/rental"
                                 className="btn btn-large hoverable accent-3"
                                 style={{
                                     marginRight: 10,
@@ -150,7 +150,7 @@ const SearchFlight = () => {
                                     background: "#f9bc60",
                                     color: "#001e1d"
                                 }}
-                            >RENTALCARS</Link>
+                            >RENTALCARS</Link> */}
                             <Link to="/activity"
                                 className="btn btn-large hoverable accent-3"
                                 style={{
@@ -173,9 +173,10 @@ const SearchFlight = () => {
 
                                     letterSpacing: "1.5px",
                                     marginTop: "1rem",
+                                    background: "#090088"
                                 }}
 
-                                    className="Search btn btn-large hoverable blue accent-3">
+                                    className="Search btn btn-large hoverable accent-3">
                                     Search</button>
                             </form>
                             <br />
@@ -199,12 +200,14 @@ const SearchFlight = () => {
 
                                     letterSpacing: "1.5px",
                                     marginTop: "1rem",
+                                    marginBottom: "2px",
+                                    background: "#090088"
+                                
                                 }}
 
-                                    className="Search btn btn-large hoverable blue accent-3">
+                                    className="Search btn btn-large hoverable accent-3">
                                     Search</button>
                             </form>
-
 
 
                         </div>

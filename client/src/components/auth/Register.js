@@ -53,7 +53,7 @@ class Register extends Component {
     const { errors } = this.state;
 
     return (
-      <div style={{ background: "#fffffe" , paddingBottom: "1rem", marginTop: "2rem"}} className="container">
+      <div style={{ background: "#fffffe" , paddingBottom: "1rem", marginTop: "2rem", marginBottom: "2rem"}} className="container">
         <div className="row">
           <div className="col s8 offset-s2">
             <Link to="/" className="btn-flat waves-effect">
@@ -61,9 +61,9 @@ class Register extends Component {
               home
             </Link>
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>
+              <h3>
                 <b>Register</b> below
-              </h4>
+              </h3>
               <p className="grey-text text-darken-1">
                 Already have an account? <Link to="/login">Log in</Link>
               </p>

@@ -8,16 +8,16 @@ const state = {
       {
         label: 'Travel Budgets',
         backgroundColor: [
-          '#d92027',
-          '#50d890',
+          '#B21F00',
+          '#C9DE00',
           
-          '#0278ae',
-          '#9818d6'
+          '#00A6B4',
+          '#6800B4'
         ],
         hoverBackgroundColor: [
         '#501800',
         '#4B5000',
-        
+       
         '#003350',
         '#35014F'
         ],
