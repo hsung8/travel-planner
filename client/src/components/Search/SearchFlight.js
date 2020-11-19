@@ -12,10 +12,14 @@ const amadeus = new Amadeus({
 });
 
 
+
+
+
+
 const SearchFlight = () => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
-
+    const [flightsState, setFlightsState] = useState([])
 
     const travelClass = [
         { value: "ECONOMY", label: "Economy" },
@@ -23,7 +27,7 @@ const SearchFlight = () => {
         { value: "BUSINESS", label: "Business" },
         { value: "FIRST", label: "First" }
     ]
-    console.log(travelClass);
+
 
     const [inputs, setInputs] = useState({})
     const [showAdditionalFlightInformation, setShowAdditionalFlightInformation] = useState(false)
@@ -93,8 +97,10 @@ const SearchFlight = () => {
                 max: 5,
                 travelClass: inputs.travelClass
             })
-        console.log(flights)
-        console.log(inputs.travelClass)
+            
+        setFlightsState(flights.data);
+
+        console.log(flights.data)
 
 
     }
@@ -180,7 +186,7 @@ const SearchFlight = () => {
                                 <br />
                                 <label>
                                     Which class would you like to fly in?
-                                <Select name="travelClass" options={travelClass} onChange={handleClassChange} />
+                                <Select required name="travelClass" options={travelClass} onChange={handleClassChange} />
                                 </label>
                                 <DatePicker name="startDate" required
                                     className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChange={date => setStartDate(date)} />
@@ -199,15 +205,65 @@ const SearchFlight = () => {
                                     Search</button>
                             </form>
 
-                            <div className="card-content">
-                                
 
-
-                            </div>
 
                         </div>
+
+
                     </div>
                 </div>
+                {flightsState.map((flight, i) => {                 
+                    let airlineName = flight.itineraries[0].segments[0].carrierCode
+                    if (airlineName === "B6") {
+                        airlineName = "test"
+                    } else if (airlineName === "DL") {
+                        airlineName = "Delta Airlines"
+                    } else if (airlineName === "AA") {
+                        airlineName = "American Airlines"
+                    } else if (airlineName === "NW") {
+                        airlineName = "Northwest Airlines"
+                    } else if (airlineName === "UA") {
+                        airlineName = "United Airlines"
+                    } else if (airlineName === "US") {
+                        airlineName = "United Airways"
+                    } else if (airlineName === "UA") {
+                        airlineName = "United Airlines"
+                    } else if (airlineName === "WN") {
+                        airlineName = "Southwest Airlines"
+                    } else if (airlineName === "FL") {
+                        airlineName = "AirTran"
+                    } else if (airlineName === "AS") {
+                        airlineName = "Alaska Airlines"
+                    } else if (airlineName === "NK") {
+                        airlineName = "Spirit Airlines"
+                    } else if (airlineName === "F9") {
+                        airlineName = "Frontier Airlines"
+                    } else if (airlineName === "B6") {
+                        airlineName = "JetBlue Airways"
+                    } else if (airlineName === "HA") {
+                        airlineName = "Hawaiian Airlines"
+                    } else if (airlineName === "G4") {
+                        airlineName = "Allegiant Air"
+                    } 
+                     
+                
+                    
+                    return (
+                        <div key={i} className="card blue-grey darken-1">
+                            <div className="card-content white-text">
+                                <span className="card-title">{airlineName}</span>
+                                <p>Departure: {flight.itineraries[0].segments[0].departure.iataCode} at {flight.itineraries[0].segments[0].departure.at}</p>
+                                <p>Arrival: {flight.itineraries[0].segments[0].arrival.iataCode} at {flight.itineraries[0].segments[0].arrival.at}</p>
+                                <p>Price: {flight.price.grandTotal} {flight.price.currency}</p>
+                                
+                            </div>
+                            <div className="card-action">
+                                <a href="#">This is a link</a>
+
+                            </div></div>
+
+                    )
+                })}
             </div>
         </div>
     );
