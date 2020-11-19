@@ -1,7 +1,7 @@
-import { GET_HOTELS, SAVE_HOTEL } from "./types";
+import { GET_HOTELS, SAVE_HOTEL , SELECTED_HOTEL} from "./types";
 
 
-//get hotel infor from Amadeus API
+//get hotel info from Amadeus API
 export const getHotels = (searchObj) => (dispatch) => {
   console.log(
     "this logs the search object to be used to send the back end for API querying",
@@ -27,8 +27,10 @@ export const getHotels = (searchObj) => (dispatch) => {
 
 
 // Post hotels to Mongo
-export const addHotelToMongo  = (hotel) => dispatch => {    
-    console.log("line 31 of hotelActions, log the hotels to be send to Mongo",hotel)
+export const addHotelToMongo  = (hotel) => dispatch => { 
+    const key = hotel.key;
+   
+    console.log(" log the hotels to be send to Mongo",hotel)
     fetch(`/api/users/postHotel`,
     {
     method: "PUT",
@@ -43,7 +45,36 @@ export const addHotelToMongo  = (hotel) => dispatch => {
         dispatch({
             type: SAVE_HOTEL,
             payload: response
-        })
+        });
+        dispatch({
+          type: SELECTED_HOTEL,
+          payload: key,
+        });
     })
     .catch (err => console.log(err))
 }
+
+
+export const getSavedHotels = (id) => (dispatch) => {
+  fetch(`/api/users/getSavedHotels/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  })
+    .then((res) => res.json())
+    .then((hotels) => {
+      console.log(
+        "this comes from activities Action.js, console.log all the saved hotels in our mongo database",
+        hotels
+      );
+      dispatch({
+        type: SAVE_HOTEL,
+        payload: hotels,
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+};

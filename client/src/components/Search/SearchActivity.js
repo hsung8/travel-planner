@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -75,7 +75,7 @@ class SearchActivity extends Component {
                   : moment(item.time_end).format("MM-DD-YYYY")}
               </li>
               {/* button to save */}
-              {!this.props.activities.selected.includes(key) ? (
+              {!this.props.activities.selectedActivities.includes(key) ? (
                 <button
                   id={key}
                   className="btn waves-effect waves-light"
@@ -118,7 +118,7 @@ class SearchActivity extends Component {
         <div className="col s12 center-align">
           <div className="card horizontal">
             <div className="card-stacked">
-              <div className="card-header">
+              <div className="card-content">
                 <Link
                   to="/hotel"
                   className="btn btn-large hoverable green accent-3"
@@ -245,7 +245,7 @@ SearchActivity.propTypes = {
   getActivitiesByAddress: PropTypes.func.isRequired,
   addActivitiesToMongo: PropTypes.func.isRequired,
   activities: PropTypes.object,
-  selected: PropTypes.array,
+  selectedActivities: PropTypes.array,
   getSavedActivities: PropTypes.func,
 };
 

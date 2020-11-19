@@ -12,7 +12,7 @@ router.put("/activities", (req, res) => {
     const activity = req.body
     User.findByIdAndUpdate(user, {
         $push: { activities: activity }
-    })
+    },{new: true})
         .then(response => {
             console.log("This comes from line 17 of activities.js console.log the response from Mongo after you add the activity", response)
             res.status(200).json(response.activities) 

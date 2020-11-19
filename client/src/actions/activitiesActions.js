@@ -1,4 +1,4 @@
-import { SET_ACTIVITIES, SELECTED, SAVED_ACTIVITIES } from "./types";
+import { SET_ACTIVITIES, SELECTED_ACTIVITIES, SAVED_ACTIVITIES } from "./types";
 
 // const yelp = `Bearer 1PLVyi4fmTRLknS5zUS29KZGV5BDDh3e6WCWv5ds7SnaHvk1rFDKHmW90CFeTMogcDGUhK_qEXWtsuSGZ9k6HaXk7aeWEPIfx-yCCg2Z_ftSvShgumpl9MIf3UarX3Yx`
 
@@ -15,14 +15,14 @@ export const addActivitiesToMongo = (activity) => (dispatch) => {
     .then((savedActivities) => {
       console.log(
         "this come from line 18 of activitiesAction, this is a success response from the backend after it added the activities to the user database",
-        key
+      savedActivities
       );
       dispatch({
         type: SAVED_ACTIVITIES,
         payload: savedActivities,
       });
       dispatch({
-        type: SELECTED,
+        type: SELECTED_ACTIVITIES,
         payload: key,
       });
     })
