@@ -6,6 +6,7 @@ const passport = require("passport");
 const users = require("./routes/api/users");
 const activities = require("./routes/api/activities")
 const hotel = require("./routes/api/hotel")
+const flight = require("./routes/api/flight")
 
 const app = express();
 
@@ -53,6 +54,8 @@ app.use("/api/users", users);
 app.use("/api/users", activities);
   //user hotel routes
 app.use("/api/users", hotel);
+ //user flight routes
+app.use("/api/users", flight);
 
 
 const port = process.env.PORT || 3001;
