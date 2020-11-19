@@ -2,7 +2,11 @@ import React, { useState, useContext, useEffect } from "react";
 import Select from "react-select";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { addFlightToMongo } from "../../actions/flightAction";
 import "react-datepicker/dist/react-datepicker.css";
+const moment = require("moment");
 // import { AmadeusProvider, AmadeusContext } from "../../utils/AmadeusProvider";
 // import amadeus from '../../utils/AmadeusProvider'
 const Amadeus = require("amadeus");
@@ -11,12 +15,7 @@ const amadeus = new Amadeus({
     clientSecret: "mhpcNiCqSY1olTPP",
 });
 
-
-
-
-
-
-const SearchFlight = () => {
+const SearchFlight = (props) => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
     const [flightsState, setFlightsState] = useState([])
@@ -83,8 +82,7 @@ const SearchFlight = () => {
 
     const flightSearchSubmit = async event => {
         event.preventDefault();
-
-        // get flights data
+        // get data from inputs for flight search
         const flights = await amadeus.shopping.flightOffersSearch
             .get({
                 originLocationCode: inputs.originIataCode,
@@ -97,11 +95,10 @@ const SearchFlight = () => {
                 max: 5,
                 travelClass: inputs.travelClass
             })
-            
+
         setFlightsState(flights.data);
 
         console.log(flights.data)
-
 
     }
     return (
@@ -202,20 +199,17 @@ const SearchFlight = () => {
                                     marginTop: "1rem",
                                     marginBottom: "2px",
                                     background: "#090088"
-                                
+
                                 }}
 
                                     className="Search btn btn-large hoverable accent-3">
                                     Search</button>
                             </form>
-
-
                         </div>
-
-
                     </div>
                 </div>
-                {flightsState.map((flight, i) => {                 
+
+                {flightsState.map((flight, i) => {
                     let airlineName = flight.itineraries[0].segments[0].carrierCode
                     if (airlineName === "B6") {
                         airlineName = "JetBlue"
@@ -229,8 +223,6 @@ const SearchFlight = () => {
                         airlineName = "United Airlines"
                     } else if (airlineName === "US") {
                         airlineName = "United Airways"
-                    } else if (airlineName === "UA") {
-                        airlineName = "United Airlines"
                     } else if (airlineName === "WN") {
                         airlineName = "Southwest Airlines"
                     } else if (airlineName === "FL") {
@@ -245,29 +237,82 @@ const SearchFlight = () => {
                         airlineName = "Hawaiian Airlines"
                     } else if (airlineName === "G4") {
                         airlineName = "Allegiant Air"
-                    } 
-                     
-                
-                    
+                    }
+
+                    let returnAirlineName = flight.itineraries[1].segments[0].carrierCode
+                    if (returnAirlineName === "B6") {
+                        returnAirlineName = "JetBlue"
+                    } else if (returnAirlineName === "DL") {
+                        returnAirlineName = "Delta Airlines"
+                    } else if (returnAirlineName === "AA") {
+                        returnAirlineName = "American Airlines"
+                    } else if (returnAirlineName === "NW") {
+                        returnAirlineName = "Northwest Airlines"
+                    } else if (returnAirlineName === "UA") {
+                        returnAirlineName = "United Airlines"
+                    } else if (returnAirlineName === "US") {
+                        returnAirlineName = "United Airways"
+                    } else if (returnAirlineName === "WN") {
+                        returnAirlineName = "Southwest Airlines"
+                    } else if (returnAirlineName === "FL") {
+                        returnAirlineName = "AirTran"
+                    } else if (returnAirlineName === "AS") {
+                        returnAirlineName = "Alaska Airlines"
+                    } else if (returnAirlineName === "NK") {
+                        returnAirlineName = "Spirit Airlines"
+                    } else if (returnAirlineName === "F9") {
+                        returnAirlineName = "Frontier Airlines"
+                    } else if (returnAirlineName === "HA") {
+                        returnAirlineName = "Hawaiian Airlines"
+                    } else if (returnAirlineName === "G4") {
+                        returnAirlineName = "Allegiant Air"
+                    }
+                    flight.user = props.auth.user.id;
                     return (
                         <div key={i} className="card blue-grey darken-1">
                             <div className="card-content white-text">
                                 <span className="card-title">{airlineName}</span>
-                                <p>Departure: {flight.itineraries[0].segments[0].departure.iataCode} at {flight.itineraries[0].segments[0].departure.at}</p>
-                                <p>Arrival: {flight.itineraries[0].segments[0].arrival.iataCode} at {flight.itineraries[0].segments[0].arrival.at}</p>
-                                <p>Price: {flight.price.grandTotal} {flight.price.currency}</p>
-                                
+                                <p>Flight from {flight.itineraries[0].segments[0].departure.iataCode} to {flight.itineraries[0].segments[0].arrival.iataCode}</p>
+                                <p> {moment(flight.itineraries[0].segments[0].departure.at).format("MM-DD-YYYY h:mm a")} - {moment(flight.itineraries[0].segments[0].arrival.at).format("MM-DD-YYYY h:mm a")}</p>
+                                <p>Stops: {flight.itineraries[0].segments[0].numberOfStops}</p>
+                                <br></br>
+                                <span className="card-title">{returnAirlineName}</span>
+                                <p>Flight from {flight.itineraries[1].segments[0].departure.iataCode} to {flight.itineraries[1].segments[0].arrival.iataCode}</p>
+                                <p>{moment(flight.itineraries[1].segments[0].departure.at).format("MM-DD-YYYY h:mm a")} - {moment(flight.itineraries[1].segments[0].arrival.at).format("MM-DD-YYYY h:mm a")}</p>
+                                <p>Stops: {flight.itineraries[1].segments[0].numberOfStops}</p>
+                                <p>Price per ticket: ${flight.travelerPricings[0].price.total}</p>
+                                <p>Total price: ${flight.price.grandTotal} </p>
                             </div>
-                            <div className="card-action">
-                                <a href="#">This is a link</a>
-
-                            </div></div>
-
+                            <div>
+                                <button onClick={(event) => {
+                                    event.preventDefault();
+                                    props.addFlightToMongo(flight);
+                                }}
+                                    style={{
+                                        letterSpacing: "1 px",
+                                        marginTop: "1rem",
+                                        marginBottom: "2px",
+                                        background: "#090088"
+                                    }}
+                                    className="Search btn btn-large hoverable accent-3">
+                                    Add to planner</button>
+                            </div>
+                        </div>
                     )
                 })}
             </div>
         </div>
     );
 };
+SearchFlight.propTypes = {
+    addFlightToMongo: PropTypes.func
+    
+  };
+  
+const mapStateToProps = (state) => ({    
+    auth: state.auth,
+  });
 
-export default SearchFlight;
+export default connect(mapStateToProps, { addFlightToMongo })(
+    SearchFlight
+  );
