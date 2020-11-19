@@ -40,6 +40,9 @@ router.post("/getHotels", (req, res) => {
           radiusUnit: "MILE",
           checkInDate: startDate,
           checkOutDate: endDate,
+          includeClosed: true,
+          sort: "DISTANCE"
+
         })
         .then((response) => {
           return amadeus.next(response);
@@ -70,7 +73,7 @@ router.put("/postHotel", (req, res) => {
     //push the hotel to mongo, then send back all the hotels saved back to React
     User.findByIdAndUpdate(user, {
         $push: { hotels: hotel }
-    })
+    },{new: true})
         .then(response => {
             console.log("this log the response after the hotel has been succcessfully added to mongo",response)
             res.status(200).json(response.hotels)
@@ -78,6 +81,24 @@ router.put("/postHotel", (req, res) => {
         )
         .catch(err => console.log(err))
 })
+
+
+
+
+// @route GET api/users/getSAvedHotels
+// @desc add activities to the user database based on log in ID
+// @access Public
+router.get("/getSavedHotels/:id", (req, res) => {
+  const user = req.params.id
+  User.findById(user)
+      .then(response => {
+          console.log("this log all the hotel saved about to be sent to React from Mongo", response)
+          res.status(200).json(response.hotels) 
+      }
+      )
+      .catch(err => console.log(err))
+})
+
 
 
 // export the router
