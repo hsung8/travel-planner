@@ -92,6 +92,8 @@ class Budget extends Component {
                   style={{
                     marginBottom: 10,
                     width: "100%",
+                    paddingLeft: "auto",
+                    paddingRight: "auto"
                   }}
                 >
                   ACTIVITIES
@@ -101,8 +103,8 @@ class Budget extends Component {
             </div>
           </div>
         </div>
-        <div className="col s12 m12 l9 center-align">
-          <div style={{ width: "100%" }} className="card horizontal">
+        <div className="col s13 m12 l9 center-align">
+          <div style={{ width: "100%"}} className="card horizontal">
             <div className="card-stacked">
               <div className="card-content">
                 <div className="col s4 center-align">
@@ -145,6 +147,7 @@ class Budget extends Component {
                   <Piechart />
                 </div>
               </div>
+              </div>
               <h5
                 className="savingsPerWeek"
                 style={{ display: this.state.style }}
@@ -154,16 +157,16 @@ class Budget extends Component {
               </h5>
             </div>
           </div>
-          <div style={{ width: "100%" }} className="card horizontal">
+          <div style={{ width: "100%"}} className="card horizontal">
             <div className="card-stacked">
               <div className="card-content">
-                <div className="col s12 center-align">
+                <div style={{ marginBottom:"5rem"}}className="col s12 center-align">
                   <Table />
                 </div>
               </div>
             </div>
           </div>
-        </div>
+       
       </div>
     );
   }
