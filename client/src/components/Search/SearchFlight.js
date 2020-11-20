@@ -39,10 +39,10 @@ const SearchFlight = (props) => {
     ]
     const [inputs, setInputs] = useState({})
     const [showAdditionalFlightInformation, setShowAdditionalFlightInformation] = useState(false)
-    
+
     useEffect(() => {
         props.getSavedFlights(props.auth.user.id);
-      }, [props.auth.user.id]);
+    }, [props.auth.user.id]);
 
     const handleOriginDestinationSubmit = async event => {
         event.preventDefault();
@@ -359,18 +359,11 @@ SearchFlight.propTypes = {
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-});
-
     addFlightToMongo: PropTypes.func,
     getSavedFlights: PropTypes.func,
     savedFlights: PropTypes.array
-  };
-  
-const mapStateToProps = (state) => ({    
-    auth: state.auth,
-    savedFlights: state.flight.savedFlights
-  });
+});
 
-export default connect(mapStateToProps, { addFlightToMongo , getSavedFlights })(
+export default connect(mapStateToProps, { addFlightToMongo, getSavedFlights })(
     SearchFlight
 );
