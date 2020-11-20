@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getSavedHotels } from "../../actions/hotelAction";
+import { getSavedHotels , deleteHotel} from "../../actions/hotelAction";
 
 class HotelTable extends Component {
     componentDidMount() {
@@ -14,13 +14,19 @@ class HotelTable extends Component {
          const address = hotel.hotel.address.lines
          const contact = hotel.hotel.contact.phone
          const ratings = hotel.hotel.rating
+         const id = hotel.hotel.hotelId
          return (
             <tr key={index}>
                <td>{name}</td>
                <td>{address}</td>
                <td>{contact}</td>
                <td>{ratings}</td>
-               <td><button type="btn btn-small">Delete</button></td>
+               <td><button
+                onClick={(event) => {
+                  event.preventDefault();
+                  this.props.deleteHotel(id, this.props.auth.user.id);
+                }}
+                type="btn btn-small">Delete</button></td>
             </tr>
          ) 
       });
@@ -49,7 +55,8 @@ class HotelTable extends Component {
 
 HotelTable.propTypes = {
    hotels: PropTypes.array,
-   getSavedHotels: PropTypes.func
+   getSavedHotels: PropTypes.func,
+   deleteHotel: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -59,5 +66,5 @@ const mapStateToProps = state => ({
 
 export default connect(
    mapStateToProps,
-   { getSavedHotels }
+   { getSavedHotels, deleteHotel }
 )(HotelTable); 

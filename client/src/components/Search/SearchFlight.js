@@ -19,6 +19,8 @@ import NK from "./images/NK.jpeg";
 import NW from "./images/NW.png";
 import UA from "./images/UA.gif";
 import WN from "./images/WN.jpg";
+import { v4 as uuidv4 } from 'uuid';
+
 const moment = require("moment");
 const Amadeus = require("amadeus");
 const amadeus = new Amadeus({
@@ -296,7 +298,7 @@ const SearchFlight = (props) => {
                         airlineName = "Allegiant Air"
                         airlineImg = G4
                     }
-
+                    flight.uniqueId = uuidv4()
                     flight.user = props.auth.user.id;
                     return (
                         <div key={i} className="card blue-grey darken-1">

@@ -36,11 +36,10 @@ router.post("/getHotels", (req, res) => {
       amadeus.shopping.hotelOffers
         .get({
           cityCode: cityCode,
-          radius: 100,
+          radius: 200,
           radiusUnit: "MILE",
           checkInDate: startDate,
           checkOutDate: endDate,
-          includeClosed: true,
           sort: "DISTANCE"
 
         })
@@ -99,6 +98,25 @@ router.get("/getSavedHotels/:id", (req, res) => {
       .catch(err => console.log(err))
 })
 
+
+  // @ROUTE delete
+// @des delete an FLIGHT
+router.put("/deleteHotel", (req, res) => {
+  const user = req.body.user;
+  const id = req.body.id;
+
+  console.log(user, id);
+  User.findByIdAndUpdate(
+    user,
+    { $pull: { hotels: { "hotel.hotelId": id }  } },
+    { new: true }
+  )
+    .then((response) => {
+      console.log("array after you delete", response.hotels);
+      res.status(200).json(response.hotels);
+    })
+    .catch((err) => console.log(err));
+});
 
 
 // export the router

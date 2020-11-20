@@ -31,5 +31,26 @@ router.get("/getSavedFlights/:id", (req, res) => {
   })
   
 
+
+
+  // @ROUTE delete
+// @des delete an FLIGHT
+router.put("/deleteFLight", (req, res) => {
+    const user = req.body.user;
+    const id = req.body.id;
+  
+    console.log(user, id);
+    User.findByIdAndUpdate(
+      user,
+      { $pull: { flights: { uniqueId: id } } },
+      { new: true }
+    )
+      .then((response) => {
+        console.log("array after you delete", response.flights);
+        res.status(200).json(response.flights);
+      })
+      .catch((err) => console.log(err));
+  });
+  
 // export the router
 module.exports = router;

@@ -1,4 +1,33 @@
-import { GET_HOTELS, SAVE_HOTEL , SELECTED_HOTEL} from "./types";
+import { GET_HOTELS, SAVE_HOTEL, SELECTED_HOTEL } from "./types";
+
+;
+//delete hotel
+export const deleteHotel = (id, user) => (dispatch) => {
+  const hotelToDelete = {
+    id: id,
+    user: user,
+  };
+  console.log(hotelToDelete);
+  fetch(`/api/users/deleteHotel`, {
+    method: "PUT",
+    body: JSON.stringify(hotelToDelete),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((savedHotels) => {
+      console.log(
+        "this is the array of activity after you delete",
+        savedHotels
+      );
+      dispatch({
+        type: SAVE_HOTEL,
+        payload: savedHotels,
+      });
+    })
+    .catch((err) => console.log(err));
+};
 
 
 //get hotel info from Amadeus API
@@ -16,44 +45,47 @@ export const getHotels = (searchObj) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((hotels) => {
-      console.log("this is the array of hotels extracted from our backend server",hotels);
+      console.log(
+        "this is the array of hotels extracted from our backend server",
+        hotels
+      );
       dispatch({
         type: GET_HOTELS,
-        payload: hotels
-    })
+        payload: hotels,
+      });
     })
     .catch((err) => console.log(err));
 };
 
-
 // Post hotels to Mongo
-export const addHotelToMongo  = (hotel) => dispatch => { 
-    const key = hotel.key;
-   
-    console.log(" log the hotels to be send to Mongo",hotel)
-    fetch(`/api/users/postHotel`,
-    {
+export const addHotelToMongo = (hotel) => (dispatch) => {
+  const key = hotel.key;
+
+  console.log(" log the hotels to be send to Mongo", hotel);
+  fetch(`/api/users/postHotel`, {
     method: "PUT",
     body: JSON.stringify(hotel),
     headers: {
-        'Content-Type': 'application/json'
-      },
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((response) => {
+      console.log(
+        "this log the response after you added the hotel to mongo",
+        response
+      );
+      dispatch({
+        type: SAVE_HOTEL,
+        payload: response,
+      });
+      dispatch({
+        type: SELECTED_HOTEL,
+        payload: key,
+      });
     })
-    .then( res => res.json())
-    .then( (response) => {
-        console.log("this log the response after you added the hotel to mongo",response);
-        dispatch({
-            type: SAVE_HOTEL,
-            payload: response
-        });
-        dispatch({
-          type: SELECTED_HOTEL,
-          payload: key,
-        });
-    })
-    .catch (err => console.log(err))
-}
-
+    .catch((err) => console.log(err));
+};
 
 export const getSavedHotels = (id) => (dispatch) => {
   fetch(`/api/users/getSavedHotels/${id}`, {
