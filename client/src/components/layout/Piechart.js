@@ -37,9 +37,10 @@ class Piechart extends Component {
   totalActivityCost() {
     activityCost = 0;
     for (let i = 0; i < this.props.activities.savedActivities.length; i++) {
-      if (this.props.activities.savedActivities[i].cost)
+      if (isNaN(this.props.activities.savedActivities[i].cost))
+        return
+      else
         activityCost += this.props.activities.savedActivities[i].cost;
-      else return
     };
     data = {
       labels: ['Flights', 'Hotels',
