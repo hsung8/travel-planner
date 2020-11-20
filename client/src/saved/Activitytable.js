@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getActivitiesByAddress, addActivitiesToMongo, getSavedActivities } from "../../actions/activitiesActions";
+import { getActivitiesByAddress, addActivitiesToMongo, getSavedActivities } from "../actions/activitiesActions";
 
-class Table extends Component {
+class ActivityTable extends Component {
     componentDidMount() {
       this.props.getSavedActivities(this.props.auth.user.id)
    };
@@ -45,7 +45,7 @@ class Table extends Component {
    };
 };
 
-Table.propTypes = {
+ActivityTable.propTypes = {
    activities: PropTypes.object,
    getSavedActivities: PropTypes.func
 };
@@ -58,4 +58,4 @@ const mapStateToProps = state => ({
 export default connect(
    mapStateToProps,
    { getActivitiesByAddress, addActivitiesToMongo, getSavedActivities }
-)(Table); 
+)(ActivityTable); 
