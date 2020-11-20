@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getSavedHotels } from "../actions/hotelAction";
+import { getSavedHotels } from "../../actions/hotelAction";
 
 class HotelTable extends Component {
     componentDidMount() {
