@@ -13,13 +13,22 @@ html,body {
 body{
     background-image: url(https://i.pinimg.com/originals/9a/55/17/9a551732f3bbc864ca657f7279d42f1a.jpg);
     background-position: center; 
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
     background-size: cover; 
     height: 100%;
     justify-content: center;
     background-color: #1d1f20;
     font-family: "Josefin Sans", sans-serif;
     
+}
+/* We hide the checkmark by default */
+#checkmark {
+  visibility: hidden;
+}
+
+.airline-logo {
+  width: 215px;
+  height: 95px; 
 }
 
 .container {
@@ -69,12 +78,20 @@ body{
 .svg-calLoader {
   width: 230px;
   height: 230px;
+  margin-right: auto;
+    margin-left: auto;
+    margin-top: 10rem;
+    display: block;
+    z-index: 1;
+
   transform-origin: 115px 115px;
   animation: 1.4s linear infinite loader-spin;
+ 
 }
 
 .cal-loader__plane {
-  fill: #ffa500;
+  fill: white;
+    
 }
 
 .cal-loader__path {

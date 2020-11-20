@@ -79,4 +79,3 @@ export default connect(
   mapStateToProps,
   { logoutUser }
 )(Dashboard);
-
