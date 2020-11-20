@@ -196,6 +196,9 @@ class Budget extends Component {
                   </form>
                   <h4 className="totalSavings"></h4>
                   <br />
+                 { console.log(activityCost)}
+                 { console.log(flightCost)}
+                 { console.log(hotelCost)}
                   <h6>Your estimates: ${parseFloat(activityCost + flightCost + hotelCost).toFixed(2)}</h6>
                 </div>
                 <div className="col s8 center-align">
