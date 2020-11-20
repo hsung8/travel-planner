@@ -1,4 +1,4 @@
-import { POST_FLIGHT } from "./types";
+import { POST_FLIGHT, GET_SAVED_FLIGHT } from "./types";
 
 
 //get hotel infor from Amadeus API
@@ -11,12 +11,37 @@ export const addFlightToMongo = (flight) => (dispatch) => {
     },
   })
     .then((res) => res.json())
-    // .then((flights) => {
-    //   console.log("this is the array of hotels extracted from our backend server",flights);
-    //   dispatch({
-    //     type: POST_FLIGHT,
-    //     payload: flights
-    // })
-    // })
+    .then((flights) => {
+      console.log("this is the array of flights extracted from our backend server",flights);
+      dispatch({
+        type: POST_FLIGHT,
+        payload: flights
+    })
+    })
     .catch((err) => console.log(err));
+};
+
+
+export const getSavedFlights = (id) => (dispatch) => {
+  fetch(`/api/users/getSavedFlights/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  })
+    .then((res) => res.json())
+    .then((flights) => {
+      console.log(
+        "all saved flights",
+        flights
+      );
+      dispatch({
+        type: GET_SAVED_FLIGHT,
+        payload: flights,
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 };
