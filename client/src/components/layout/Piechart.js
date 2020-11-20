@@ -1,54 +1,110 @@
 import React, { Component } from "react";
-import {Pie, Doughnut} from 'react-chartjs-2';
+import { Pie, Doughnut } from 'react-chartjs-2';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getSavedActivities } from "../../actions/activitiesActions";
+import { getSavedFlights } from "../../actions/flightAction";
+import { getSavedHotels } from "../../actions/hotelAction";
 
-const state = {
-    labels: ['Flights', 'Hotels',
-             'Activities', 'Miscellaneous'],
-    datasets: [
-      {
-        label: 'Travel Budgets',
-        backgroundColor: [
-          '#d92027',
-          '#50d890',
-          
-          '#0278ae',
-          '#9818d6'
-        ],
-        hoverBackgroundColor: [
-        '#501800',
-        '#4B5000',
-        
-        '#003350',
-        '#35014F'
-        ],
-        data: [75, 59, 40, 20]
-      }
-    ]
-  }
-  
+let data;
+let activityCost;
+let hotelCost = 0;
+let flightCost = 0;
 
 class Piechart extends Component {
-        render() {
-          return (
-            <div>    
-            <Doughnut
-              data={state}
-              options={{
-                title:{
-                  display:true,
-                  text:'Travel Budgets',
-                  fontSize:20
-                },
-                legend:{
-                  display:true,
-                  position:'right'
-                }
-              }}
-            />
-          </div>
-        );
-      }
-    
-}
+  componentDidMount() {
+    this.props.getSavedActivities(this.props.auth.user.id);
+    this.props.getSavedFlights(this.props.auth.user.id);
+    this.props.getSavedHotels(this.props.auth.user.id);
+  };
 
-export default Piechart;
+  totalFlightCost() {
+    flightCost = 0;
+    for (let i = 0; i < this.props.flights.length; i++) {
+      flightCost += parseFloat(this.props.flights[i].price.total);
+    }
+  };
+
+  totalHotelCost() {
+    hotelCost = 0;
+    for (let i = 0; i < this.props.hotels.length; i++) {
+      if (this.props.hotels[i].offers[0].price.total)
+        hotelCost += parseFloat(this.props.hotels[i].offers[0].price.total);
+      else return;
+    }
+  };
+
+  totalActivityCost() {
+    activityCost = 0;
+    for (let i = 0; i < this.props.activities.savedActivities.length; i++) {
+      if (this.props.activities.savedActivities[i].cost)
+        activityCost += this.props.activities.savedActivities[i].cost;
+      else return
+    };
+    data = {
+      labels: ['Flights', 'Hotels',
+        'Activities'],
+      datasets: [
+        {
+          label: 'Travel Budgets',
+          backgroundColor: [
+            '#d92027',
+            '#50d890',
+            '#0278ae'
+          ],
+          hoverBackgroundColor: [
+            '#501800',
+            '#4B5000',
+            '#003350'
+          ],
+          data: [flightCost, hotelCost, activityCost]
+        }
+      ]
+    };
+  };
+
+  render() {
+    return (
+      <div>
+        {this.totalActivityCost()}
+        {this.totalHotelCost()}
+        {this.totalFlightCost()}
+        <Doughnut
+          data={data}
+          options={{
+            title: {
+              display: true,
+              text: 'Travel Budgets',
+              fontSize: 20
+            },
+            legend: {
+              display: true,
+              position: 'right'
+            }
+          }}
+        />
+      </div>
+    );
+  };
+};
+
+
+Piechart.propTypes = {
+  activities: PropTypes.object,
+  getSavedActivities: PropTypes.func,
+  getSavedFlights: PropTypes.func,
+  getSavedHotels: PropTypes.func,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  activities: state.activities,
+  flights: state.flight.savedFlights,
+  hotels: state.hotel.savedHotels,
+});
+
+export default connect(mapStateToProps, {
+  getSavedFlights,
+  getSavedActivities,
+  getSavedHotels
+})(Piechart);

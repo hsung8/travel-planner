@@ -1,25 +1,25 @@
-// import { POST_FLIGHT } from "../actions/types";
+import { POST_FLIGHT, GET_SAVED_FLIGHT } from "../actions/types";
 
-// const initialState = {
-//   savedFlights: []
-// }
+const initialState = {
+  savedFlights: [],
+}
 
-// export default function (state = initialState, action) {
-//   switch (action.type) {
-//     case POST_FLIGHT:
-//       //if successful got data from YELP, export that data to the activities state
-//       return {
-//         hotels: [...action.payload],
-//         savedHotels: []
-//       }
-//     ;
-//     case SAVE_HOTEL:
-//             //if successful post hotel to mongo, return all the hotels saved state
-//       return {
-//         ...state,
-//         savedHotels: action.payload
-//       }
-//     default:
-//       return state;
-//   }
-// }
+export default function (state = initialState, action) {
+  switch (action.type) {
+    case POST_FLIGHT:
+      //when user save a flight to planner, update that to savedFlights
+      return {
+        ...state,
+        savedFlights: [...action.payload]
+      }
+    ;
+    case GET_SAVED_FLIGHT:
+    return {
+        ...state,
+        savedFlights: [...action.payload]
+    }
+
+    default:
+      return state;
+  }
+}

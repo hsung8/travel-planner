@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { addFlightToMongo } from "../../actions/flightAction";
+import { addFlightToMongo, getSavedFlights } from "../../actions/flightAction";
 import "react-datepicker/dist/react-datepicker.css";
 import plane from "./images/plane.jpg";
 import DL from "./images/DL.jpg";
@@ -30,6 +30,7 @@ const SearchFlight = (props) => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
     const [flightsState, setFlightsState] = useState([])
+
     const travelClass = [
         { value: "ECONOMY", label: "Economy" },
         { value: "PREMIUM_ECONOMY", label: "Premium Economy" },
@@ -38,6 +39,10 @@ const SearchFlight = (props) => {
     ]
     const [inputs, setInputs] = useState({})
     const [showAdditionalFlightInformation, setShowAdditionalFlightInformation] = useState(false)
+    
+    useEffect(() => {
+        props.getSavedFlights(props.auth.user.id);
+      }, [props.auth.user.id]);
 
     const handleOriginDestinationSubmit = async event => {
         event.preventDefault();
@@ -350,13 +355,22 @@ const SearchFlight = (props) => {
 };
 SearchFlight.propTypes = {
     addFlightToMongo: PropTypes.func
-
 };
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
 });
 
-export default connect(mapStateToProps, { addFlightToMongo })(
+    addFlightToMongo: PropTypes.func,
+    getSavedFlights: PropTypes.func,
+    savedFlights: PropTypes.array
+  };
+  
+const mapStateToProps = (state) => ({    
+    auth: state.auth,
+    savedFlights: state.flight.savedFlights
+  });
+
+export default connect(mapStateToProps, { addFlightToMongo , getSavedFlights })(
     SearchFlight
 );

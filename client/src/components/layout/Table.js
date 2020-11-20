@@ -1,53 +1,61 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getActivitiesByAddress, addActivitiesToMongo, getSavedActivities } from "../../actions/activitiesActions";
 
 class Table extends Component {
-    constructor(props) {
-       super(props) 
-       this.state = {
-          travel: [
-             { id: 1, category: 'Flights', price: 75, savedDate: 'Nov 14, 2020' },
-             { id: 2, category: 'Hotels', price: 59, savedDate: 'Nov 12, 2020' },
-            //  { id: 3, category: 'Rental Cars', price: 30, savedDate: 'Nov 10, 2020' },
-             { id: 3, category: 'Activities', price: 40, savedDate: 'Nov 4, 2020' },
-             { id: 4, category: 'Miscellaneous', price: 20, savedDate: 'Oct 8, 2020' }
-          ]
-       };
-    };
- 
-    renderTableData() {
-        return this.state.travel.map((travel, index) => {
-           const { id, category, price, savedDate } = travel
-           return (
-              <tr key={id}>
-                 <td>{id}</td>
-                 <td>{category}</td>
-                 <td>{price}</td>
-                 <td>{savedDate}</td>
-                 <td><button type="button">Delete</button></td>
-              </tr>
-           )
-        });
-    };
+    componentDidMount() {
+      this.props.getSavedActivities(this.props.auth.user.id)
+   };
 
-    renderTableHeader() {
-        let header = Object.keys(this.state.travel[0])
-        return header.map((key, index) => {
-           return <th key={index}>{key.toUpperCase()}</th>
-        });
-    };
-  
-    render() {
-        return (
-           <div>
-              <table id='travel'>
-                 <tbody>
-                    <tr>{this.renderTableHeader()}</tr>
-                    {this.renderTableData()}
-                 </tbody>
-              </table>
-           </div>
-        );
-    };
- };
- 
- export default Table 
+   renderTableData() {
+      return this.props.activities.savedActivities.map((travel, index) => {
+         const {image_url, name, category, cost, description} = travel
+         return (
+            <tr key={index}>
+               <td><img href={image_url} src={image_url} style={{height:"100px"}}></img></td>
+               <td>{name}</td>
+               <td>{category}</td>
+               <td>${cost}</td>
+               <td>{description}</td>
+               <td><button type="btn btn-small">Delete</button></td>
+            </tr>
+         ) 
+      });
+   };
+
+   renderTableHeader() {
+      let header = ["Event Image","Event", "Category", "Cost", "Description", "Delete"]
+      return header.map((key, index) => {
+         return <th key={index}>{key.toUpperCase()}</th>
+      });
+   };
+
+   render() {
+      return (
+         <div>
+            <table id='travel'>
+               <tbody>
+                  <tr>{this.renderTableHeader()}</tr>
+                  {this.renderTableData()}
+               </tbody>
+            </table>
+         </div>
+      );
+   };
+};
+
+Table.propTypes = {
+   activities: PropTypes.object,
+   getSavedActivities: PropTypes.func
+};
+
+const mapStateToProps = state => ({
+   auth: state.auth,
+   activities: state.activities,
+});
+
+export default connect(
+   mapStateToProps,
+   { getActivitiesByAddress, addActivitiesToMongo, getSavedActivities }
+)(Table); 

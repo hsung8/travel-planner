@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getHotels, addHotelToMongo } from "../../actions/hotelAction";
-import { v4 as uuidv4 } from "uuid";
+import {
+  getHotels,
+  addHotelToMongo,
+  getSavedHotels,
+} from "../../actions/hotelAction";
+import M from "materialize-css";
+import { render } from "react-dom";
 
 const SearchHotel = (props) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [destination, setDestination] = useState("");
+
+  useEffect(() => {
+    props.getSavedHotels(props.auth.user.id);
+  }, [props.auth.user.id]);
 
   function handleChange(event) {
     setDestination(event.target.value);
@@ -146,7 +155,7 @@ const SearchHotel = (props) => {
                   style={{
                     letterSpacing: "1.5px",
                     marginTop: "1rem",
-                    background: "#090088"
+                    background: "#090088",
                   }}
                   type="submit"
                   className="Search btn btn-large hoverable accent-3"
@@ -156,55 +165,88 @@ const SearchHotel = (props) => {
               </form>
             </div>
             <div className="card-content">
-              {props.hotel.length === 0 ? (
+              {props.default ? (
+                <div>{props.default}</div>
+              ) : props.hotel.length === 0 ? (
                 <div>No hotel can be found</div>
               ) : (
-                props.hotel.map((item) => {
-                  const key = uuidv4();
-                  const name = item.hotel.name || "not available";
-                  const phone = !item.hotel.contact.phone
-                    ? "not available"
-                    : item.hotel.contact.phone;
-                  const media = !item.hotel.media[0].uri
-                    ? "https://picsum.photos/200/300"
-                    : item.hotel.media[0].uri;
-                  const price = item.offers[0].price.base || "not available";
-                  const total = item.offers[0].price.total || "not available";
-                  const description =
-                    item.offers[0].room.description.text || "not available";
-                  const bookingID = item.offers[0].id || "not available";
+                props.hotel.map((item, id) => {
+                  const key = id;
+                  const name = item.hotel.name;
+                  const phone = item.hotel.contact
+                    ? item.hotel.contact.phone
+                    : "not available";
+
+                  const media = item.hotel.media
+                    ? item.hotel.media[0].uri
+                    : "https://picsum.photos/200/300";
+                  const price = item.offers
+                    ? item.offers[0].price.base
+                    : "not available";
+                  const total = item.offers
+                    ? item.offers[0].price.total
+                    : "not available";
+                  const description = item.offers
+                    ? item.offers[0].room.description.text
+                    : "not available";
+                  const bookingID = item.offers
+                    ? item.offers[0].id
+                    : "not available";
+                  // add the user id to each item so we can id to locate which user to save to mongoDB
                   item.user = props.auth.user.id;
                   return (
-                    <div key={key}>
-                      <div>Hotel: {name}</div>
-                      <div>
-                        Address:{" "}
-                        {`${item.hotel.address.lines[0]} ${item.hotel.address.cityName} ${item.hotel.address.stateCode}`}
+                    <>
+                      <div key={key}>
+                        <div>Hotel: {name}</div>
+                        <div>
+                          Address:{" "}
+                          {`${item.hotel.address.lines[0]} ${item.hotel.address.cityName} ${item.hotel.address.stateCode}`}
+                        </div>
+                        <div>Contact: {phone}</div>
+                        <img
+                          src={media}
+                          alt="hotel-image"
+                          width="100px"
+                          height="100px"
+                        ></img>
+                        <div>Rating: {item.hotel.rating}</div>
+                        <div>Base Price: {`${price} USD per night`}</div>
+                        <div>Total Price : {`${total} USD per night`} </div>
+                        <div>Room Description: {`${description}`} </div>
+                        <div>Booking Id : {`${bookingID}`}</div>
+                        {/* button to save */}
+                        {!props.selectedHotels.includes(key) ? (
+                          <button
+                            id={key}
+                            className="btn waves-effect waves-light"
+                            type="button"
+                            onClick={(event) => {
+                              event.preventDefault();
+                              //ADD THE USER to the activities data so mongoose can locate the user based on _userID
+                                item.user = props.auth.user.id;
+                                item.key = key;
+                              props.addHotelToMongo(item);
+                              M.toast({
+                                html: "Successfully added to planner",
+                                class: "toast",
+                              });
+                            }}
+                          >
+                            Add to planner
+                          </button>
+                        ) : (
+                          <div></div>
+                        )}
                       </div>
-                      <div>Contact: {phone}</div>
-                      <img
-                        src={media}
-                        alt="hotel-image"
-                        width="100px"
-                        height="100px"
-                      ></img>
-                      <div>Rating: {item.hotel.rating}</div>
-                      <div>Base Price: {`${price} USD per night`}</div>
-                      <div>Total Price : {`${total} USD per night`} </div>
-                      <div>Room Description: {`${description}`} </div>
-                      <div>Booking Id : {`${bookingID}`}</div>
-                      <button
-                        type="button"
-                        onClick={(event) => {
-                          event.preventDefault();
-                          props.addHotelToMongo(item);
-                        }}
-                      >
-                        Add to planner
-                      </button>
-                      <br></br>
-                      <br></br>
-                    </div>
+                      <br />
+                      <br />
+                      <br />
+                      <div className="divider"></div>
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                    </>
                   );
                 })
               )}
@@ -220,15 +262,20 @@ SearchHotel.propTypes = {
   getHotels: PropTypes.func,
   hotel: PropTypes.array,
   addHotelToMongo: PropTypes.func,
-  savedHotels: PropTypes.array
+  savedHotels: PropTypes.array,
+  getSavedHotels: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   hotel: state.hotel.hotels,
   auth: state.auth,
-  savedHotels: state.hotel.savedHotels
+  savedHotels: state.hotel.savedHotels,
+  default: state.hotel.default,
+  selectedHotels: state.hotel.selectedHotels,
 });
 
-export default connect(mapStateToProps, { getHotels, addHotelToMongo })(
-  SearchHotel
-);
+export default connect(mapStateToProps, {
+  getHotels,
+  addHotelToMongo,
+  getSavedHotels,
+})(SearchHotel);

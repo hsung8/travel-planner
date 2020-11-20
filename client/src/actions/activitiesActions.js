@@ -1,4 +1,4 @@
-import { SET_ACTIVITIES, SELECTED, SAVED_ACTIVITIES } from "./types";
+import { SET_ACTIVITIES, SELECTED_ACTIVITIES, SAVED_ACTIVITIES } from "./types";
 
 // const yelp = `Bearer 1PLVyi4fmTRLknS5zUS29KZGV5BDDh3e6WCWv5ds7SnaHvk1rFDKHmW90CFeTMogcDGUhK_qEXWtsuSGZ9k6HaXk7aeWEPIfx-yCCg2Z_ftSvShgumpl9MIf3UarX3Yx`
 
@@ -15,14 +15,14 @@ export const addActivitiesToMongo = (activity) => (dispatch) => {
     .then((savedActivities) => {
       console.log(
         "this come from line 18 of activitiesAction, this is a success response from the backend after it added the activities to the user database",
-        key
+      savedActivities
       );
       dispatch({
         type: SAVED_ACTIVITIES,
         payload: savedActivities,
       });
       dispatch({
-        type: SELECTED,
+        type: SELECTED_ACTIVITIES,
         payload: key,
       });
     })
@@ -30,13 +30,15 @@ export const addActivitiesToMongo = (activity) => (dispatch) => {
 };
 
 // get activities from YELP API, the fulladdress comes from user input
-export const getActivitiesByAddress = (fullAddress) => (dispatch) => {
-  const searchTerm = {
-    address: fullAddress,
+export const getActivitiesByAddress = (searchParams) => (dispatch) => {
+  const searchCondition = {
+    address: searchParams.searchTerm,
+    startDate: searchParams.startDate,
+    endDate: searchParams.endDate
   };
   fetch(`/api/users/getActivities`, {
     method: "POST",
-    body: JSON.stringify(searchTerm),
+    body: JSON.stringify(searchCondition),
     headers: {
       "Content-Type": "application/json",
       // 'Content-Type': 'application/x-www-form-urlencoded',
@@ -50,10 +52,6 @@ export const getActivitiesByAddress = (fullAddress) => (dispatch) => {
         else return res.json();
     })
     .then((activities) => {
-      console.log(
-        "this comes from activities Action.js, console.log the activities from YELP API called by our backend",
-        activities
-      );
       dispatch({
         type: SET_ACTIVITIES,
         payload: activities,
@@ -79,10 +77,6 @@ export const getSavedActivities = (id) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((activities) => {
-      console.log(
-        "this comes from activities Action.js, console.log all the saved activities in our mongo database",
-        activities
-      );
       dispatch({
         type: SAVED_ACTIVITIES,
         payload: activities,
