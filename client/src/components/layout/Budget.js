@@ -20,6 +20,10 @@ class Budget extends Component {
     savingsLength: "",
     savingsPerWeek: "",
     style: "none",
+    cardStyle: "none",
+    HotelTable: false,
+    FlightTable: false,
+    ActivityTable: false,
   };
 
   componentDidMount() {
@@ -70,6 +74,18 @@ class Budget extends Component {
     this.setState({ style: "" });
   };
 
+  onHotelClick = () => {
+    this.setState({ HotelTable: true, FlightTable: false, ActivityTable: false, cardStyle: "" });
+  };
+
+  onFlightsClick = () => {
+    this.setState({ HotelTable: false, FlightTable: true, ActivityTable: false, cardStyle: "" });
+  };
+
+  onTableClick = () => {
+    this.setState({ HotelTable: false, FlightTable: false, ActivityTable: true, cardStyle: "" });
+  };
+
   render() {
     return (
       <div className="row">
@@ -80,7 +96,7 @@ class Budget extends Component {
           <div style={{ width: "100%" }} className="card horizontal">
             <div className="card-stacked">
               <div className="card-content">
-                <button 
+                {/* <button 
                     style={{
                     marginBottom: 10,
                     width: "100%",
@@ -88,49 +104,43 @@ class Budget extends Component {
                     onClick={this.onTableClick}
                     className="btn btn-large hoverable purple accent-3">
                     Budget
-                </button>
-        
-                <br />
-
-                <button 
-                    style={{
+                </button> */}
+                {/* <br /> */}
+                <button
+                  style={{
                     marginBottom: 10,
                     width: "100%",
-                    }}
-                    onClick={this.onHotelClick}
-                    className="btn btn-large hoverable green accent-3">
-                    HOTELS
+                  }}
+                  onClick={this.onHotelClick}
+                  className="btn btn-large hoverable green accent-3">
+                  HOTELS
                 </button>
-                
                 <br />
-
-                <button 
-                    style={{
+                <button
+                  style={{
                     marginBottom: 10,
                     width: "100%",
-                    }}
-                    onClick={this.onFlightsClick}
-                    className="btn btn-large hoverable red accent-3">
-                    FLIGHTS
+                  }}
+                  onClick={this.onFlightsClick}
+                  className="btn btn-large hoverable red accent-3">
+                  FLIGHTS
                 </button>
-               
                 <br />
                 {/* <Link to="/rental"
-                                    className="btn btn-large hoverable green accent-3"
-                                    style={{
-                                        marginBottom: 10,
-                                        width: "100%"
-                                    }}
-                                >RENTAL CARS</Link><br /> */}
-                
-                <button 
-                    style={{
+                  className="btn btn-large hoverable green accent-3"
+                  style={{
+                    marginBottom: 10,
+                    width: "100%"
+                  }}
+                >RENTAL CARS</Link><br /> */}
+                <button
+                  style={{
                     marginBottom: 10,
                     width: "100%",
-                    }}
-                    onClick={this.onTableClick}
-                    className="btn btn-large hoverable blue accent-3">
-                    ACTIVITIES
+                  }}
+                  onClick={this.onTableClick}
+                  className="btn btn-large hoverable blue accent-3">
+                  ACTIVITIES
                 </button>
                 <br />
               </div>
@@ -190,13 +200,13 @@ class Budget extends Component {
               </h5>
             </div>
           </div>
-          <div style={{ width: "100%"}} className="card horizontal">
+          <div style={{ width: "100%", display: this.state.cardStyle }} className="card horizontal">
             <div className="card-stacked">
               <div className="card-content">
-                <div style={{ marginBottom:"5rem"}}className="col s12 center-align">
-                  <ActivityTable />
-                  <HotelTable />
-                  <FlightTable />
+                <div className="col s12 center-align">
+                  {this.state.ActivityTable ? <ActivityTable /> : <div> </div>}
+                  {this.state.HotelTable ? <HotelTable /> : <div> </div>}
+                  {this.state.FlightTable ? <FlightTable />: <div> </div>}
                 </div>
               </div>
             </div>
