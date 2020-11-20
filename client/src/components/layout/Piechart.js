@@ -28,7 +28,7 @@ class Piechart extends Component {
   totalHotelCost() {
     hotelCost = 0;
     for (let i = 0; i < this.props.hotels.length; i++) {
-      if (this.props.hotels[i].offers[0].price.total)
+      if (this.props.hotels[i].offers)
         hotelCost += parseFloat(this.props.hotels[i].offers[0].price.total);
       else return;
     }

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Piechart from "../layout/Piechart";
-import Table from "../layout/Table";
+import ActivityTable from "../../saved/Activitytable";
+import HotelTable from "../../saved/Hoteltable";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getSavedActivities } from "../../actions/activitiesActions";
@@ -45,7 +46,7 @@ class Budget extends Component {
   totalHotelCost() {
     hotelCost = 0;
     for (let i = 0; i < this.props.hotels.length; i++) {
-      if (this.props.hotels[i].offers[0].price.total)
+      if (this.props.hotels[i].offers)
         hotelCost += parseFloat(this.props.hotels[i].offers[0].price.total);
       else return;
     }
@@ -78,38 +79,40 @@ class Budget extends Component {
           <div style={{ width: "100%" }} className="card horizontal">
             <div className="card-stacked">
               <div className="card-content">
-                <Link
-                  to="/budget"
-                  className="btn btn-large hoverable purple accent-3"
-                  style={{
+                <button 
+                    style={{
                     marginBottom: 10,
                     width: "100%",
-                  }}
-                >
-                  BUDGET
-                </Link>
+                    }}
+                    onClick={this.onTableClick}
+                    className="btn btn-large hoverable purple accent-3">
+                    Budget
+                </button>
+        
                 <br />
-                <Link
-                  to="/hotel"
-                  className="btn btn-large hoverable green accent-3"
-                  style={{
+
+                <button 
+                    style={{
                     marginBottom: 10,
                     width: "100%",
-                  }}
-                >
-                  HOTELS
-                </Link>
+                    }}
+                    onClick={this.onHotelClick}
+                    className="btn btn-large hoverable green accent-3">
+                    HOTELS
+                </button>
+                
                 <br />
-                <Link
-                  to="/flights"
-                  className="btn btn-large hoverable red accent-3"
-                  style={{
+
+                <button 
+                    style={{
                     marginBottom: 10,
                     width: "100%",
-                  }}
-                >
-                  FLIGHTS
-                </Link>
+                    }}
+                    onClick={this.onFlightsClick}
+                    className="btn btn-large hoverable red accent-3">
+                    FLIGHTS
+                </button>
+               
                 <br />
                 {/* <Link to="/rental"
                                     className="btn btn-large hoverable green accent-3"
@@ -118,16 +121,16 @@ class Budget extends Component {
                                         width: "100%"
                                     }}
                                 >RENTAL CARS</Link><br /> */}
-                <Link
-                  to="/activity"
-                  className="btn btn-large hoverable blue accent-3"
-                  style={{
+                
+                <button 
+                    style={{
                     marginBottom: 10,
                     width: "100%",
-                  }}
-                >
-                  ACTIVITIES
-                </Link>
+                    }}
+                    onClick={this.onTableClick}
+                    className="btn btn-large hoverable blue accent-3">
+                    ACTIVITIES
+                </button>
                 <br />
               </div>
             </div>
@@ -189,7 +192,8 @@ class Budget extends Component {
             <div className="card-stacked">
               <div className="card-content">
                 <div className="col s12 center-align">
-                  <Table />
+                  <ActivityTable />
+                  <HotelTable />
                 </div>
               </div>
             </div>
