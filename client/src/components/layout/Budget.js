@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Piechart from "../layout/Piechart";
-import ActivityTable from "../../saved/Activitytable";
-import HotelTable from "../../saved/Hoteltable";
+import ActivityTable from "../saved/Activitytable";
+import HotelTable from "../saved/Hoteltable";
+import FlightTable from "../saved/Flighttable";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getSavedActivities } from "../../actions/activitiesActions";
@@ -195,6 +196,7 @@ class Budget extends Component {
                 <div style={{ marginBottom:"5rem"}}className="col s12 center-align">
                   <ActivityTable />
                   <HotelTable />
+                  <FlightTable />
                 </div>
               </div>
             </div>
