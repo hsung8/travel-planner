@@ -37,9 +37,13 @@ const SearchFlight = (props) => {
         { value: "BUSINESS", label: "Business" },
         { value: "FIRST", label: "First" }
     ]
+    const typeOfTrip = [
+        { value: "One Way", label: "One Way" },
+        { value: "Round Trip", label: "Round Trip" }
+    ]
     const [inputs, setInputs] = useState({})
     const [showAdditionalFlightInformation, setShowAdditionalFlightInformation] = useState(false)
-
+    const [tripType, setTripType] = useState(false)
     useEffect(() => {
         props.getSavedFlights(props.auth.user.id);
     }, [props.auth.user.id]);
@@ -73,6 +77,9 @@ const SearchFlight = (props) => {
         clone2.destinationIataCode = destinationIataCode.data[0].iataCode
         setInputs(clone2)
         setShowAdditionalFlightInformation(true)
+        if (inputs.typeOfTrip === "Round Trip") {
+            setTripType(true)
+        }
     }
 
     const handleInputs = (e) => {
@@ -89,22 +96,47 @@ const SearchFlight = (props) => {
         setInputs(clone)
     };
 
+    const handleTypeOfTripChange = selectedOption => {
+        // this.setState({ selectedOption });
+        console.log(`Type of Trip Selected:`, selectedOption);
+        const clone = inputs;
+        clone.typeOfTrip = selectedOption.value;
+        setInputs(clone)
+    };
+
     const flightSearchSubmit = async event => {
         event.preventDefault();
+        let returnDate;
+        let flights;
         // get data from inputs for flight search
-        const flights = await amadeus.shopping.flightOffersSearch
-            .get({
-                originLocationCode: inputs.originIataCode,
-                destinationLocationCode: inputs.destinationIataCode,
-                departureDate: startDate.toISOString().split('T')[0],
-                returnDate: endDate.toISOString().split('T')[0],
-                adults: inputs.adults,
-                children: inputs.children,
-                currencyCode: "USD",
-                max: 5,
-                travelClass: inputs.travelClass
-            })
+        if (inputs.typeOfTrip === "Round Trip") {
+            returnDate = endDate.toISOString().split('T')[0];
+            flights = await amadeus.shopping.flightOffersSearch
+                .get({
+                    originLocationCode: inputs.originIataCode,
+                    destinationLocationCode: inputs.destinationIataCode,
+                    departureDate: startDate.toISOString().split('T')[0],
+                    returnDate: returnDate,
+                    adults: inputs.adults,
+                    children: inputs.children,
+                    currencyCode: "USD",
+                    max: 5,
+                    travelClass: inputs.travelClass
+                })
 
+        } else {
+            flights = await amadeus.shopping.flightOffersSearch
+                .get({
+                    originLocationCode: inputs.originIataCode,
+                    destinationLocationCode: inputs.destinationIataCode,
+                    departureDate: startDate.toISOString().split('T')[0],
+                    adults: inputs.adults,
+                    children: inputs.children,
+                    currencyCode: "USD",
+                    max: 5,
+                    travelClass: inputs.travelClass
+                })
+        }
         setFlightsState(flights.data);
 
         console.log(flights.data)
@@ -174,8 +206,11 @@ const SearchFlight = (props) => {
 
                                 <input required name="origin" className="origin" placeholder="Where from?" onChange={handleInputs}></input>
                                 <input required name="destination" className="destination" placeholder="Where to?" onChange={handleInputs}></input>
+                                <label>
+                                    Which type of trip would you like to book today?
+                                <Select required name="typeOfTrip" options={typeOfTrip} onChange={handleTypeOfTripChange} />
+                                </label>
                                 <button style={{
-
                                     letterSpacing: "1.5px",
                                     marginTop: "1rem",
                                     background: "#090088"
@@ -197,8 +232,9 @@ const SearchFlight = (props) => {
                                 <DatePicker name="startDate" required
                                     className="startDate" timeInputLabel="When do you want this adventure to start?" selected={startDate} onChange={date => setStartDate(date)} />
                                 <br />
-                                <DatePicker name="endDate"
-                                    className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} />
+                                {tripType ? <DatePicker name="endDate"
+                                    className="endDate" timeInputLabel="When do you want this adventure to start?" selected={endDate} onChange={date => setEndDate(date)} /> : <div></div>}
+
                                 <br />
 
                                 <button style={{
@@ -219,6 +255,7 @@ const SearchFlight = (props) => {
 
                 {flightsState.map((flight, i) => {
                     let airlineName = flight.itineraries[0].segments[0].carrierCode
+                    let airlineImg = plane;
                     if (airlineName === "B6") {
                         airlineName = "JetBlue"
                         airlineImg = B6
@@ -260,48 +297,6 @@ const SearchFlight = (props) => {
                         airlineImg = G4
                     }
 
-                    let returnAirlineName = flight.itineraries[1].segments[0].carrierCode;
-                    let airlineImg = plane;
-                    if (returnAirlineName === "B6") {
-                        returnAirlineName = "JetBlue"
-                        airlineImg = B6
-                    } else if (returnAirlineName === "DL") {
-                        returnAirlineName = "Delta Airlines"
-                        airlineImg = DL
-                    } else if (returnAirlineName === "AA") {
-                        returnAirlineName = "American Airlines"
-                        airlineImg = AA
-                    } else if (returnAirlineName === "NW") {
-                        returnAirlineName = "Northwest Airlines"
-                        airlineImg = NW
-                    } else if (returnAirlineName === "UA") {
-                        returnAirlineName = "United Airlines"
-                        airlineImg = UA
-                    } else if (returnAirlineName === "US") {
-                        returnAirlineName = "United Airways"
-                        airlineImg = UA
-                    } else if (returnAirlineName === "WN") {
-                        returnAirlineName = "Southwest Airlines"
-                        airlineImg = WN
-                    } else if (returnAirlineName === "FL") {
-                        returnAirlineName = "AirTran"
-                        airlineImg = FL
-                    } else if (returnAirlineName === "AS") {
-                        returnAirlineName = "Alaska Airlines"
-                        airlineImg = AS
-                    } else if (returnAirlineName === "NK") {
-                        returnAirlineName = "Spirit Airlines"
-                        airlineImg = NK
-                    } else if (returnAirlineName === "F9") {
-                        returnAirlineName = "Frontier Airlines"
-                        airlineImg = F9
-                    } else if (returnAirlineName === "HA") {
-                        returnAirlineName = "Hawaiian Airlines"
-                        airlineImg = HA
-                    } else if (returnAirlineName === "G4") {
-                        returnAirlineName = "Allegiant Air"
-                        airlineImg = G4
-                    }
                     flight.user = props.auth.user.id;
                     return (
                         <div key={i} className="card blue-grey darken-1">
@@ -313,17 +308,23 @@ const SearchFlight = (props) => {
                                     </>
                                 })}
                                 {/* <p>Flight from {flight.itineraries[0].segments[0].departure.iataCode} to {flight.itineraries[0].segments[0].arrival.iataCode}</p>
-                                <p> {moment(flight.itineraries[0].segments[0].departure.at).format("MM-DD-YYYY h:mm a")} - {moment(flight.itineraries[0].segments[0].arrival.at).format("MM-DD-YYYY h:mm a")}</p> */}
+                                <p> {moment(flight.itineraries[0].segments[0].departure.at).format("MM-DD-YYYY h:mm a")} - {moment(flight.itineraries[0].segments[0].arrival.at).format("h:mm a")}</p> */}
                                 <br></br>
-                                <hr></hr>
-                                <br></br>
-                                <span className="card-title"><img className="airline-logo" src={airlineImg}></img></span>
-                                {flight.itineraries[1].segments.map(flight => {
+                                <hr style={{ display: tripType ? "block" : "none" }}></hr>
+                                <br style={{ display: tripType ? "block" : "none" }}></br>
+                                <span style={{ display: tripType ? "block" : "none" }} className="card-title"><img className="airline-logo" src={airlineImg}></img></span>
+                                {tripType  ?                                 
+                                    flight.itineraries[1].segments.map(flight => {
 
-                                    return <><h6>Flight from {flight.departure.iataCode} to {flight.arrival.iataCode}</h6>
-                                        <h6>{moment(flight.departure.at).format("MM-DD-YYYY h:mm a")} - {moment(flight.arrival.at).format("h:mm a")}</h6>
-                                    </>
-                                })}
+                                        return <><h6>Flight from {flight.departure.iataCode} to {flight.arrival.iataCode}</h6>
+                                            <h6>{moment(flight.departure.at).format("MM-DD-YYYY h:mm a")} - {moment(flight.arrival.at).format("h:mm a")}</h6>
+                                        </>
+                                    }) : <div></div>                            
+                              
+                                }
+
+
+
                                 {/* <p>Flight from {flight.itineraries[1].segments[0].departure.iataCode} to {flight.itineraries[1].segments[0].arrival.iataCode}</p> */}
                                 <h6>Price per ticket: ${flight.travelerPricings[0].price.total}</h6>
                                 <h5>Total price: ${flight.price.grandTotal}</h5>
@@ -338,18 +339,18 @@ const SearchFlight = (props) => {
                                         marginTop: "1rem",
                                         marginBottom: "2px",
                                         background: "#090088",
-                       
-                            }}
-                            className="Search btn btn-large hoverable accent-3">
-                            Add to planner
+
+                                    }}
+                                    className="Search btn btn-large hoverable accent-3">
+                                    Add to planner
                                     <i className="material-icons right">send</i>
-                                    </button>
-                           
+                                </button>
+
+                            </div>
+                            <br></br>
                         </div>
-                        <br></br>
-                        </div>
-            )
-        })}
+                    )
+                })}
             </div>
         </div >
     );
