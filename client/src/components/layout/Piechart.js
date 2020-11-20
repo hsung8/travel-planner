@@ -2,54 +2,75 @@ import React, { Component } from "react";
 import { Pie, Doughnut } from 'react-chartjs-2';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getActivitiesByAddress, addActivitiesToMongo, getSavedActivities } from "../../actions/activitiesActions";
+import { getSavedActivities } from "../../actions/activitiesActions";
+import { getSavedFlights } from "../../actions/flightAction";
+import { getSavedHotels } from "../../actions/hotelAction";
 
-const state = {
-  labels: ['Flights', 'Hotels',
-    'Activities'],
-  datasets: [
-    {
-      label: 'Travel Budgets',
-      backgroundColor: [
-        '#d92027',
-        '#50d890',
-
-        '#0278ae',
-        '#9818d6'
-      ],
-      hoverBackgroundColor: [
-        '#501800',
-        '#4B5000',
-
-        '#003350',
-        '#35014F'
-      ],
-      data: [75, 59, 40]
-    }
-  ]
-};
-
+let data;
+let activityCost;
+let hotelCost = 0;
+let flightCost = 0;
 
 class Piechart extends Component {
   componentDidMount() {
-    this.props.getSavedActivities(this.props.auth.user.id)
+    this.props.getSavedActivities(this.props.auth.user.id);
+    this.props.getSavedFlights(this.props.auth.user.id);
+    this.props.getSavedHotels(this.props.auth.user.id);
+  };
+
+  totalFlightCost() {
+    flightCost = 0;
+    for (let i = 0; i < this.props.flights.length; i++) {
+      flightCost += parseFloat(this.props.flights[i].price.total);
+    }
+  };
+
+  totalHotelCost() {
+    hotelCost = 0;
+    for (let i = 0; i < this.props.hotels.length; i++) {
+      if (this.props.hotels[i].offers)
+        hotelCost += parseFloat(this.props.hotels[i].offers[0].price.total);
+      else return;
+    }
   };
 
   totalActivityCost() {
-    let totalActivityCost;
-    for (let i = 0; i < 0; i++) {
-      totalActivityCost = parseFloat(this.props.activities.savedActivities[2].cost);
+    activityCost = 0;
+    for (let i = 0; i < this.props.activities.savedActivities.length; i++) {
+      if (this.props.activities.savedActivities[i].cost)
+        activityCost += this.props.activities.savedActivities[i].cost;
+      else return
     };
-    console.log(this.props.activities.savedActivities);
-    console.log("this is the total activity cost " + totalActivityCost);
+    data = {
+      labels: ['Flights', 'Hotels',
+        'Activities'],
+      datasets: [
+        {
+          label: 'Travel Budgets',
+          backgroundColor: [
+            '#d92027',
+            '#50d890',
+            '#0278ae'
+          ],
+          hoverBackgroundColor: [
+            '#501800',
+            '#4B5000',
+            '#003350'
+          ],
+          data: [flightCost, hotelCost, activityCost]
+        }
+      ]
+    };
   };
 
   render() {
-    
     return (
       <div>
+        {this.totalActivityCost()}
+        {this.totalHotelCost()}
+        {this.totalFlightCost()}
         <Doughnut
-          data={state}
+          data={data}
           options={{
             title: {
               display: true,
@@ -70,15 +91,20 @@ class Piechart extends Component {
 
 Piechart.propTypes = {
   activities: PropTypes.object,
-  getSavedActivities: PropTypes.func
+  getSavedActivities: PropTypes.func,
+  getSavedFlights: PropTypes.func,
+  getSavedHotels: PropTypes.func,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
   activities: state.activities,
+  flights: state.flight.savedFlights,
+  hotels: state.hotel.savedHotels,
 });
 
-export default connect(
-  mapStateToProps,
-  { getActivitiesByAddress, addActivitiesToMongo, getSavedActivities }
-)(Piechart);
+export default connect(mapStateToProps, {
+  getSavedFlights,
+  getSavedActivities,
+  getSavedHotels
+})(Piechart);
