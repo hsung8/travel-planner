@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Piechart from "../layout/Piechart";
-import ActivityTable from "../../saved/Activitytable";
-import HotelTable from "../../saved/Hoteltable";
-// import FlightTable from "../../saved/Flighttable";
+import ActivityTable from "../saved/Activitytable";
+import HotelTable from "../saved/Hoteltable";
+import FlightTable from "../saved/Flighttable";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getSavedActivities } from "../../actions/activitiesActions";
@@ -147,8 +147,8 @@ class Budget extends Component {
             </div>
           </div>
         </div>
-        <div className="col s12 m12 l9 center-align">
-          <div style={{ width: "100%" }} className="card horizontal">
+        <div className="col s13 m12 l9 center-align">
+          <div style={{ width: "100%"}} className="card horizontal">
             <div className="card-stacked">
               <div className="card-content">
                 <div className="col s4 center-align">
@@ -190,6 +190,7 @@ class Budget extends Component {
                   <Piechart />
                 </div>
               </div>
+              </div>
               <h5
                 className="savingsPerWeek"
                 style={{ display: this.state.style }}
@@ -205,12 +206,12 @@ class Budget extends Component {
                 <div className="col s12 center-align">
                   {this.state.ActivityTable ? <ActivityTable /> : <div> </div>}
                   {this.state.HotelTable ? <HotelTable /> : <div> </div>}
-                  {/* {this.state.FlightTable ? <FlightTable />: <div> </div>} */}
+                  {this.state.FlightTable ? <FlightTable />: <div> </div>}
                 </div>
               </div>
             </div>
           </div>
-        </div>
+       
       </div>
     );
   }
