@@ -337,20 +337,21 @@ const SearchFlight = (props) => {
                                         letterSpacing: "1 px",
                                         marginTop: "1rem",
                                         marginBottom: "2px",
-                                        background: "#090088"
-                                    }}
-                                    className="Search btn btn-large hoverable accent-3">
-                                    Add to planner</button>
-                                <svg>
-                                    <path id="checkmark" className="icon" d="M27 4l-15 15-7-7-5 5 12 12 20-20z"></path>
-                                </svg>
-                            </div>
-                            <br></br>
+                                        background: "#090088",
+                       
+                            }}
+                            className="Search btn btn-large hoverable accent-3">
+                            Add to planner
+                                    <i className="material-icons right">send</i>
+                                    </button>
+                           
                         </div>
-                    )
-                })}
+                        <br></br>
+                        </div>
+            )
+        })}
             </div>
-        </div>
+        </div >
     );
 };
 SearchFlight.propTypes = {
