@@ -307,27 +307,22 @@ const SearchFlight = (props) => {
                                         <h6>{moment(flight.departure.at).format("MM-DD-YYYY h:mm a")} - {moment(flight.arrival.at).format("h:mm a")}</h6>
                                     </>
                                 })}
-                                {/* <p>Flight from {flight.itineraries[0].segments[0].departure.iataCode} to {flight.itineraries[0].segments[0].arrival.iataCode}</p>
-                                <p> {moment(flight.itineraries[0].segments[0].departure.at).format("MM-DD-YYYY h:mm a")} - {moment(flight.itineraries[0].segments[0].arrival.at).format("h:mm a")}</p> */}
                                 <br></br>
-                                <hr style={{ display: tripType ? "block" : "none" }}></hr>
                                 <br style={{ display: tripType ? "block" : "none" }}></br>
                                 <span style={{ display: tripType ? "block" : "none" }} className="card-title"><img className="airline-logo" src={airlineImg}></img></span>
-                                {tripType  ?                                 
+                                {tripType ?
                                     flight.itineraries[1].segments.map(flight => {
 
                                         return <><h6>Flight from {flight.departure.iataCode} to {flight.arrival.iataCode}</h6>
                                             <h6>{moment(flight.departure.at).format("MM-DD-YYYY h:mm a")} - {moment(flight.arrival.at).format("h:mm a")}</h6>
                                         </>
-                                    }) : <div></div>                            
-                              
+                                    }) : <div></div>
                                 }
-
-
-
-                                {/* <p>Flight from {flight.itineraries[1].segments[0].departure.iataCode} to {flight.itineraries[1].segments[0].arrival.iataCode}</p> */}
+                                <hr></hr>
+                                <br></br>
                                 <h6>Price per ticket: ${flight.travelerPricings[0].price.total}</h6>
                                 <h5>Total price: ${flight.price.grandTotal}</h5>
+                                <br></br>
                             </div>
                             <div>
                                 <button onClick={(event) => {
