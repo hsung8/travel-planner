@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { getSavedActivities } from "../../actions/activitiesActions";
 import { getSavedFlights } from "../../actions/flightAction";
 import { getSavedHotels } from "../../actions/hotelAction";
+
 class Budget extends Component {
   state = {
     savingsGoal: "",
@@ -19,7 +20,16 @@ class Budget extends Component {
     this.props.getSavedActivities(this.props.auth.user.id);
     this.props.getSavedFlights(this.props.auth.user.id);
     this.props.getSavedHotels(this.props.auth.user.id);
-
+    fetch(`/api/users/getSaving/${this.props.auth.user.id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => res.json())
+      .then(saving => {
+          console.log(saving)
+          this.setState({...this.state,savingsGoal : saving})
+      });
   }
 
   handleSearchEvent = (e) => {
@@ -31,7 +41,18 @@ class Budget extends Component {
     }
   };
 
-  handleSubmit = () => {
+  handleSubmit = (goal) => {
+      const savingGoal = {
+          user: this.props.auth.user.id,
+          goal: goal
+      }
+    fetch(`/api/users/savingGoal`, {
+      method: "PUT",
+      body: JSON.stringify(savingGoal),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json());
     console.log(this.state.savingsPerWeek);
     const savings =
       parseFloat(this.state.savingsGoal) / parseFloat(this.state.savingsLength);
@@ -118,6 +139,7 @@ class Budget extends Component {
                       className="savingsGoal"
                       placeholder="What is your savings goal?"
                       style={{ textAlign: "center", fontSize: "12.5px" }}
+                      value={this.state.savingsGoal}
                     ></input>
                     <input
                       onChange={this.handleSearchEvent}
@@ -128,7 +150,11 @@ class Budget extends Component {
                     ></input>
 
                     <button
-                      onClick={this.handleSubmit}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        console.log(this.state.savingsGoal)
+                        this.handleSubmit(this.state.savingsGoal);
+                      }}
                       type="submit"
                       className="btn btn-large waves-effect hoverable"
                       style={{ background: "#090088" }}
@@ -186,5 +212,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getSavedFlights,
   getSavedActivities,
-  getSavedHotels
+  getSavedHotels,
 })(Budget);

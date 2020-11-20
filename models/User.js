@@ -31,6 +31,10 @@ const UserSchema = new Schema({
     type: Array,
     required: false,
   },
+  savingGoal: {
+    type: Number,
+    required: false
+  }
 });
 
 module.exports = User = mongoose.model("users", UserSchema);

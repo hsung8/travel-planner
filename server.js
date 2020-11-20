@@ -4,16 +4,16 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 
 const users = require("./routes/api/users");
-const activities = require("./routes/api/activities")
-const hotel = require("./routes/api/hotel")
-const flight = require("./routes/api/flight")
-
+const activities = require("./routes/api/activities");
+const hotel = require("./routes/api/hotel");
+const flight = require("./routes/api/flight");
+const saving = require("./routes/api/savingGoal");
 const app = express();
 
 // Bodyparser middleware
 app.use(
   bodyParser.urlencoded({
-    extended: false
+    extended: false,
   })
 );
 app.use(bodyParser.json());
@@ -32,14 +32,10 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Connect to MongoDB
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost:27017/users",
-  {
-    useCreateIndex: true,
-    useNewUrlParser: true
-  }
-);
-
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/users", {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+});
 
 // Passport middleware
 app.use(passport.initialize());
@@ -48,15 +44,16 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Routes
-  //users route
+//users route
 app.use("/api/users", users);
-  //user activities routes
+//user activities routes
 app.use("/api/users", activities);
-  //user hotel routes
+//user hotel routes
 app.use("/api/users", hotel);
- //user flight routes
+//user flight routes
 app.use("/api/users", flight);
-
+//user saving goal routes
+app.use("/api/users", saving);
 
 const port = process.env.PORT || 3001;
 
