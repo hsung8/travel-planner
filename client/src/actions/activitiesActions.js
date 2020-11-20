@@ -52,10 +52,6 @@ export const getActivitiesByAddress = (searchParams) => (dispatch) => {
         else return res.json();
     })
     .then((activities) => {
-      console.log(
-        "this comes from activities Action.js, console.log the activities from YELP API called by our backend",
-        activities
-      );
       dispatch({
         type: SET_ACTIVITIES,
         payload: activities,

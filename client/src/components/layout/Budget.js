@@ -8,6 +8,11 @@ import PropTypes from "prop-types";
 import { getSavedActivities } from "../../actions/activitiesActions";
 import { getSavedFlights } from "../../actions/flightAction";
 import { getSavedHotels } from "../../actions/hotelAction";
+
+let activityCost;
+let hotelCost;
+let flightCost;
+
 class Budget extends Component {
   state = {
     savingsGoal: "",
@@ -20,8 +25,32 @@ class Budget extends Component {
     this.props.getSavedActivities(this.props.auth.user.id);
     this.props.getSavedFlights(this.props.auth.user.id);
     this.props.getSavedHotels(this.props.auth.user.id);
+  };
 
-  }
+  totalActivityCost() {
+    activityCost = 0;
+    for (let i = 0; i < this.props.activities.savedActivities.length; i++) {
+      if (this.props.activities.savedActivities[i].cost)
+        activityCost += this.props.activities.savedActivities[i].cost;
+      else return
+    };
+  };
+
+  totalFlightCost() {
+    flightCost = 0;
+    for (let i = 0; i < this.props.flights.length; i++) {
+      flightCost += parseFloat(this.props.flights[i].price.total);
+    }
+  };
+
+  totalHotelCost() {
+    hotelCost = 0;
+    for (let i = 0; i < this.props.hotels.length; i++) {
+      if (this.props.hotels[i].offers[0].price.total)
+        hotelCost += parseFloat(this.props.hotels[i].offers[0].price.total);
+      else return;
+    }
+  };
 
   handleSearchEvent = (e) => {
     if (e.target.name === "savingsGoal") {
@@ -43,6 +72,9 @@ class Budget extends Component {
   render() {
     return (
       <div className="row">
+        {this.totalActivityCost()}
+        {this.totalHotelCost()}
+        {this.totalFlightCost()}
         <div className="col s12 m12 l3 center-align">
           <div style={{ width: "100%" }} className="card horizontal">
             <div className="card-stacked">
@@ -141,8 +173,7 @@ class Budget extends Component {
                   </form>
                   <h4 className="totalSavings"></h4>
                   <br />
-                  <h6>Your estimates: </h6>
-                  <h4 className="totalSpend"></h4>
+                  <h6>Your estimates: ${parseFloat(activityCost + flightCost + hotelCost).toFixed(2)}</h6>
                 </div>
                 <div className="col s8 center-align">
                   <Piechart />
