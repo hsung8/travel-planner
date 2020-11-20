@@ -3,17 +3,19 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getSavedFlights } from "../../actions/flightAction";
 
+const moment = require("moment");
+
 class FlightTable extends Component {
-    componentDidMount() {
+   componentDidMount() {
       this.props.getSavedFlights(this.props.auth.user.id)
    };
 
    renderTableData() {
       return this.props.flights.map((flight, index) => {
          const departCity = flight.itineraries[0].segments[0].departure.iataCode
-         const departDate = flight.itineraries[0].segments[0].departure.at
+         const departDate = moment(flight.itineraries[0].segments[0].departure.at).format("MM-DD-YYYY h:mm a")
          const arrivalCity = flight.itineraries[0].segments[0].arrival.iataCode
-         const arrivalDate = flight.itineraries[0].segments[0].arrival.at
+         const arrivalDate = moment(flight.itineraries[0].segments[0].arrival.at).format("MM-DD-YYYY h:mm a")
          const cost = flight.price.total
          return (
             <tr key={index}>
