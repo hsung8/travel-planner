@@ -81,10 +81,6 @@ export const getSavedActivities = (id) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((activities) => {
-      console.log(
-        "this comes from activities Action.js, console.log all the saved activities in our mongo database",
-        activities
-      );
       dispatch({
         type: SAVED_ACTIVITIES,
         payload: activities,
