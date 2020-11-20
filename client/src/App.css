@@ -78,12 +78,20 @@ body{
 .svg-calLoader {
   width: 230px;
   height: 230px;
+  margin-right: auto;
+    margin-left: auto;
+    margin-top: 10rem;
+    display: block;
+    z-index: 1;
+
   transform-origin: 115px 115px;
   animation: 1.4s linear infinite loader-spin;
+ 
 }
 
 .cal-loader__plane {
-  fill: #ffa500;
+  fill: white;
+    
 }
 
 .cal-loader__path {
