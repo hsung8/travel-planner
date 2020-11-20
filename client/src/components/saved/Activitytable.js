@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getActivitiesByAddress, addActivitiesToMongo, getSavedActivities } from "../actions/activitiesActions";
+import { getActivitiesByAddress, addActivitiesToMongo, getSavedActivities } from "../../actions/activitiesActions";
 
 class ActivityTable extends Component {
     componentDidMount() {
