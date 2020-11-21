@@ -1,42 +1,66 @@
-# mern-auth
 
-![Final App](https://i.postimg.cc/tybZb8dL/final-MERNAuth.gif)
-Minimal full-stack MERN app with authentication using passport and JWTs.
+# The Travel App ![License]
 
-This project uses the following technologies:
+(https://img.shields.io/badge/License-MIT%202.0-orange.svg)
 
-- [React](https://reactjs.org) and [React Router](https://reacttraining.com/react-router/) for frontend
-- [Express](http://expressjs.com/) and [Node](https://nodejs.org/en/) for the backend
-- [MongoDB](https://www.mongodb.com/) for the database
-- [Redux](https://redux.js.org/basics/usagewithreact) for state management between React components
 
-## Medium Series
+![](client/public/images/screenshot.png)
 
-- [Build a Login/Auth App with the MERN Stack — Part 1 (Backend)](https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669)
-- [Build a Login/Auth App with the MERN Stack — Part 2 (Frontend & Redux Setup)](https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-2-frontend-6eac4e38ee82)
-- [Build a Login/Auth App with the MERN Stack — Part 3 (Linking Redux with React Components)](https://blog.bitsrc.io/build-a-login-auth-app-with-the-mern-stack-part-3-react-components-88190f8db718)
 
-## Configuration
+## Description
 
-Make sure to add your own `MONGOURI` from your [mLab](http://mlab.com) database in `config/keys.js`.
+The Travel App gives you the ability to plan your trip and stay within your budget. You can search for flights, hotels and activities under one UI and save those you would like to consider for your trip under the budget tool. This tool will itemize your saved items and put together the overall cost of your trip.
 
-```javascript
-module.exports = {
-  mongoURI: "YOUR_MONGO_URI_HERE",
-  secretOrKey: "secret"
-};
-```
+## Features
 
-## Quick Start
+The features and information this application includes:
+- Hotel Search
+- Flight Search
+- Activities Search
+- Dashboard with budget feature
 
-```javascript
-// Install dependencies for server & client
-npm install && npm run client-install
 
-// Run client & server with concurrently
-npm run dev
+## Deployment
 
-// Server runs on http://localhost:5000 and client on http://localhost:3000
-```
+This app is deployed [here]()
 
-For deploying to Heroku, please refer to [this](https://www.youtube.com/watch?v=71wSzpLyW9k) helpful video by TraversyMedia.
+
+## Installation
+
+To install necessary dependencies, run the following command:
+`npm install`
+Then to run the app locally:
+`npm start`
+
+## License
+
+This project is licensed under the `MIT license`.
+
+## Contributors
+
+| Connor
+------------ 
+
+[<img src="https://avatars0.githubusercontent.com/u/64113283?s=400&u=7e0c148e1da2f623193ac9c45f56c0eeb7a90cc9&v=4" width="100px;"/><br /><sub><b>Connor Cote</b></sub>](https://github.com/cotec4)<br />[💻](https://github.com/cotec4?tab=repositories "Repositories")
+
+
+| Jonathan
+------------ 
+
+[<img src="https://avatars2.githubusercontent.com/u/54176797?s=400&u=a16edf17621b444a6483f6b36f8e69a4eee50a4e&v=4" width="100px;"/><br /><sub><b>Jonathan Davila</b></sub>](https://github.com/jdavila10)<br />[💻](https://github.com/jdavila10?tab=repositories "Repositories")
+
+
+| Xyra
+------------ 
+
+[<img src="https://avatars2.githubusercontent.com/u/65522080?s=400&u=e57ab7aa5c5db10ff5d1a1edf708f2a49aed0d54&v=4" width="100px;"/><br /><sub><b>Xyra Arroyo</b></sub>](https://github.com/xarroyo1)<br />[💻](https://github.com/xarroyo1?tab=repositories "Repositories")
+
+| Ethan
+------------ 
+
+[<img src="https://avatars0.githubusercontent.com/u/64672854?s=400&u=c94cf70336bc5b2fb753dd7c6c1cea4fe33575e9&v=4" width="100px;"/><br /><sub><b>Ethan Lam</b></sub>](https://github.com/ethanlam93)<br />[💻](https://github.com/ethanlam93?tab=repositories "Repositories")
+
+| Hae Sung
+------------ 
+
+[<img src="https://avatars1.githubusercontent.com/u/52669956?s=400&u=f17a67095e8787671eac1980666541bab435950f&v=4" width="100px;"/><br /><sub><b>Hae Sung</b></sub>](https://github.com/hsung8)<br />[💻](https://github.com/hsung8?tab=repositories "Repositories")

@@ -22,8 +22,8 @@ import WN from "./images/WN.jpg";
 const moment = require("moment");
 const Amadeus = require("amadeus");
 const amadeus = new Amadeus({
-    clientId: "HikDALzxHh0L6AaJXVTRTdxknMs0ItsR",
-    clientSecret: "mhpcNiCqSY1olTPP",
+    clientId: "9A15DsQaP8TEfPKtjThzJ9nU26SkFPHz",
+    clientSecret: "ZuTGp2wEXpCi1hnT",
 });
 
 const SearchFlight = (props) => {
