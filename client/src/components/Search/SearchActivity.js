@@ -121,7 +121,7 @@ class SearchActivity extends Component {
               <div className="card-content">
                 <Link
                   to="/hotel"
-                  className="btn btn-large hoverable green accent-3"
+                  className="btn btn-large hoverable accent-3"
                   style={{
                     marginRight: 10,
                     background: "#f9bc60",
@@ -139,7 +139,7 @@ class SearchActivity extends Component {
                 </Link>
                 <Link
                   to="/flights"
-                  className="btn btn-large hoverable blue accent-3"
+                  className="btn btn-large hoverable accent-3"
                   style={{
                     marginRight: 10,
                     background: "#f9bc60",
@@ -166,7 +166,7 @@ class SearchActivity extends Component {
                 </Link> */}
                 <Link
                   to="/activity"
-                  className="btn btn-large hoverable orange accent-3"
+                  className="btn btn-large hoverable accent-3"
                   style={{
                     background: "#f9bc60",
                     color: "#001e1d",

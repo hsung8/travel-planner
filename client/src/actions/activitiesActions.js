@@ -86,3 +86,30 @@ export const getSavedActivities = (id) => (dispatch) => {
       console.error("Error:", error);
     });
 };
+
+export const deleteActivity = (id, user) => (dispatch) => {
+  const activityToDelete = {
+    id: id,
+    user: user
+  }
+  console.log(activityToDelete)
+  fetch(`/api/users/deleteActivity`, {
+    method: "PUT",
+    body: JSON.stringify(activityToDelete),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((savedActivities) => {
+      console.log(
+       "this is the array of activity after you delete",
+      savedActivities
+      );
+      dispatch({
+        type: SAVED_ACTIVITIES,
+        payload: savedActivities,
+      });
+    })
+    .catch((err) => console.log(err));
+};
