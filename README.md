@@ -22,7 +22,7 @@ The features and information this application includes:
 
 ## Deployment
 
-This app is deployed [here]()
+This app is deployed [here](https://travel-planner-2020-11-20.herokuapp.com/)
 
 
 ## Installation
