@@ -1,4 +1,4 @@
 module.exports = {
-  mongoURI: "YOUR_MONGO_URI_HERE",
+  mongoURI: "mongodb+srv://bootcamp:bootcamp@cluster0.on9lh.mongodb.net/travelUsers?retryWrites=true&w=majority",
   secretOrKey: "secret",
 };
