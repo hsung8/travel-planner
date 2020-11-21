@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addFlightToMongo, getSavedFlights } from "../../actions/flightAction";
 import "react-datepicker/dist/react-datepicker.css";
-import plane from "./images/plane.jpg";
+import plane from "./images/plane.png";
 import DL from "./images/DL.jpg";
 import AA from "./images/AA.jpg";
 import AS from "./images/AS.png";
@@ -69,9 +69,9 @@ const SearchFlight = (props) => {
             .get({
                 keyword: inputs.destination,
                 subType: "CITY",
-            })
+            }).catch((err) => console.log(err));
 
-        console.log(destinationIataCode.data[0].iataCode);
+        // console.log(destinationIataCode.data[0].iataCode);
 
         let clone2 = inputs
         clone2.destinationIataCode = destinationIataCode.data[0].iataCode
@@ -307,27 +307,20 @@ const SearchFlight = (props) => {
                                         <h6>{moment(flight.departure.at).format("MM-DD-YYYY h:mm a")} - {moment(flight.arrival.at).format("h:mm a")}</h6>
                                     </>
                                 })}
-                                {/* <p>Flight from {flight.itineraries[0].segments[0].departure.iataCode} to {flight.itineraries[0].segments[0].arrival.iataCode}</p>
-                                <p> {moment(flight.itineraries[0].segments[0].departure.at).format("MM-DD-YYYY h:mm a")} - {moment(flight.itineraries[0].segments[0].arrival.at).format("h:mm a")}</p> */}
-                                <br></br>
-                                <hr style={{ display: tripType ? "block" : "none" }}></hr>
                                 <br style={{ display: tripType ? "block" : "none" }}></br>
                                 <span style={{ display: tripType ? "block" : "none" }} className="card-title"><img className="airline-logo" src={airlineImg}></img></span>
-                                {tripType  ?                                 
+                                {tripType ?
                                     flight.itineraries[1].segments.map(flight => {
 
                                         return <><h6>Flight from {flight.departure.iataCode} to {flight.arrival.iataCode}</h6>
                                             <h6>{moment(flight.departure.at).format("MM-DD-YYYY h:mm a")} - {moment(flight.arrival.at).format("h:mm a")}</h6>
                                         </>
-                                    }) : <div></div>                            
-                              
+                                    }) : <div></div>
                                 }
-
-
-
-                                {/* <p>Flight from {flight.itineraries[1].segments[0].departure.iataCode} to {flight.itineraries[1].segments[0].arrival.iataCode}</p> */}
+                                <hr></hr>
+                                <br></br>
                                 <h6>Price per ticket: ${flight.travelerPricings[0].price.total}</h6>
-                                <h5>Total price: ${flight.price.grandTotal}</h5>
+                                <h5>Total price: ${flight.price.grandTotal}</h5>                                
                             </div>
                             <div>
                                 <button onClick={(event) => {
