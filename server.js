@@ -35,7 +35,11 @@ if (process.env.NODE_ENV === "production") {
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/users", {
   useCreateIndex: true,
   useNewUrlParser: true,
+  useFindAndModify: false,
+      useUnifiedTopology: true,
+
 });
+
 
 // Passport middleware
 app.use(passport.initialize());

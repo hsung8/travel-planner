@@ -25,6 +25,23 @@ class Budget extends Component {
     FlightTable: false,
     ActivityTable: false,
   };
+
+  componentDidMount() {
+    this.props.getSavedActivities(this.props.auth.user.id);
+    this.props.getSavedFlights(this.props.auth.user.id);
+    this.props.getSavedHotels(this.props.auth.user.id);
+    fetch(`/api/users/getSaving/${this.props.auth.user.id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => res.json())
+      .then(saving => {
+          console.log("this is your saving",saving)
+          this.setState({...this.state,savingsGoal : saving})
+      });
+  };
+
   totalActivityCost() {
     activityCost = 0;
     for (let i = 0; i < this.props.activities.savedActivities.length; i++) {
@@ -33,6 +50,7 @@ class Budget extends Component {
       else return
     };
   };
+
   totalFlightCost() {
     flightCost = 0;
     for (let i = 0; i < this.props.flights.length; i++) {
@@ -48,21 +66,6 @@ class Budget extends Component {
       else return;
     }
   };
-  componentDidMount() {
-    this.props.getSavedActivities(this.props.auth.user.id);
-    this.props.getSavedFlights(this.props.auth.user.id);
-    this.props.getSavedHotels(this.props.auth.user.id);
-    fetch(`/api/users/getSaving/${this.props.auth.user.id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => res.json())
-      .then(saving => {
-          console.log("this is your saving",saving)
-          this.setState({...this.state,savingsGoal : saving})
-      });
-  }
 
   handleSearchEvent = (e) => {
     if (e.target.name === "savingsGoal") {
@@ -73,18 +76,7 @@ class Budget extends Component {
     }
   };
 
-  handleSubmit = (goal) => {
-      const savingGoal = {
-          user: this.props.auth.user.id,
-          goal: goal
-      }
-    fetch(`/api/users/savingGoal`, {
-      method: "PUT",
-      body: JSON.stringify(savingGoal),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => res.json());
+  handleSubmit = () => {
     console.log(this.state.savingsPerWeek);
     const savings =
       parseFloat(this.state.savingsGoal) / parseFloat(this.state.savingsLength);
@@ -166,75 +158,102 @@ class Budget extends Component {
           </div>
         </div>
         <div className="col s13 m12 l9 center-align">
-          <div style={{ width: "100%"}} className="card horizontal">
+          <div style={{ width: "100%" }} className="card horizontal">
             <div className="card-stacked">
               <div className="card-content">
-                <div className="col s4 center-align">
-                  <h6>Your goal: </h6>
-                  <form
-                    onSubmit={(res) => {
-                      res.preventDefault();
-                    }}
-                  >
-                    <input
-                      onChange={this.handleSearchEvent}
-                      name="savingsGoal"
-                      className="savingsGoal"
-                      placeholder="What is your savings goal?"
-                      style={{ textAlign: "center", fontSize: "12.5px" }}
-                      value={this.state.savingsGoal}
-                    ></input>
-                    <input
-                      onChange={this.handleSearchEvent}
-                      name="savingsLength"
-                      className="savingsLength"
-                      placeholder="How many weeks to save?"
-                      style={{ textAlign: "center", fontSize: "12.5px" }}
-                    ></input>
-
-                    <button
-                      onClick={(event) => {
-                        event.preventDefault();
-                        console.log(this.state.savingsGoal)
-                        this.handleSubmit(this.state.savingsGoal);
-                      }}
-                      type="submit"
-                      className="btn btn-large waves-effect hoverable"
-                      style={{ background: "#090088" }}
-                    >
-                      Submit
-                    </button>
-                  </form>
-                  <h4 className="totalSavings"></h4>
-                  <br />
-                  <h6>Your estimates: ${parseFloat(activityCost + flightCost + hotelCost).toFixed(2)}</h6>
-                </div>
+                
                 <div className="col s8 center-align">
                   <Piechart />
                 </div>
-              </div>
-              </div>
-              <h5
-                className="savingsPerWeek"
-                style={{ display: this.state.style }}
-              >
-                You need to save {this.state.savingsPerWeek} each week to save{" "}
-                {this.state.savingsGoal}! Get Saving!
-              </h5>
-            </div>
-          </div>
-          <div style={{ width: "100%", display: this.state.cardStyle }} className="card horizontal">
-            <div className="card-stacked">
-              <div className="card-content">
-                <div className="col s12 center-align">
-                  {this.state.ActivityTable ? <ActivityTable /> : <div> </div>}
-                  {this.state.HotelTable ? <HotelTable /> : <div> </div>}
-                  {this.state.FlightTable ? <FlightTable />: <div> </div>}
+
+                <div className="col s4 center-align">
+
+                  <br />
+                  <h5>Total estimates: ${parseFloat(activityCost + flightCost + hotelCost).toFixed(2)}</h5>
+                  <br />
+                  <ul>
+                    <li>
+                      - Flights: ${parseFloat(flightCost).toFixed(2)}
+                    </li>
+                    <li>
+                      - Hotels: ${parseFloat(hotelCost).toFixed(2)}
+                    </li>
+                    <li> 
+                      - Activity: ${parseFloat(activityCost).toFixed(2)}
+                    </li>
+                    <li> 
+                      - SavingGoal: ${this.state.savingsGoal}
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
+
           </div>
-       
+        </div>
+        <div className="col s12 m12 l3 center-align">
+        </div>
+        <div className="col s13 m12 l9 center-align">
+          <div style={{ width: "100%" }} className="card horizontal">
+            <div className="card-stacked">
+              <div className="card-content">
+              <h6>Calculate your savings goal: </h6>
+                <form
+                  onSubmit={(res) => {
+                    res.preventDefault();
+                  }}
+                >
+                  <input
+                    onChange={this.handleSearchEvent}
+                    name="savingsGoal"
+                    className="savingsGoal"
+                    placeholder="What is your savings goal?"
+                    style={{ textAlign: "center", fontSize: "12.5px" }}
+                    value={this.state.savingsGoal}
+                  ></input>
+                  <input
+                    onChange={this.handleSearchEvent}
+                    name="savingsLength"
+                    className="savingsLength"
+                    placeholder="How many weeks to save?"
+                    style={{ textAlign: "center", fontSize: "12.5px" }}
+                  ></input>
+
+                  <button
+                    onClick={this.handleSubmit}
+                    type="submit"
+                    className="btn btn-large waves-effect hoverable"
+                    style={{ background: "#090088" }}
+                  >
+                    Submit
+                    </button>
+                </form>
+                <h4 className="totalSavings"></h4>
+                <h5
+                  className="savingsPerWeek"
+                  style={{ display: this.state.style }}
+                >
+                  You need to save {this.state.savingsPerWeek} each week to save{" "}
+                  {this.state.savingsGoal}! Get Saving!
+              </h5>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div style={{ width: "100%", display: this.state.cardStyle }} className="card horizontal">
+          <div className="card-stacked">
+            <div className="card-content">
+              <div className="col s12 center-align">
+                {this.state.ActivityTable ? <ActivityTable /> : <div> </div>}
+                {this.state.HotelTable ? <HotelTable /> : <div> </div>}
+                {this.state.FlightTable ? <FlightTable /> : <div> </div>}
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     );
   }
@@ -257,5 +276,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getSavedFlights,
   getSavedActivities,
-  getSavedHotels,
+  getSavedHotels
 })(Budget);
