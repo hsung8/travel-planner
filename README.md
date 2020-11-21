@@ -1,5 +1,5 @@
 
-# The Travel Planner
+# The Travel Hub
 
 ![License](https://img.shields.io/badge/License-MIT%202.0-orange.svg)
 
@@ -9,7 +9,7 @@
 
 ## Description
 
-The Travel Planner gives you the ability to plan your trip and stay within your budget. You can search for flights, hotels and activities under one app, and save those you would like to consider for your trip under the budget tool. The tool will itemize your saved items and put together the overall cost of your trip.
+The Travel Hub gives you the ability to plan your trip and stay within your budget. You can search for flights, hotels and activities under one app, and save those you would like to consider for your trip under the budget tool. The tool will itemize your saved items and put together the overall cost of your trip.
 
 ## Features
 
