@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { addFlightToMongo, getSavedFlights } from "../../actions/flightAction";
 import "react-datepicker/dist/react-datepicker.css";
 import plane from "./images/plane.png";
+import M from "materialize-css";
 import DL from "./images/DL.jpg";
 import AA from "./images/AA.jpg";
 import AS from "./images/AS.png";
@@ -317,6 +318,7 @@ const SearchFlight = (props) => {
                                         </>
                                     }) : <div></div>
                                 }
+                                <br></br>
                                 <hr></hr>
                                 <br></br>
                                 <h6>Price per ticket: ${flight.travelerPricings[0].price.total}</h6>
@@ -326,6 +328,10 @@ const SearchFlight = (props) => {
                                 <button onClick={(event) => {
                                     event.preventDefault();
                                     props.addFlightToMongo(flight);
+                                    M.toast({
+                                        html: "Successfully added to planner",
+                                        class: "toast",
+                                      });
                                 }}
                                     style={{
                                         letterSpacing: "1 px",
