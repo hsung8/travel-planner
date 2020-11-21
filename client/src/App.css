@@ -1,14 +1,48 @@
-body {
-    background-color: #004643;
+* {
+    margin:0;
+    padding:0;
+}
+html,body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+
+body{
+    background-image: url(https://i.pinimg.com/originals/9a/55/17/9a551732f3bbc864ca657f7279d42f1a.jpg);
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    height: 100%;
+    justify-content: center;
+    background-color: #1d1f20;
+    font-family: "Josefin Sans", sans-serif;
+    
+}
+/* We hide the checkmark by default */
+#checkmark {
+  visibility: hidden;
+}
+
+.airline-logo {
+  width: 215px;
+  height: 95px; 
 }
 
 .container {
+    border-radius: 25px;
+    opacity: .9;
+}
+
+.card {
     border-radius: 25px;
 }
 
 .searchBox {
     border-radius: 25px; 
-    background-color: #abd1c6;
+    background-color: #fffffe;
 }
 
 ::placeholder {
@@ -25,4 +59,63 @@ body {
 
 .nav-wrapper {
    color: black;
+   background-color: white;
+}
+
+  h4 {
+    color: white;
+  }
+
+    /* ==========================================================================
+     Loader
+     ========================================================================== */
+
+
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700");
+@import url("https://fonts.googleapis.com/css?family=Indie+Flower");
+
+
+.svg-calLoader {
+  width: 230px;
+  height: 230px;
+  margin-right: auto;
+    margin-left: auto;
+    margin-top: 10rem;
+    display: block;
+    z-index: 1;
+
+  transform-origin: 115px 115px;
+  animation: 1.4s linear infinite loader-spin;
+ 
+}
+
+.cal-loader__plane {
+  fill: white;
+    
+}
+
+.cal-loader__path {
+  stroke: #ffffff;
+  animation: 1.4s ease-in-out infinite loader-path;
+}
+
+  /*
+     Loader animations
+     ========================================================================== */
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader-path {
+  0% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+  }
+  50% {
+    stroke-dasharray: 0, 450, 10, 30, 10, 30, 10, 30, 10;
+  }
+  100% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+  }
 }

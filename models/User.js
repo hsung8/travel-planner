@@ -5,19 +5,35 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+  },
+  activities: {
+    type: Array,
+    required: false,
+  },
+  hotels: {
+    type: Array,
+    required: false,
+  },
+  flights: {
+    type: Array,
+    required: false,
+  },
+  savingGoal: {
+    type: Number,
+    required: false
   }
 });
 

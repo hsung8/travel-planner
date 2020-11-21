@@ -53,7 +53,7 @@ class Login extends Component {
     const { errors } = this.state;
 
     return (
-      <div style={{ background: "#abd1c6" , paddingBottom: "1rem"}} className="container">
+      <div style={{ background: "#fffffe" , paddingBottom: "1rem"}} className="container">
         <div style={{ marginTop: "4rem" }} className="row">
           <div className="col s8 offset-s2">
             <Link to="/" className="btn-flat waves-effect">
@@ -61,9 +61,9 @@ class Login extends Component {
               home
             </Link>
             <div className="col s12" style={{ paddingLeft: "11.250px", color: "black"}}>
-              <h4>
+              <h3>
                 <b>Login</b> below
-              </h4>
+              </h3>
               <p className="grey-text text-darken-1">
                 Don't have an account? <Link to="/register">Register</Link>
               </p>
