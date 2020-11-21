@@ -30,6 +30,16 @@ class Budget extends Component {
     this.props.getSavedActivities(this.props.auth.user.id);
     this.props.getSavedFlights(this.props.auth.user.id);
     this.props.getSavedHotels(this.props.auth.user.id);
+    fetch(`/api/users/getSaving/${this.props.auth.user.id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => res.json())
+      .then(saving => {
+          console.log("this is your saving",saving)
+          this.setState({...this.state,savingsGoal : saving})
+      });
   };
 
   totalActivityCost() {
@@ -171,6 +181,9 @@ class Budget extends Component {
                     <li> 
                       - Activity: ${parseFloat(activityCost).toFixed(2)}
                     </li>
+                    <li> 
+                      - SavingGoal: ${this.state.savingsGoal}
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -196,6 +209,7 @@ class Budget extends Component {
                     className="savingsGoal"
                     placeholder="What is your savings goal?"
                     style={{ textAlign: "center", fontSize: "12.5px" }}
+                    value={this.state.savingsGoal}
                   ></input>
                   <input
                     onChange={this.handleSearchEvent}
