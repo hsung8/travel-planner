@@ -14,7 +14,7 @@ class Navbar extends Component {
                 display: "flex"
               }}
               className="col s4 brand-logo center black-text"
-            ><i className="material-icons">code</i>Travel-Hub</Link>
+             ><i className="material-icons">code</i>Travel-Hub</Link>
             <Link
               to="/register"
               style={{

@@ -118,16 +118,8 @@ const SearchHotel = (props) => {
                 ></input>
                 <div style={{ color: "grey" }}>
                   {" "}
-                  You can type in a city name here, but for more accurate
-                  result, please try to use IATA 3-digits city code of the city
-                  you want to search, you can use{" "}
-                  <a
-                    href="https://www.iata.org/en/publications/directories/code-search/"
-                    target="blank"
-                  >
-                    THIS WEBSITE
-                  </a>{" "}
-                  to help you look it up
+                  You can type in a city name (Atlanta) or the IATA 3-digits city code (Atl)
+                  {" "}                  
                 </div>
                 <br />
                 <DatePicker
