@@ -1,7 +1,7 @@
 
-# The Travel App ![License]
+# The Travel App 
 
-(https://img.shields.io/badge/License-MIT%202.0-orange.svg)
+![License](https://img.shields.io/badge/License-MIT%202.0-orange.svg)
 
 
 ![](client/public/images/screenshot.png)
@@ -27,9 +27,9 @@ This app is deployed [here]()
 
 ## Installation
 
-To install necessary dependencies, run the following command:
-`npm install`
-Then to run the app locally:
+To install necessary dependencies, run the following command:<br/>
+`npm install`<br/>
+To run the app:<br/>
 `npm start`
 
 ## License
