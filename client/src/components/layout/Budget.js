@@ -30,15 +30,27 @@ class Budget extends Component {
     this.props.getSavedActivities(this.props.auth.user.id);
     this.props.getSavedFlights(this.props.auth.user.id);
     this.props.getSavedHotels(this.props.auth.user.id);
+  };
+
+  getSavings = () => {
     fetch(`/api/users/getSaving/${this.props.auth.user.id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => res.json())
-      .then(saving => {
-          console.log("this is your saving",saving)
-          this.setState({...this.state,savingsGoal : saving})
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .catch(err => console.log(err))
+      .then(res => {
+        console.log(res);
+        if (!res.bodyUsed)
+          return
+        else {
+          res.json()
+            .then(saving => {
+              console.log("this is your saving", saving)
+              this.setState({ ...this.state, savingsGoal: saving })
+            });
+        }
       });
   };
 
@@ -82,6 +94,8 @@ class Budget extends Component {
       parseFloat(this.state.savingsGoal) / parseFloat(this.state.savingsLength);
     this.setState({ savingsPerWeek: savings });
     this.setState({ style: "" });
+    this.setState({ savingsGoal: this.state.savingsGoal });
+    console.log(this.state.savingsGoal);
   };
 
   onHotelClick = () => {
@@ -102,6 +116,7 @@ class Budget extends Component {
         {this.totalActivityCost()}
         {this.totalHotelCost()}
         {this.totalFlightCost()}
+        {this.getSavings()}
         <div className="col s12 m12 l3 center-align">
           <div style={{ width: "100%" }} className="card horizontal">
             <div className="card-stacked">
@@ -161,7 +176,7 @@ class Budget extends Component {
           <div style={{ width: "100%" }} className="card horizontal">
             <div className="card-stacked">
               <div className="card-content">
-                
+
                 <div className="col s8 center-align">
                   <Piechart />
                 </div>
@@ -178,10 +193,10 @@ class Budget extends Component {
                     <li>
                       - Hotels: ${parseFloat(hotelCost).toFixed(2)}
                     </li>
-                    <li> 
+                    <li>
                       - Activity: ${parseFloat(activityCost).toFixed(2)}
                     </li>
-                    <li> 
+                    <li>
                       - SavingGoal: ${this.state.savingsGoal}
                     </li>
                   </ul>
@@ -197,7 +212,7 @@ class Budget extends Component {
           <div style={{ width: "100%" }} className="card horizontal">
             <div className="card-stacked">
               <div className="card-content">
-              <h6>Calculate your savings goal: </h6>
+                <h6>Calculate your savings goal: </h6>
                 <form
                   onSubmit={(res) => {
                     res.preventDefault();
