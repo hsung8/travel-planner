@@ -21,7 +21,7 @@ class FlightTable extends Component {
         flight.itineraries[0].segments[0].arrival.at
       ).format("MM-DD-YYYY h:mm a");
       const cost = flight.price.total;
-      const id = flight.uniqueId
+      const id = flight.uniqueId;
       return (
         <tr key={index}>
           <td>{departCity}</td>
@@ -35,6 +35,7 @@ class FlightTable extends Component {
                 event.preventDefault();
                 this.props.deleteFlight(id, this.props.auth.user.id);
               }}
+              className="btn"
               type="btn btn-small"
             >
               Delete
@@ -69,7 +70,7 @@ class FlightTable extends Component {
 FlightTable.propTypes = {
   flights: PropTypes.array,
   getSavedFlights: PropTypes.func,
-  deleteFlight: PropTypes.func
+  deleteFlight: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -77,4 +78,6 @@ const mapStateToProps = (state) => ({
   flights: state.flight.savedFlights,
 });
 
-export default connect(mapStateToProps, { getSavedFlights, deleteFlight })(FlightTable);
+export default connect(mapStateToProps, { getSavedFlights, deleteFlight })(
+  FlightTable
+);

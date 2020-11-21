@@ -5,9 +5,8 @@ import {
   getActivitiesByAddress,
   addActivitiesToMongo,
   getSavedActivities,
-  deleteActivity
+  deleteActivity,
 } from "../../actions/activitiesActions";
-
 
 class ActivityTable extends Component {
   componentDidMount() {
@@ -31,10 +30,14 @@ class ActivityTable extends Component {
           <td>${cost}</td>
           <td>{description}</td>
           <td>
-            <button type="btn btn-small" onClick={(event) => {
-               event.preventDefault();
-               this.props.deleteActivity(id,this.props.auth.user.id)
-            }}>
+            <button
+              className="btn"
+              type="btn btn-small"
+              onClick={(event) => {
+                event.preventDefault();
+                this.props.deleteActivity(id, this.props.auth.user.id);
+              }}
+            >
               Delete
             </button>
           </td>
@@ -85,5 +88,5 @@ export default connect(mapStateToProps, {
   getActivitiesByAddress,
   addActivitiesToMongo,
   getSavedActivities,
-  deleteActivity
+  deleteActivity,
 })(ActivityTable);

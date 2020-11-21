@@ -1,7 +1,8 @@
-import { POST_FLIGHT, GET_SAVED_FLIGHT } from "../actions/types";
+import { POST_FLIGHT, GET_SAVED_FLIGHT , SELECTED_FLIGHT} from "../actions/types";
 
 const initialState = {
   savedFlights: [],
+  selectedFlights : []
 }
 
 export default function (state = initialState, action) {
@@ -17,6 +18,11 @@ export default function (state = initialState, action) {
     return {
         ...state,
         savedFlights: [...action.payload]
+    }
+    case SELECTED_FLIGHT:
+    return {
+        ...state,
+        selectedFlights: [...state.selectedFlights,action.payload],
     }
 
     default:
